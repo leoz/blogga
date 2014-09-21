@@ -2,6 +2,15 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicSideMenuDelegate, $ionicModal, $timeout) {
 
+    $scope.journals = [
+        { title: 'Journal A', id: 1 },
+        { title: 'Journal B', id: 2 },
+        { title: 'Journal XX', id: 3 },
+        { title: 'Journal XXX', id: 4 },
+        { title: 'Some other', id: 5 },
+        { title: 'Last', id: 6 }
+    ];
+
   $scope.toggleLeft = function() {
     $ionicSideMenuDelegate.toggleLeft();
   };
@@ -38,16 +47,21 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('EventsCtrl', function($scope) {
-  $scope.events = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.controller('JournalCtrl', function($scope, $stateParams) {
+    $scope.journalId = $stateParams.journalId;
+    $scope.posts = [
+        { title: 'Reggae', id: 1 },
+        { title: 'Chill', id: 2 },
+        { title: 'Dubstep', id: 3 },
+        { title: 'Indie', id: 4 },
+        { title: 'Rap', id: 5 },
+        { title: 'Cowbell', id: 6 }
+    ];
 })
 
-.controller('EventCtrl', function($scope, $stateParams) {
+.controller('PostCtrl', function($scope, $stateParams) {
+    $scope.journalId = $stateParams.journalId;
+    $scope.postId = $stateParams.postId;
 });
+
+

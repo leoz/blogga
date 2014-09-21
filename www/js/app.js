@@ -47,26 +47,26 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-    .state('app.events', {
-      url: "/events",
+    .state('app.journal', {
+      url: "/journal/:journalId",
       views: {
         'menuContent' :{
-          templateUrl: "templates/events.html",
-          controller: 'EventsCtrl'
+          templateUrl: "templates/journal.html",
+          controller: 'JournalCtrl'
         }
       }
     })
 
     .state('app.single', {
-      url: "/events/:eventId",
+      url: "/journal/:journalId/:postId",
       views: {
         'menuContent' :{
-          templateUrl: "templates/event.html",
-          controller: 'EventCtrl'
+          templateUrl: "templates/post.html",
+          controller: 'PostCtrl'
         }
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/events');
+  $urlRouterProvider.otherwise('/app/journal/3');
 });
 

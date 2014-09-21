@@ -1,0 +1,13 @@
+<ion-view title="Journal - {{journalId}}">
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-navicon" ng-click="toggleLeft()" ng-hide="$exposeAside.active"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+        <ion-list>
+            <ion-item ng-repeat="post in posts" href="#/app/journal/{{journalId}}/{{post.id}}">
+                {{post.title}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
+
