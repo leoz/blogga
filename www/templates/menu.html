@@ -22,7 +22,7 @@
                 <ion-item nav-clear menu-close href="#/app/browse">
                     Browse
                 </ion-item>
-                <ion-item nav-clear menu-close ng-repeat="journal in journals" href="#/app/journal/{{journal.id}}">
+                <ion-item nav-clear menu-close ng-repeat="journal in data.journals" href="#/app/journal/{{journal.id}}">
                     {{journal.title}}
                 </ion-item>
             </ion-list>

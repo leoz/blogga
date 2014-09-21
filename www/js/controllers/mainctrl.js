@@ -1,14 +1,7 @@
 
-angular.module('MainCtrl', []).controller('MainController', function($scope, $ionicSideMenuDelegate, $ionicModal, $timeout) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, $ionicSideMenuDelegate, $ionicModal, $timeout, Data) {
 
-    $scope.journals = [
-        { title: 'Journal A', id: 1 },
-        { title: 'Journal B', id: 2 },
-        { title: 'Journal XX', id: 3 },
-        { title: 'Journal XXX', id: 4 },
-        { title: 'Some other', id: 5 },
-        { title: 'Last', id: 6 }
-    ];
+    $scope.data = Data;
 
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();

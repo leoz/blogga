@@ -1,7 +1,7 @@
 
 // Blogga LiveJournal client
 
-angular.module('blogga', ['ionic', 'MainRoute', 'MainCtrl', 'JournalCtrl', 'PostCtrl'])
+angular.module('blogga', ['ionic', 'MainRoute', 'MainCtrl', 'JournalCtrl', 'PostCtrl', 'DataService'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
