@@ -12,18 +12,26 @@
             <h1 class="title">Left</h1>
         </header>
         <ion-content class="has-header">
-            <ion-list>
-                <ion-item nav-clear menu-close ng-click="login()">
-                    Login
+            <ion-list>         
+                <ion-item class="item-icon-left" nav-clear menu-close ng-repeat="journal in data.journals" href="#/app/journal/{{journal.id}}">
+                    <i class="icon ion-ios7-person"></i>
+                    {{journal.title}}
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/search">
+                <ion-item class="item-divider">
+                </ion-item>            
+                <ion-item class="item-icon-left" nav-clear menu-close href="#/app/search">
+                    <i class="icon ion-ios7-search-strong"></i>
                     Search
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/browse">
+                <ion-item class="item-icon-left" nav-clear menu-close href="#/app/browse">
+                    <i class="icon ion-ios7-world-outline"></i>
                     Browse
                 </ion-item>
-                <ion-item nav-clear menu-close ng-repeat="journal in data.journals" href="#/app/journal/{{journal.id}}">
-                    {{journal.title}}
+                <ion-item class="item-divider">
+                </ion-item>            
+                <ion-item class="item-icon-left" nav-clear menu-close ng-click="login()">
+                    <i class="icon ion-log-in"></i>
+                    Login
                 </ion-item>
             </ion-list>
         </ion-content>
