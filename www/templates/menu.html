@@ -35,7 +35,7 @@
             	<ion-list show-delete="journalData.show_delete">
 		            <ion-item class="item-icon-left" nav-clear menu-close
 		                      ng-repeat="journal in journalData.journals | filter: journal.title"
-		                      href="#/app/journal/{{journal.id}}">
+		                      href="#/app/journal/{{$index}}">
 		                <i class="icon ion-ios7-person"></i>
 		                {{journal.title}}
 						<ion-delete-button class="ion-minus-circled"

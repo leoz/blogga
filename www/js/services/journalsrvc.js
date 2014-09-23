@@ -2,29 +2,23 @@
 angular.module('JournalSrvc', []).factory('JournalService', function() {
 
     var journals = [
-        { title: 'Journal A'  , id: 1 },
-        { title: 'Journal B'  , id: 2 },
-        { title: 'Journal XX' , id: 3 },
-        { title: 'Journal XXX', id: 4 },
-        { title: 'Some other' , id: 5 },
-        { title: 'Last'       , id: 6 }
+        { title: 'Journal A'   },
+        { title: 'Journal B'   },
+        { title: 'Journal XX'  },
+        { title: 'Journal XXX' },
+        { title: 'Some other'  },
+        { title: 'Last'        }
     ];
-    
-    var last_journal = 6;
     
     var cur_journal = 4;
     
 	return {
 	
-        get_journal : function(id) {
-            return journals[id-1];
+        get_journal : function(i) {
+            return journals[i];
         },
         
         add_journal : function(journal) {
-        	if (!journal.id) {
-        		last_journal++;
-        		journal.id = last_journal;
-        	}
 			journals.push(journal);
         },
         
