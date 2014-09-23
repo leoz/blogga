@@ -2,13 +2,15 @@
 angular.module('DataService', []).factory('Data', function() {
 
     var journals = [
-        { title: 'Journal A', id: 1 },
-        { title: 'Journal B', id: 2 },
-        { title: 'Journal XX', id: 3 },
+        { title: 'Journal A'  , id: 1 },
+        { title: 'Journal B'  , id: 2 },
+        { title: 'Journal XX' , id: 3 },
         { title: 'Journal XXX', id: 4 },
-        { title: 'Some other', id: 5 },
-        { title: 'Last', id: 6 }
+        { title: 'Some other' , id: 5 },
+        { title: 'Last'       , id: 6 }
     ];
+    
+    var last_journal = 6;
     
     var cur_journal = 4;
     
@@ -26,7 +28,15 @@ angular.module('DataService', []).factory('Data', function() {
         get_journal : function(id) {
             return journals[id-1];
         },
-	
+        
+        add_journal : function(journal) {
+        	if (!journal.id) {
+        		last_journal++;
+        		journal.id = last_journal;
+        	}
+			journals.push(journal);
+        },
+		
         get_post : function(id) {
             return posts[id-1];
         },

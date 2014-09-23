@@ -6,6 +6,18 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $io
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
+    
+	$scope.journal = {};
+	$scope.submit = function() {
+		if(!$scope.journal.title) {
+			alert('Info required');
+			return;
+		}
+		var j = {};
+		j.title = $scope.journal.title;
+		$scope.data.add_journal(j);
+		$scope.journal = {};
+	};   
 
     // Form data for the login modal
     $scope.loginData = {};
