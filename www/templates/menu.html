@@ -18,15 +18,16 @@
 				<ion-item class="item-input-inset">
 					<label class="item-input-wrapper">
 					<input type="text" placeholder="Journal" ng-model="journal.title">
+					
 					</label>
 					<button class="button button-small button-icon icon ion-plus"
-					        ng-disabled="!journal.title" ng-click="submit()">
+					        ng-disabled="!journal.title || data.has_journal(journal.title)" ng-click="submit()">
 					</button>
 				</ion-item>
             
             
                 <ion-item class="item-icon-left" nav-clear menu-close
-                          ng-repeat="journal in data.journals" href="#/app/journal/{{journal.id}}">
+                          ng-repeat="journal in data.journals | filter: journal.title" href="#/app/journal/{{journal.id}}">
                     <i class="icon ion-ios7-person"></i>
                     {{journal.title}}
                 </ion-item>

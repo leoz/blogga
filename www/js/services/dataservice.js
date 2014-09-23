@@ -36,6 +36,15 @@ angular.module('DataService', []).factory('Data', function() {
         	}
 			journals.push(journal);
         },
+        
+		has_journal : function(title) {
+			for(var i in journals) {			
+				if(journals[i].title == title) {
+					return true;
+				}
+			}
+			return false;
+		},        
 		
         get_post : function(id) {
             return posts[id-1];
