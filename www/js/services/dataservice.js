@@ -37,6 +37,10 @@ angular.module('DataService', []).factory('Data', function() {
 			journals.push(journal);
         },
         
+		delete_journal : function(journal) {
+			journals.splice(journals.indexOf(journal), 1);
+		},      
+        
 		has_journal : function(title) {
 			for(var i in journals) {			
 				if(journals[i].title == title) {
@@ -45,7 +49,11 @@ angular.module('DataService', []).factory('Data', function() {
 			}
 			return false;
 		},        
-		
+        
+		has_journals : function(title) {
+			return (journals.length > 0);
+		},
+				
         get_post : function(id) {
             return posts[id-1];
         },
