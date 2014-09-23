@@ -4,7 +4,7 @@
     </ion-nav-buttons>
     <ion-content class="has-header">
         <ion-list>
-            <ion-item ng-repeat="post in data.posts" href="#/app/journal/{{journalId}}/{{post.id}}">
+            <ion-item ng-repeat="post in postData.posts" href="#/app/journal/{{journalId}}/{{post.id}}">
                 {{post.title}}
             </ion-item>
         </ion-list>

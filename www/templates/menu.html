@@ -18,8 +18,8 @@
             <ion-list>
 				<ion-item class="item-input-inset">
 					<button class="button button-small button-icon icon ion-ios7-minus-outline"
-					        ng-disabled="!data.has_journals()"
-					        ng-click="data.show_delete = !data.show_delete">
+					        ng-disabled="!journalData.has_journals()"
+					        ng-click="journalData.show_delete = !journalData.show_delete">
 					</button>
 				
 					<label class="item-input-wrapper">
@@ -27,19 +27,19 @@
 					</label>
 					
 					<button class="button button-small button-icon icon ion-ios7-plus-outline"
-					        ng-disabled="!journal.title || data.has_journal(journal.title)"
-					        ng-click="submit(); data.show_delete = false">
+					        ng-disabled="!journal.title || journalData.has_journal(journal.title)"
+					        ng-click="submit(); journalData.show_delete = false">
 					</button>
 				</ion-item>
             
-            	<ion-list show-delete="data.show_delete">
+            	<ion-list show-delete="journalData.show_delete">
 		            <ion-item class="item-icon-left" nav-clear menu-close
-		                      ng-repeat="journal in data.journals | filter: journal.title"
+		                      ng-repeat="journal in journalData.journals | filter: journal.title"
 		                      href="#/app/journal/{{journal.id}}">
 		                <i class="icon ion-ios7-person"></i>
 		                {{journal.title}}
 						<ion-delete-button class="ion-minus-circled"
-							               ng-click="data.delete_journal(journal)">
+							               ng-click="journalData.delete_journal(journal)">
 						</ion-delete-button>                    
 		            </ion-item>                
             	</ion-list>

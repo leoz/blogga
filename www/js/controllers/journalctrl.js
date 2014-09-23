@@ -1,12 +1,13 @@
 
-angular.module('JournalCtrl', []).controller('JournalController', function($scope, $stateParams, Data) {
+angular.module('JournalCtrl', []).controller('JournalController', function($scope, $stateParams, JournalService, PostService) {
     
-    $scope.data = Data;
+    $scope.journalData = JournalService;
+    $scope.postData = PostService;
 
     $scope.journalId = $stateParams.journalId;
     
     $scope.get_title = function() {
-        return $scope.data.get_journal($scope.journalId).title;
+        return $scope.journalData.get_journal($scope.journalId).title;
     };    
 });
 

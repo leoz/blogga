@@ -1,7 +1,7 @@
 
-angular.module('MainCtrl', []).controller('MainController', function($scope, $ionicSideMenuDelegate, $ionicModal, $timeout, Data) {
+angular.module('MainCtrl', []).controller('MainController', function($scope, $ionicSideMenuDelegate, $ionicModal, $timeout, JournalService) {
 
-    $scope.data = Data;
+    $scope.journalData = JournalService;
 
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
@@ -15,7 +15,7 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $io
 		}
 		var j = {};
 		j.title = $scope.journal.title;
-		$scope.data.add_journal(j);
+		$scope.journalData.add_journal(j);
 		$scope.journal = {};
 	};   
 

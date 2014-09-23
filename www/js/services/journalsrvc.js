@@ -1,5 +1,5 @@
 
-angular.module('DataService', []).factory('Data', function() {
+angular.module('JournalSrvc', []).factory('JournalService', function() {
 
     var journals = [
         { title: 'Journal A'  , id: 1 },
@@ -14,15 +14,6 @@ angular.module('DataService', []).factory('Data', function() {
     
     var cur_journal = 4;
     
-    var posts = [
-        { title: 'Reggae', id: 1 },
-        { title: 'Chill', id: 2 },
-        { title: 'Dubstep', id: 3 },
-        { title: 'Indie', id: 4 },
-        { title: 'Rap', id: 5 },
-        { title: 'Cowbell', id: 6 }
-    ];    
-
 	return {
 	
         get_journal : function(id) {
@@ -54,13 +45,8 @@ angular.module('DataService', []).factory('Data', function() {
 			return (journals.length > 0);
 		},
 				
-        get_post : function(id) {
-            return posts[id-1];
-        },
-        
 	    journals : journals,
-	    cur_journal : cur_journal,
-	    posts : posts
+	    cur_journal : cur_journal
 	    
 	};
 	
