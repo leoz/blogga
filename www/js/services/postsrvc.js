@@ -1,5 +1,6 @@
 
-angular.module('PostSrvc', []).factory('PostService', function() {
+angular.module('PostSrvc', [])
+.factory('PostService', function() {
     
     var posts = [
         { title: 'Reggae', id: 1 },

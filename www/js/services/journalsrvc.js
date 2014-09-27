@@ -1,7 +1,12 @@
 
-angular.module('JournalSrvc', []).factory('JournalService', function() {
+angular.module('JournalSrvc', [])
+.factory('JournalService', function(StorageService) {
 
-    var journals = [
+    var JOURNALS_TAG = 'journals';
+
+    var journals = StorageService.getObject(JOURNALS_TAG);
+
+    var def = [
         { title: 'Journal A'   },
         { title: 'Journal B'   },
         { title: 'Journal XX'  },
@@ -10,7 +15,11 @@ angular.module('JournalSrvc', []).factory('JournalService', function() {
         { title: 'Last'        }
     ];
     
-    var cur_journal = 4;
+    if (!journals) {
+        journals = def;
+    }
+    
+    var cur_journal = 1;
     
 	return {
 	
@@ -20,10 +29,12 @@ angular.module('JournalSrvc', []).factory('JournalService', function() {
         
         add_journal : function(journal) {
 			journals.push(journal);
+			StorageService.setObject(JOURNALS_TAG, journals);
         },
         
 		delete_journal : function(journal) {
 			journals.splice(journals.indexOf(journal), 1);
+			StorageService.setObject(JOURNALS_TAG, journals);
 		},      
         
 		has_journal : function(title) {

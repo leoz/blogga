@@ -1,5 +1,6 @@
 
-angular.module('MainRoute', []).config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+angular.module('MainRoute', [])
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 $stateProvider
 
     .state('app', {
@@ -48,7 +49,7 @@ $stateProvider
     });
     
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/journal/3');
+    $urlRouterProvider.otherwise('/app/journal/0');
 
 }]);
 

@@ -1,5 +1,6 @@
 
-angular.module('JournalCtrl', []).controller('JournalController', function($scope, $stateParams, JournalService, PostService) {
+angular.module('JournalCtrl', [])
+.controller('JournalController', function($scope, $stateParams, JournalService, PostService) {
     
     $scope.journalData = JournalService;
     $scope.postData = PostService;

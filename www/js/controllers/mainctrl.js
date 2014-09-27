@@ -1,5 +1,6 @@
 
-angular.module('MainCtrl', []).controller('MainController', function($scope, $ionicSideMenuDelegate, $ionicModal, $timeout, JournalService) {
+angular.module('MainCtrl', [])
+.controller('MainController', function($scope, $ionicSideMenuDelegate, $ionicModal, $timeout, JournalService) {
 
     $scope.journalData = JournalService;
 
