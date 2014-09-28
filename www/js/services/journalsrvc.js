@@ -15,17 +15,32 @@ angular.module('JournalSrvc', [])
         { title: 'leoz-net'   }
     ];
     
+    //FIXME!
+    
     if (!journals) {
         journals = def;
     }
     
-    function setUserpicsData(data,id) {
-        console.log('setUserpicsData ' + data[0].defaultpicurl);
+    function cbGoodUserpics(data,title) {
+        console.log('cbGoodUserpics for ' + title + ' ' + data[0].defaultpicurl);
     };
     
-    if (true) {
-        LJService.get_userpics('toronto-ru',setUserpicsData,0);    
-    }
+    function cbFailUserpics(title) {
+        console.log('cbFailUserpics for ' + title);
+        deleteJournal(title);
+    };
+    
+    function deleteJournal(title) {
+		journals.splice(journals.indexOf(title), 1);
+		StorageService.setObject(JOURNALS_TAG, journals);
+	};    
+    
+    //FIXME!
+
+    angular.forEach(journals, function(journal) {
+        console.log('journal: ' + journal.title);
+        LJService.get_userpics(journal.title,cbGoodUserpics,cbFailUserpics,journal.title);    
+    });    
     
     var cur_journal = 1;
     
@@ -40,10 +55,7 @@ angular.module('JournalSrvc', [])
 			StorageService.setObject(JOURNALS_TAG, journals);
         },
         
-		delete_journal : function(journal) {
-			journals.splice(journals.indexOf(journal), 1);
-			StorageService.setObject(JOURNALS_TAG, journals);
-		},      
+		delete_journal : deleteJournal,      
         
 		has_journal : function(title) {
 			for(var i in journals) {			

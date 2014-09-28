@@ -8,7 +8,7 @@ angular.module('LJSrvc', [])
     
 	return {
 	
-		post: function(params,callback,context) {
+		post: function(params,cbGood,cbFail,context) {
 			$http({
 				method: 'POST',
 				url: URL,
@@ -24,10 +24,20 @@ angular.module('LJSrvc', [])
 				var xmlDoc = x2js.parseXmlString(data);
 				console.log('#2');
 				console.log(xmlDoc);
-				var response = XMLRPC.parseDocument(xmlDoc);
-				console.log('#3');
-				console.log(response);
-				callback(response,context);
+				
+				var response;
+				
+                try {
+				    response = XMLRPC.parseDocument(xmlDoc);
+				    console.log('#3');
+				    console.log(response);
+				    cbGood(response,context);
+                }
+                catch(err) {
+				    console.log('Request failed ' + err);
+				    cbFail(context);
+                }				
+				
 			}).
 			error(function(data, status) {
 				console.log('Request failed ' + status);
@@ -48,14 +58,14 @@ angular.module('LJSrvc', [])
 			console.log(data);
 			return data;
 		},	
-		get_userpics: function(user,callback,index) {
+		get_userpics: function(user,cbGood,cbFail,context) {
 			var method = 'LJ.XMLRPC.getuserpics';
 			var params = {
 				'ver'        : '1',
 				'usejournal' : user
 			};        
 			var param = this.prepare_call(method,params);         
-			this.post(param,callback,index);
+			this.post(param,cbGood,cbFail,context);
 		}
 	
 	};
