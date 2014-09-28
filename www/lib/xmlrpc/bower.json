@@ -1,0 +1,31 @@
+{
+  "name": "xmlrpc",
+  "main": "xmlrpc.js",
+  "version": "0.1.2",
+  "homepage": "https://github.com/leoz2011/xmlrpc.js",
+  "authors": [
+    "Tim Heap <heap.tim@gmail.com>",
+    "Leonid Zolotarev <leoz@yahoo.com>"
+  ],
+  "description": "JavaScript library for talking to XML-RPC servers",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "xmlrpc",
+    "xmlrpc.js",
+    "XML-RPC",
+    "JSON"
+  ],
+  "license": "Unlicense",
+  "ignore": [
+    "UNLICENSE",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "docs",
+    "test",
+    "tests"
+  ]
+}
+

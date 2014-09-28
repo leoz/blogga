@@ -1,22 +1,30 @@
 
 angular.module('JournalSrvc', [])
-.factory('JournalService', function(StorageService) {
+.factory('JournalService', function(StorageService,LJService) {
 
     var JOURNALS_TAG = 'journals';
 
     var journals = StorageService.getObject(JOURNALS_TAG);
 
     var def = [
-        { title: 'Journal A'   },
-        { title: 'Journal B'   },
-        { title: 'Journal XX'  },
-        { title: 'Journal XXX' },
-        { title: 'Some other'  },
-        { title: 'Last'        }
+        { title: 'torontoru'  },
+        { title: 'toronto-ru' },
+        { title: 'tema'       },
+        { title: 'russos'     },
+        { title: 'tanyat'     },
+        { title: 'leoz-net'   }
     ];
     
     if (!journals) {
         journals = def;
+    }
+    
+    function setUserpicsData(data,id) {
+        console.log('setUserpicsData ' + data[0].defaultpicurl);
+    };
+    
+    if (true) {
+        LJService.get_userpics('toronto-ru',setUserpicsData,0);    
     }
     
     var cur_journal = 1;

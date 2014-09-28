@@ -2,6 +2,9 @@
   "name": "blogga",
   "private": "true",
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.0.0-beta.13"
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.13",
+    "x2js": "abdmob/x2js#1.1.7",
+    "xmlrpc": "leoz2011/xmlrpc.js#0.1.2"
   }
 }
+
