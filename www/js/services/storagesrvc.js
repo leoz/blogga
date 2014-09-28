@@ -10,7 +10,8 @@ angular.module('StorageSrvc', [])
             return $window.localStorage[key] || defaultValue;
         },
         setObject: function(key, value) {
-            console.log(JSON.stringify(value));
+            console.log('setObject');
+            console.log(angular.toJson(value));
             $window.localStorage[key] = angular.toJson(value);
         },
         getObject: function(key) {

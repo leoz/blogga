@@ -23,12 +23,25 @@ angular.module('JournalSrvc', [])
     
     function cbGoodUserpics(data,title) {
         console.log('cbGoodUserpics for ' + title + ' ' + data[0].defaultpicurl);
+        var i = getJournal(title);
+        if (i != -1) {
+            journals[i].$$avatar = data[0].defaultpicurl;
+        }
     };
     
     function cbFailUserpics(title) {
         console.log('cbFailUserpics for ' + title);
         deleteJournal(title);
     };
+    
+    function getJournal(title) {
+		for(var i in journals) {			
+			if(journals[i].title == title) {
+				return i;
+			}
+		}
+		return -1;
+	};    
     
     function deleteJournal(title) {
 		journals.splice(journals.indexOf(title), 1);
@@ -39,6 +52,7 @@ angular.module('JournalSrvc', [])
 
     angular.forEach(journals, function(journal) {
         console.log('journal: ' + journal.title);
+        journal['$$avatar'] = 'img/ios7-person.png';
         LJService.get_userpics(journal.title,cbGoodUserpics,cbFailUserpics,journal.title);    
     });    
     
