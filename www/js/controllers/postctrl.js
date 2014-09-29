@@ -1,6 +1,6 @@
 
 angular.module('PostCtrl', [])
-.controller('PostController', function($scope, $stateParams, JournalService, PostService) {
+.controller('PostController', function($scope, $stateParams, $sce, JournalService, PostService, LJService) {
 
     $scope.journalData = JournalService;
     $scope.postData = PostService;
@@ -8,12 +8,28 @@ angular.module('PostCtrl', [])
     $scope.journalId = $stateParams.journalId;
     $scope.postId = $stateParams.postId;
     
-    $scope.get_journal_title = function() {
-        return $scope.journalData.get_journal($scope.journalId).title;
+    $scope.title = '';
+    $scope.content = '';
+    $scope.avatar = '';
+    
+    $scope.post = {};
+    
+    $scope.load_post = function() {
+        $scope.post = $scope.postData.get_post($scope.postId);
+        
+	    LJService.array_buffer_to_string($scope.post.subject).then(
+	        function (v) {
+	            $scope.title = v;
+	        });
+	    LJService.array_buffer_to_string($scope.post.event).then(
+	        function (v) {
+	            $scope.content = $sce.trustAsHtml(v);
+	        });    
+        
     };    
     
-    $scope.get_post_title = function() {
-        return $scope.postData.get_post($scope.postId).title;
+    $scope.get_journal_title = function() {
+        return $scope.journalData.get_journal($scope.journalId).title;
     };    
     
 });

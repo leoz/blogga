@@ -1,6 +1,29 @@
-<ion-view title="Post - {{get_journal_title()}} : {{get_post_title()}}">
+<ion-view ng-init="load_post()" title="Post - {{get_journal_title()}} : {{title}}">
   <ion-content class="has-header">
-    <h1>Post - {{get_journal_title()}} : {{get_post_title()}}</h1>
+  <!--
+    <h1>Post - {{get_journal_title()}} : {{title}}</h1>
+    -->
+    
+<div class="card">
+
+	<div class="item item-avatar">
+		<img ng-src="{{avatar}}">
+		<h2>{{post.poster}}</h2>
+		<p>{{post.eventtime | dateFormat}}, {{post.eventtime | timeFormat}}</p>
+	</div>
+	
+	<div class="item item-divider">
+		{{title}}
+	</div>
+	
+	<div class="item item-text-wrap" ng-bind-html="content">
+	</div>
+	
+	<ng-include ng-init="get_comments()" src="'templates/reply.html'"></ng-include>
+	
+</div>
+    
+    
   </ion-content>
 </ion-view>
 

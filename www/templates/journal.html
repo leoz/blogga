@@ -1,12 +1,52 @@
-<ion-view ng-init="load_posts()" title="Journal - {{get_title()}}">
+<ion-view ng-init="load_posts()" title="Journal - {{get_journal_title()}}">
     <ion-nav-buttons side="left">
         <button class="button button-icon ion-navicon" ng-click="toggleLeft()" ng-hide="$exposeAside.active"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
         <ion-list>
-            <ion-item ng-repeat="post in postData.posts" href="#/app/journal/{{journalId}}/{{post.id}}">
-                {{post.title}}
+        
+	        <div ng-init="set_last_date($last,$index)" ng-repeat="post in postData.posts">
+	
+		        <ion-item class="item-stable item-avatar item-button-right"
+		                  ng-click="toggle_show($index)">
+		
+			        <img ng-init="get_avatar(post.poster,$id)" ng-src="{{avatars[$id]}}">
+			
+			        <span>
+				        <h2 ng-init="get_title($index,$id)">{{titles[$id]}}</h2>
+				        <p>{{post.poster}}</p>
+			        </span>
+						
+			        <span class="badge">
+				        <div>
+					        <div>{{post.eventtime | dateFormat}}</div>
+					        <div>{{post.eventtime | timeFormat}}</div>
+				        </div>
+			        </span>
+			
+			
+			        <a class="button"
+					        href="#/app/journal/{{journalId}}/{{post.itemid}}"
+					        style="top: 20px"
+					        ng-show="post.reply_count">
+				        {{post.reply_count}}
+			        </a>
+		
+		        </ion-item>
+		        <ion-item class="item-accordion" ng-show="post.m_show">		   
+			        <div style="white-space: normal"
+				         ng-init="get_content(post.event,$id)"
+				         ng-bind-html="contents[$id]"></div>			
+		        </ion-item>
+	
+	        </div>
+        
+        
+            <!--
+            <ion-item ng-repeat="post in postData.posts" href="#/app/journal/{{journalId}}/{{post.itemid}}">
+                {{post.poster}}
             </ion-item>
+            -->
         </ion-list>
     </ion-content>
 </ion-view>
