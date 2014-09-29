@@ -4,25 +4,47 @@ angular.module('JournalSrvc', [])
 
     var JOURNALS_TAG = 'journals';
 
-    var journals = StorageService.getObject(JOURNALS_TAG);
+    var journals = null;
+    
+    var cur_journal = 1;
 
     var def = [
         { title: 'torontoru'  },
         { title: 'toronto-ru' },
         { title: 'tema'       },
         { title: 'russos'     },
-        { title: 'tanyat'     },
+        { title: 'tanyant'    },
         { title: 'leoz-net'   }
     ];
     
     //FIXME!
+    loadJournals();
+        
+    function loadJournals() {
     
-    if (!journals) {
-        journals = def;
-    }
+        console.log('loadJournals');
+
+        journals = StorageService.getObject(JOURNALS_TAG);
+        
+        //FIXME!
+
+        if (!journals) {
+            journals = def;
+        }
+        
+        //FIXME!
+
+        angular.forEach(journals, function(journal) {
+            console.log('journal: ' + journal.title);
+            journal['$$avatar'] = 'img/ios7-person.png';
+            LJService.get_userpics(journal.title,cbGoodUserpics,cbFailUserpics,journal.title);    
+        });    
+        
+	};    
     
     function cbGoodUserpics(data,title) {
         console.log('cbGoodUserpics for ' + title + ' ' + data[0].defaultpicurl);
+        console.log(data);
         var i = getJournal(title);
         if (i != -1) {
             journals[i].$$avatar = data[0].defaultpicurl;
@@ -48,16 +70,6 @@ angular.module('JournalSrvc', [])
 		StorageService.setObject(JOURNALS_TAG, journals);
 	};    
     
-    //FIXME!
-
-    angular.forEach(journals, function(journal) {
-        console.log('journal: ' + journal.title);
-        journal['$$avatar'] = 'img/ios7-person.png';
-        LJService.get_userpics(journal.title,cbGoodUserpics,cbFailUserpics,journal.title);    
-    });    
-    
-    var cur_journal = 1;
-    
 	return {
 	
         get_journal : function(i) {
@@ -71,6 +83,8 @@ angular.module('JournalSrvc', [])
         
 		delete_journal : deleteJournal,      
         
+		load_journals : loadJournals,      
+
 		has_journal : function(title) {
 			for(var i in journals) {			
 				if(journals[i].title == title) {
