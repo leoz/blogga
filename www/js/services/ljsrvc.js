@@ -92,6 +92,17 @@ angular.module('LJSrvc', [])
 	        }   
             var param = this.prepare_call(method,params);         
             this.post(param,cbGood,cbFail,context);     
+		},
+		get_comments: function(itemid,anum,journal,cbGood,cbFail,context) {
+            var method = 'LJ.XMLRPC.getcomments';
+            var ditemid = itemid * 256 + anum;
+	        var params = {
+			    'ver'     : '1',
+			    'journal' : journal,
+			    'ditemid' : ditemid
+	        };  
+            var param = this.prepare_call(method,params);         
+            this.post(param,cbGood,cbFail,context);     
 		}
 	
 	};

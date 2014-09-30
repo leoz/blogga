@@ -53,8 +53,8 @@ angular.module('JournalCtrl', [])
         if (!$scope.avatars[id]) {
         	$scope.avatars[id] = 'img/ios7-person.png';
         }
-        console.log('setUserpicsData ' + id);
-        console.log('setUserpicsData ' + $scope.avatars[id]);
+        console.log('cbGoodUserpics ' + id);
+        console.log('cbGoodUserpics ' + $scope.avatars[id]);
     };
     
     cbFailUserpics = function(id) {

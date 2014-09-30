@@ -1,0 +1,30 @@
+
+<div class="padding">
+	<ion-list>
+	<div ng-repeat="child in child.children">
+	
+		<ion-item class="item-stable item-avatar item-button-right">
+			<img ng-init="get_avatar(child.postername,$id)" ng-src="{{avatars[$id]}}">
+			<span>
+				<h2>{{child.postername}}</h2>
+				<p>{{child.datepostunix | unixFormat}}</p>
+			</span>
+			<button class="button button-icon icon {{child.m_show ? 'ion-minus' : 'ion-plus'}}"
+				    ng-click="child.m_show = !child.m_show;"
+				    style="top: 20px"
+				    ng-show="child.children">
+			</button>      
+		</ion-item>
+		<ion-item class="item-accordion" ng-show="true">
+			<div style="white-space: normal"
+				 ng-init="get_content(child.body,$id)"
+				 ng-bind-html="contents[$id]"></div>
+		</ion-item>
+		<div ng-show="child.m_show">
+			<ng-include ng-if="child.children" src="'templates/comment.html'"></ng-include>
+		</div>
+		
+	</div>
+	</ion-list>
+</div>
+
