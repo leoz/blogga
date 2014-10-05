@@ -8,6 +8,8 @@ angular.module('PostSrvc', [])
     var count = 7; // Minimum count is 4 (seems to be a bug in LJ)
     var load_more = true;
     
+    var read_lock = false;
+    
     function setTitle(t) {
     	title = t;
     	posts.length = 0;    
@@ -20,6 +22,12 @@ angular.module('PostSrvc', [])
 	};
 	
     function loadPosts(callback) {
+    
+        if (read_lock) {
+            return;
+        }
+            
+        read_lock = true;
     
     	var last_date = '';
     	
@@ -46,6 +54,8 @@ angular.module('PostSrvc', [])
         	callback();
         }
         
+        read_lock = false;
+        
     };
     
     function cbFailEvents(callback) {
@@ -55,6 +65,8 @@ angular.module('PostSrvc', [])
         if (callback) {
         	callback();
         }
+        
+        read_lock = false;
         
     };	   
 
