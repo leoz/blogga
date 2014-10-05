@@ -16,7 +16,7 @@
 		        <ion-item class="item-stable item-avatar item-button-right"
 		                  ng-click="toggle_show($index)">
 		
-			        <img ng-init="get_avatar(post.poster,$id)" ng-src="{{avatars[$id]}}">
+			        <img ng-cache ng-init="get_avatar(post.poster,$id)" ng-src="{{avatars[$id]}}">
 			
 			        <span>
 				        <h2 ng-init="get_title($index,$id)">{{titles[$id]}}</h2>
