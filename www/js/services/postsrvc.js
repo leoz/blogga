@@ -11,10 +11,13 @@ angular.module('PostSrvc', [])
     var read_lock = false;
     
     function setTitle(t) {
-    	title = t;
-    	posts.length = 0;    
-    	load_more = true;
-        console.log('Load posts for ' + title);
+    
+        if(title != t) {
+        	title = t;
+        	posts.length = 0;    
+        	load_more = true;
+            console.log('Load posts for ' + title);
+        }
 	};
 	
     function canLoadMore() {
