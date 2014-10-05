@@ -2,22 +2,27 @@
 angular.module('PostSrvc', [])
 .factory('PostService', function(LJService) {
     
-    var posts = [];
-    
-    var title = null;
     var count = 7; // Minimum count is 4 (seems to be a bug in LJ)
-    var load_more = true;
-    
+
+    var posts = [];    
+    var title = null;
+    var load_more = true;    
     var read_lock = false;
     
     function setTitle(t) {
     
         if(title != t) {
+            resetPosts();
         	title = t;
-        	posts.length = 0;    
-        	load_more = true;
             console.log('Load posts for ' + title);
         }
+	};
+    
+    function resetPosts() {
+    	posts.length = 0;    
+        title = null;
+    	load_more = true;
+    	read_lock = false;
 	};
 	
     function canLoadMore() {
@@ -85,6 +90,7 @@ angular.module('PostSrvc', [])
         },
         
 	    set_title : setTitle,
+	    reset_posts : resetPosts,
 	    load_posts : loadPosts,
 	    can_load_more : canLoadMore,
 	    posts : posts

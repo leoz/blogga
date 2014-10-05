@@ -11,6 +11,12 @@ angular.module('JournalCtrl', [])
     $scope.titles    = [];
     $scope.contents  = [];   
     
+    $scope.refresh_posts = function() {
+    	$scope.postData.reset_posts();
+    	$scope.postData.set_title($scope.get_journal_title());
+    	$scope.postData.load_posts(cbLoadPosts);
+    };
+    
     $scope.load_posts = function() {
     	$scope.postData.load_posts(cbLoadPosts);
     };
@@ -20,6 +26,7 @@ angular.module('JournalCtrl', [])
     };
         
     cbLoadPosts = function() {
+        $scope.$broadcast('scroll.refreshComplete');
     	$scope.$broadcast('scroll.infiniteScrollComplete');
     };
     

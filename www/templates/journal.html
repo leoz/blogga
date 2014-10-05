@@ -3,6 +3,12 @@
         <button class="button button-icon ion-navicon" ng-click="toggleLeft()" ng-hide="$exposeAside.active"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
+    
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="refresh_posts()">
+        </ion-refresher>    
+    
         <ion-list>
         
 	        <div ng-init="set_last_date($last,$index)" ng-repeat="post in postData.posts">
@@ -40,13 +46,7 @@
 		        </ion-item>
 	
 	        </div>
-        
-        
-            <!--
-            <ion-item ng-repeat="post in postData.posts" href="#/app/journal/{{journalId}}/{{post.itemid}}">
-                {{post.poster}}
-            </ion-item>
-            -->
+
         </ion-list>
         
 		<ion-infinite-scroll
