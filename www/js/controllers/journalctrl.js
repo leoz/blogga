@@ -9,12 +9,24 @@ angular.module('JournalCtrl', [])
     
     $scope.avatars   = [];
     $scope.titles    = [];
-    $scope.contents  = [];    
+    $scope.contents  = [];   
     
     $scope.load_posts = function() {
-        $scope.postData.load_posts($scope.get_journal_title());
-    };    
+    	$scope.postData.load_posts(cbLoadPosts);
+    };
     
+    $scope.can_load_posts = function() {
+    	return $scope.postData.can_load_more();
+    };
+        
+    cbLoadPosts = function() {
+    	$scope.$broadcast('scroll.infiniteScrollComplete');
+    };
+    
+	$scope.$on('$stateChangeSuccess', function() {
+		$scope.load_posts();
+	});    
+
     $scope.get_journal_title = function() {
         return $scope.journalData.get_journal($scope.journalId).title;
     };    

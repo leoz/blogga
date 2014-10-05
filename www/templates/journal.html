@@ -1,4 +1,4 @@
-<ion-view ng-init="load_posts()" title="{{get_journal_title()}}">
+<ion-view ng-init="postData.set_title(get_journal_title())" title="{{get_journal_title()}}">
     <ion-nav-buttons side="left">
         <button class="button button-icon ion-navicon" ng-click="toggleLeft()" ng-hide="$exposeAside.active"></button>
     </ion-nav-buttons>
@@ -48,6 +48,13 @@
             </ion-item>
             -->
         </ion-list>
+        
+		<ion-infinite-scroll
+			ng-if="can_load_posts()"
+			on-infinite="load_posts()"
+			distance="1%">
+		</ion-infinite-scroll>        
+        
     </ion-content>
 </ion-view>
 
