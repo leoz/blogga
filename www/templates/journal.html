@@ -34,7 +34,8 @@
 			        <a class="button"
 					        href="#/app/journal/{{journalId}}/{{post.itemid}}"
 					        style="top: 20px"
-					        ng-show="post.reply_count">
+					        ng-show="post.reply_count"
+					        stop-event="click">
 				        {{post.reply_count}}
 			        </a>
 		

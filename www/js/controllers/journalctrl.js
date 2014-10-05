@@ -9,8 +9,8 @@ angular.module('JournalCtrl', [])
     
     $scope.avatars   = [];
     $scope.titles    = [];
-    $scope.contents  = [];   
-    
+    $scope.contents  = [];
+        
     $scope.refresh_posts = function() {
     	$scope.postData.reset_posts();
     	$scope.postData.set_title($scope.get_journal_title());
@@ -85,5 +85,15 @@ angular.module('JournalCtrl', [])
         $scope.postData.posts[i].m_show = !$scope.postData.posts[i].m_show;
     };
     
+})
+.directive('stopEvent', function () {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attr) {
+			element.bind(attr.stopEvent, function (e) {
+				e.stopPropagation();
+			});
+		}
+	};
 });
 
