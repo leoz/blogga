@@ -1,8 +1,11 @@
 
 angular.module('MainCtrl', [])
-.controller('MainController', function($scope, $ionicSideMenuDelegate, $ionicModal, $timeout, JournalService) {
+.controller('MainController', function($scope, $ionicSideMenuDelegate,
+                                        $ionicModal, $timeout,
+                                        JournalService, AvatarService) {
 
     $scope.journalData = JournalService;
+    $scope.avatarData = AvatarService;
 
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();

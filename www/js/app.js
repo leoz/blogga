@@ -2,7 +2,7 @@
 // Blogga LiveJournal client
 
 angular.module('blogga', ['ionic', 'MainRoute', 'MainCtrl', 'JournalCtrl', 'PostCtrl',
-                          'JournalSrvc', 'PostSrvc', 'StorageSrvc', 'LJSrvc',
+                          'JournalSrvc', 'PostSrvc', 'AvatarSrvc', 'StorageSrvc', 'LJSrvc',
                           'DateFormatFilter', 'TimeFormatFilter', 'UnixFormatFilter'
                          ])
 

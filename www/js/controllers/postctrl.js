@@ -1,16 +1,18 @@
 
 angular.module('PostCtrl', [])
-.controller('PostController', function($scope, $stateParams, $sce, JournalService, PostService, LJService) {
+.controller('PostController', function($scope, $stateParams, $sce,
+                                        JournalService, PostService,
+                                        AvatarService, LJService) {
 
     $scope.journalData = JournalService;
     $scope.postData = PostService;
+    $scope.avatarData = AvatarService;
 
     $scope.journalId = $stateParams.journalId;
     $scope.postId = $stateParams.postId;
     
     $scope.title = '';
     $scope.content = '';
-    $scope.avatar = '';
     
     $scope.post = {};
     
@@ -18,7 +20,6 @@ angular.module('PostCtrl', [])
     	children: []
     };    
     
-    $scope.avatars  = [];
     $scope.contents = [];
     
     $scope.load_post = function() {
@@ -36,36 +37,7 @@ angular.module('PostCtrl', [])
 	    
         LJService.get_userpics($scope.post.poster,cbGoodUserpic,cbFailUserpic,null);    
         
-    };
-    
-    $scope.get_avatar = function(name,id) {
-		console.log('get_avatar for ' + name);
-		if (!$scope.avatars.hasOwnProperty(id)) {		    
-            LJService.get_userpics(name,cbGoodUserpic,cbFailUserpic,id);    
-        }   
-    };    
-    
-    cbGoodUserpic = function(data,id) {
-        console.log('cbGoodUserpic ' + id);
-        if (!id) {
-            $scope.avatar = data[0].defaultpicurl;
-            if (!$scope.avatar) {
-            	$scope.avatar = 'img/ios7-person.png';
-            }
-            console.log('cbGoodUserpic ' + $scope.avatar);
-        }
-        else {
-            $scope.avatars[id] = data[0].defaultpicurl;
-            if (!$scope.avatars[id]) {
-            	$scope.avatars[id] = 'img/ios7-person.png';
-            }
-            console.log('cbGoodUserpics ' + $scope.avatars[id]);
-        }
-    };
-    
-    cbFailUserpic = function(id) {
-        console.log('cbFailUserpics for ' + id);
-    };    
+    };   
     
     $scope.get_journal_title = function() {
         return $scope.journalData.get_journal($scope.journalId).title;

@@ -1,13 +1,15 @@
 
 angular.module('JournalCtrl', [])
-.controller('JournalController', function($scope, $stateParams, $sce, JournalService, PostService, LJService) {
+.controller('JournalController', function($scope, $stateParams, $sce,
+                                           JournalService, PostService,
+                                           AvatarService, LJService) {
     
     $scope.journalData = JournalService;
     $scope.postData = PostService;
+    $scope.avatarData = AvatarService;
 
     $scope.journalId = $stateParams.journalId;
     
-    $scope.avatars   = [];
     $scope.titles    = [];
     $scope.contents  = [];
         
@@ -39,45 +41,21 @@ angular.module('JournalCtrl', [])
     };    
 
     $scope.get_title = function(i,id) {
-//        console.log('get_title for ' + i);
 		if (!$scope.titles.hasOwnProperty(id)) {		    
 		    LJService.array_buffer_to_string($scope.postData.posts[i].subject).then(
 		        function (v) {
-//		            console.log('get_title: ' + v);
 		            $scope.titles[id] = v;
 		        });
         }
     };
     
     $scope.get_content = function(content,id) {
-//        console.log('get_content for ' + id);
 		if (!$scope.contents.hasOwnProperty(id)) {		    
 		    LJService.array_buffer_to_string(content).then(
 		        function (v) {
-//		            console.log('test: ' + v);
 		            $scope.contents[id] = $sce.trustAsHtml(v);
 		        });    
         }
-    };
-
-    $scope.get_avatar = function(name,id) {
-		console.log('get_avatar for ' + name);
-		if (!$scope.avatars.hasOwnProperty(id)) {		    
-            LJService.get_userpics(name,cbGoodUserpics,cbFailUserpics,id);    
-        }   
-    };
-
-    cbGoodUserpics = function(data,id) {
-        $scope.avatars[id] = data[0].defaultpicurl;
-        if (!$scope.avatars[id]) {
-        	$scope.avatars[id] = 'img/ios7-person.png';
-        }
-        console.log('cbGoodUserpics ' + id);
-        console.log('cbGoodUserpics ' + $scope.avatars[id]);
-    };
-    
-    cbFailUserpics = function(id) {
-        console.log('cbFailUserpics for ' + id);
     };
 
     $scope.toggle_show = function(i) {

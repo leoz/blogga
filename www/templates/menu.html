@@ -38,7 +38,11 @@
 		                      href="#/app/journal/{{$index}}">		                
 		                
 		                <div class="icon">
-		                <img ng-src="{{journal.$$avatar}}" style="width: 1em;">
+		                
+			            <img ng-cache ng-init="avatarData.load_avatar(journal.title)"
+			                          ng-src="{{avatarData.get_avatar(journal.title)}}"
+			                          style="width: 1em;">
+
 		                </div>		                
 	                
 		                {{journal.title}}

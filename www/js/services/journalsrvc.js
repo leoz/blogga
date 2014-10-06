@@ -35,20 +35,15 @@ angular.module('JournalSrvc', [])
         //FIXME!
 
         angular.forEach(journals, function(journal) {
+            // This is to check the validity of the journal
             console.log('journal: ' + journal.title);
-            journal['$$avatar'] = 'img/ios7-person.png';
             LJService.get_userpics(journal.title,cbGoodUserpics,cbFailUserpics,journal.title);    
         });    
         
 	};    
     
     function cbGoodUserpics(data,title) {
-        console.log('cbGoodUserpics for ' + title + ' ' + data[0].defaultpicurl);
-        console.log(data);
-        var i = getJournal(title);
-        if (i != -1) {
-            journals[i].$$avatar = data[0].defaultpicurl;
-        }
+        console.log('cbGoodUserpics for ' + title);
     };
     
     function cbFailUserpics(title) {
