@@ -2,7 +2,7 @@
 angular.module('PostSrvc', [])
 .factory('PostService', function(LJService) {
     
-    var count = 7; // Minimum count is 4 (seems to be a bug in LJ)
+    var count = 20; // Minimum count is 4 (seems to be a bug in LJ)
 
     var posts = [];    
     var title = null;

@@ -13,6 +13,15 @@ angular.module('blogga', ['ionic', 'MainRoute', 'MainCtrl', 'JournalCtrl', 'Post
     ImgCache.options.chromeQuota = 50*1024*1024;
    
     $ionicPlatform.ready(function() {
+
+        // Splash Screen
+        // Need following plug-ins:
+		// cordova plugin add org.apache.cordova.splashscreen
+        if(navigator && navigator.splashscreen) {
+			setTimeout(function() {
+				navigator.splashscreen.hide();
+			}, 100);
+		}
     
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
