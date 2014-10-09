@@ -17,7 +17,9 @@
 		                  ng-click="toggle_show($index)">
 		
 			        <img ng-cache ng-init="avatarData.load_avatar(post.poster)"
-			                      ng-src="{{avatarData.get_avatar(post.poster)}}">
+			                      ng-src="{{avatarData.get_avatar(post.poster)}}"
+			                      ng-click="load_journal(post.poster)"
+			                      stop-event="click">
 			
 			        <span>
 				        <h2 ng-init="get_title($index,$id)">{{titles[$id]}}</h2>
