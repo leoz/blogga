@@ -1,6 +1,6 @@
 
 angular.module('JournalSrvc', [])
-.factory('JournalService', function(StorageService,LJService) {
+.factory('JournalService', function(StorageService,AvatarService) {
 
     var JOURNALS_TAG = 'journals';
 
@@ -37,14 +37,10 @@ angular.module('JournalSrvc', [])
         angular.forEach(journals, function(journal) {
             // This is to check the validity of the journal
             console.log('journal: ' + journal.title);
-            LJService.get_userpics(journal.title,cbGoodUserpics,cbFailUserpics,journal.title);    
+            AvatarService.load_avatar(journal.title,cbFailUserpics);    
         });    
         
 	};    
-    
-    function cbGoodUserpics(data,title) {
-        console.log('cbGoodUserpics for ' + title);
-    };
     
     function cbFailUserpics(title) {
         console.log('cbFailUserpics for ' + title);

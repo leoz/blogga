@@ -5,11 +5,14 @@ angular.module('AvatarSrvc', [])
     var avatars = [];
     var def = 'img/ios7-person.png';
     
-    function loadAvatar(name) {
+    function loadAvatar(name,failCallback) {
 		console.log('loadAvatar for ' + name);
 		
-		if (!hasAvatar(name)) {		    
-            LJService.get_userpics(name,cbGoodUserpics,cbFailUserpics,name);    
+		if (!hasAvatar(name)) {
+			if (!failCallback) {
+				failCallback = cbFailUserpics;
+			}
+            LJService.get_userpics(name,cbGoodUserpics,failCallback,name);    
         }
         else {
             console.log('loadAvatar - already found for ' + name);
@@ -17,6 +20,9 @@ angular.module('AvatarSrvc', [])
     };
     
     function cbGoodUserpics(data,name) {
+    	if (!data || !data[0] || !data[0].defaultpicurl) {
+    		throw 'Invalid icon data';
+    	}
         var avatar = {
             name : name,
             url  : def
