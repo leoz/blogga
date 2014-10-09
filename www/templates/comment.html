@@ -5,7 +5,9 @@
 	
 		<ion-item class="item-stable item-avatar item-button-right">
 			<img ng-cache ng-init="avatarData.load_avatar(child.postername)"
-			              ng-src="{{avatarData.get_avatar(child.postername)}}">
+			              ng-src="{{avatarData.get_avatar(child.postername)}}"
+	                      ng-click="load_journal(child.postername)"
+	                      stop-event="click">			              
 			<span>
 				<h2>{{child.postername}}</h2>
 				<p>{{child.datepostunix | unixFormat}}</p>

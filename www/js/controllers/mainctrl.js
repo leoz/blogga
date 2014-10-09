@@ -1,7 +1,7 @@
 
 angular.module('MainCtrl', [])
 .controller('MainController', function($scope, $ionicSideMenuDelegate,
-                                        $ionicModal, $timeout,
+                                        $ionicModal, $timeout, $state,
                                         JournalService, AvatarService) {
 
     $scope.journalData = JournalService;
@@ -10,6 +10,10 @@ angular.module('MainCtrl', [])
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
+    
+    $scope.load_journal = function(name) {
+    	$state.go('app.journal', {journalName:name});
+    }    
     
 	// This is a hack to pass objects
 	$scope.menuData = {

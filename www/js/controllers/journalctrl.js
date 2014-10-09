@@ -1,6 +1,6 @@
 
 angular.module('JournalCtrl', [])
-.controller('JournalController', function($scope, $stateParams, $sce, $state,
+.controller('JournalController', function($scope, $stateParams, $sce,
                                            JournalService, PostService,
                                            AvatarService, LJService) {
     
@@ -12,10 +12,6 @@ angular.module('JournalCtrl', [])
     
     $scope.titles    = [];
     $scope.contents  = [];
-    
-    $scope.load_journal = function(name) {
-    	$state.go('app.journal', {journalName:name});
-    }    
         
     $scope.refresh_posts = function() {
     	$scope.postData.reset_posts();
