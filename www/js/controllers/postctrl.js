@@ -1,10 +1,8 @@
 
 angular.module('PostCtrl', [])
 .controller('PostController', function($scope, $stateParams, $sce,
-                                        PostService,
                                         AvatarService, LJService) {
 
-    $scope.postData = PostService;
     $scope.avatarData = AvatarService;
 
     $scope.journalName = $stateParams.journalName;
@@ -23,7 +21,17 @@ angular.module('PostCtrl', [])
     
     $scope.load_post = function() {
     
-        $scope.post = $scope.postData.get_post($scope.postId);
+        LJService.get_event($scope.journalName,
+                            $scope.postId,
+                            cbGoodPost,cbFailPost,$scope.postId);
+	                
+    };   
+    
+    cbGoodPost = function(data,id) {
+    
+        console.log('cbGoodPost for ' + id);
+        
+        $scope.post = data[0].events[0];
         
 	    LJService.array_buffer_to_string($scope.post.subject).then(
 	        function (v) {
@@ -33,9 +41,15 @@ angular.module('PostCtrl', [])
 	        function (v) {
 	            $scope.content = $sce.trustAsHtml(v);
 	        });
-	                
-    };   
+	        
+	    $scope.get_post_comments();    
+        
+    };
     
+    cbFailPost = function(id) {
+        console.log('cbFailPost for ' + id);
+    };
+        
     $scope.get_post_comments = function() {
     
         console.log('get_post_comments');
