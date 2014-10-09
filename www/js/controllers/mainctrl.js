@@ -21,9 +21,7 @@ angular.module('MainCtrl', [])
 			alert('Info required');
 			return;
 		}
-		var j = {};
-		j.title = $scope.menuData.name;
-		$scope.journalData.add_journal(j);
+		$scope.journalData.add_journal($scope.menuData.name);
 		$scope.menuData.name = null;
 	};   
 

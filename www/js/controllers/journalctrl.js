@@ -8,14 +8,14 @@ angular.module('JournalCtrl', [])
     $scope.postData = PostService;
     $scope.avatarData = AvatarService;
 
-    $scope.journalId = $stateParams.journalId;
+    $scope.journalName = $stateParams.journalName;
     
     $scope.titles    = [];
     $scope.contents  = [];
         
     $scope.refresh_posts = function() {
     	$scope.postData.reset_posts();
-    	$scope.postData.set_title($scope.get_journal_title());
+    	$scope.postData.set_title($scope.journalName);
     	$scope.postData.load_posts(cbLoadPosts);
     };
     
@@ -35,10 +35,6 @@ angular.module('JournalCtrl', [])
 	$scope.$on('$stateChangeSuccess', function() {
 		$scope.load_posts();
 	});    
-
-    $scope.get_journal_title = function() {
-        return $scope.journalData.get_journal($scope.journalId).title;
-    };    
 
     $scope.get_title = function(i,id) {
 		if (!$scope.titles.hasOwnProperty(id)) {		    

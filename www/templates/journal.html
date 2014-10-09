@@ -1,4 +1,4 @@
-<ion-view ng-init="postData.set_title(get_journal_title())" title="{{get_journal_title()}}">
+<ion-view ng-init="postData.set_title(journalName)" title="{{journalName}}">
     <ion-nav-buttons side="left">
         <button class="button button-icon ion-navicon" ng-click="toggleLeft()" ng-hide="$exposeAside.active"></button>
     </ion-nav-buttons>
@@ -33,7 +33,7 @@
 			
 			
 			        <a class="button"
-					        href="#/app/journal/{{journalId}}/{{post.itemid}}"
+					        href="#/app/journal/{{journalName}}/{{post.itemid}}"
 					        style="top: 20px"
 					        ng-show="post.reply_count"
 					        stop-event="click">

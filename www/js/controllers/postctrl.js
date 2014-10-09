@@ -1,14 +1,13 @@
 
 angular.module('PostCtrl', [])
 .controller('PostController', function($scope, $stateParams, $sce,
-                                        JournalService, PostService,
+                                        PostService,
                                         AvatarService, LJService) {
 
-    $scope.journalData = JournalService;
     $scope.postData = PostService;
     $scope.avatarData = AvatarService;
 
-    $scope.journalId = $stateParams.journalId;
+    $scope.journalName = $stateParams.journalName;
     $scope.postId = $stateParams.postId;
     
     $scope.title = '';
@@ -34,14 +33,8 @@ angular.module('PostCtrl', [])
 	        function (v) {
 	            $scope.content = $sce.trustAsHtml(v);
 	        });
-	    
-        LJService.get_userpics($scope.post.poster,cbGoodUserpic,cbFailUserpic,null);    
-        
+	                
     };   
-    
-    $scope.get_journal_title = function() {
-        return $scope.journalData.get_journal($scope.journalId).title;
-    };    
     
     $scope.get_post_comments = function() {
     
@@ -49,7 +42,7 @@ angular.module('PostCtrl', [])
        
         LJService.get_comments($scope.post.itemid,
                                $scope.post.anum,
-                               $scope.get_journal_title(),
+                               $scope.journalName,
                                cbGoodComments,cbFailComments,$scope.post.poster);
     };    
     

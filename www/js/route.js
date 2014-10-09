@@ -29,7 +29,7 @@ $stateProvider
     })
     
     .state('app.journal', {
-        url: "/journal/:journalId",
+        url: "/journal/:journalName",
             views: {
             'menuContent' :{
                 templateUrl: "templates/journal.html",
@@ -39,7 +39,7 @@ $stateProvider
     })
 
     .state('app.single', {
-        url: "/journal/:journalId/:postId",
+        url: "/journal/:journalName/:postId",
             views: {
             'menuContent' :{
                 templateUrl: "templates/post.html",
