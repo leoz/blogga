@@ -11,16 +11,20 @@ angular.module('MainCtrl', [])
         $ionicSideMenuDelegate.toggleLeft();
     };
     
-	$scope.journal = {};
+	// This is a hack to pass objects
+	$scope.menuData = {
+		name : null
+	};
+	
 	$scope.submit = function() {
-		if(!$scope.journal.title) {
+		if(!$scope.menuData.name) {
 			alert('Info required');
 			return;
 		}
 		var j = {};
-		j.title = $scope.journal.title;
+		j.title = $scope.menuData.name;
 		$scope.journalData.add_journal(j);
-		$scope.journal = {};
+		$scope.menuData.name = null;
 	};   
 
     // Form data for the login modal

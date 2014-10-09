@@ -23,18 +23,18 @@
 					</button>
 				
 					<label class="item-input-wrapper">
-					<input type="text" placeholder="Journal" ng-model="journal.title">
+					<input type="text" placeholder="Journal" ng-model="menuData.name">
 					</label>
 					
 					<button class="button button-small button-icon icon ion-ios7-plus-outline"
-					        ng-disabled="!journal.title || journalData.has_journal(journal.title)"
+					        ng-disabled="!menuData.name || journalData.has_journal(menuData.name)"
 					        ng-click="submit(); journalData.show_delete = false">
 					</button>
 				</ion-item>
             
             	<ion-list show-delete="journalData.show_delete">
 		            <ion-item class="item-icon-left" nav-clear menu-close
-		                      ng-repeat="journal in journalData.journals | filter: journal.title"
+		                      ng-repeat="journal in journalData.journals | filter: menuData.name"
 		                      href="#/app/journal/{{$index}}">		                
 		                
 		                <div class="icon">
