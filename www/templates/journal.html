@@ -2,12 +2,15 @@
     <ion-nav-buttons side="left">
         <button class="button button-icon ion-navicon" ng-click="toggleLeft()" ng-hide="$exposeAside.active"></button>
     </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon {{listExpanded ? 'ion-arrow-shrink' : 'ion-arrow-expand'}}" ng-click="listExpanded = !listExpanded"></button>
+    </ion-nav-buttons>    
     <ion-content class="has-header">
     
         <ion-refresher
             pulling-text="Pull to refresh..."
             on-refresh="refresh_posts()">
-        </ion-refresher>    
+        </ion-refresher>
     
         <ion-list>
         
@@ -43,7 +46,7 @@
 			        </a>
 		
 		        </ion-item>
-		        <ion-item class="item-accordion" ng-show="post.m_show">		   
+		        <ion-item class="item-accordion" ng-show="post.m_show || listExpanded">		   
 			        <div style="white-space: normal"
 				         ng-init="get_content(post.event,$id)"
 				         ng-bind-html="contents[$id]"></div>			
