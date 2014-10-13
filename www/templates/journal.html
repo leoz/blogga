@@ -16,17 +16,18 @@
         
 	        <div ng-init="set_last_date($last,$index)" ng-repeat="post in postData.posts">
 	
-		        <ion-item class="item-stable item-avatar item-button-right"
+		        <ion-item ng-init="posterName = post.poster ? post.poster : journalName"
+		                  class="item-stable item-avatar item-button-right"
 		                  ng-click="toggle_show($index)">
 		
-			        <img ng-cache ng-init="avatarData.load_avatar(post.poster)"
-			                      ng-src="{{avatarData.get_avatar(post.poster)}}"
-			                      ng-click="load_journal(post.poster)"
+			        <img ng-cache ng-init="avatarData.load_avatar(posterName)"
+			                      ng-src="{{avatarData.get_avatar(posterName)}}"
+			                      ng-click="load_journal(posterName)"
 			                      stop-event="click">
 			
 			        <span>
 				        <h2 ng-init="get_title($index,$id)">{{titles[$id]}}</h2>
-				        <p>{{post.poster}}</p>
+				        <p>{{posterName}}</p>
 			        </span>
 						
 			        <span class="badge">
