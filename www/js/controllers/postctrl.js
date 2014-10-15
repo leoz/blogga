@@ -42,6 +42,8 @@ angular.module('PostCtrl', [])
 	            $scope.content = $sce.trustAsHtml(v);
 	        });
 	        
+	    $scope.avatarData.load_avatar($scope.post);
+	        
 	    $scope.get_post_comments();    
         
     };

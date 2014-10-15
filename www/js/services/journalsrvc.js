@@ -32,7 +32,8 @@ angular.module('JournalSrvc', [])
         angular.forEach(journals, function(journal) {
             // This is to check the validity of the journal
             console.log('journal: ' + journal);
-            AvatarService.load_avatar(journal,cbFailUserpics);    
+            var o = {poster:journal};
+            AvatarService.load_avatar(o,cbFailUserpics);    
         });    
         
 	};    

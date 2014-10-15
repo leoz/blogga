@@ -39,8 +39,8 @@
 		                
 		                <div class="icon">
 		                
-			            <img ng-cache ng-init="avatarData.load_avatar(journal)"
-			                          ng-src="{{avatarData.get_avatar(journal)}}"
+			            <img ng-cache ng-init="o = {poster:journal}; avatarData.load_avatar(o)"
+			                          ng-src="{{o.$$avatar}}"
 			                          style="width: 1em;">
 
 		                </div>		                

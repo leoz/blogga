@@ -4,8 +4,7 @@
     <div class="card">
 
 	    <div class="item item-avatar">
-		    <img ng-cache ng-init="avatarData.load_avatar(post.poster)"
-		                  ng-src="{{avatarData.get_avatar(post.poster)}}"
+		    <img ng-cache ng-src="{{post.$$avatar}}"
 	                      ng-click="load_journal(post.poster)"
 	                      stop-event="click">
 		                  
