@@ -22,7 +22,9 @@
 			        <img ng-cache ng-init="post.poster ? post.poster = post.poster : post.poster = journalName; avatarData.load_avatar(post)"
 			                      ng-src="{{post.$$avatar}}"
 			                      ng-click="load_journal(post.poster)"
-			                      stop-event="click">
+			                      stop-event="click"
+			                      style="width: auto; height: auto;"
+			                      >
 			
 			        <span>
 				        <h2 ng-init="get_title($index,$id)">{{titles[$id]}}</h2>
@@ -30,7 +32,7 @@
 			        </span>
 						
 			        <span class="badge">
-				        <div>
+				        <div style="font-weight: normal;">
 					        <div>{{post.eventtime | dateFormat}}</div>
 					        <div>{{post.eventtime | timeFormat}}</div>
 				        </div>
