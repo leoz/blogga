@@ -1,8 +1,8 @@
 
 // Blogga LiveJournal client
 
-angular.module('blogga', ['ionic', 'MainRoute', 'MainCtrl', 'JournalCtrl', 'PostCtrl',
-                          'JournalSrvc', 'PostSrvc', 'AvatarSrvc', 'StorageSrvc', 'LJSrvc',
+angular.module('blogga', ['ionic', 'ngLiveJournal', 'MainRoute', 'MainCtrl', 'JournalCtrl', 'PostCtrl',
+                          'JournalSrvc', 'PostSrvc', 'AvatarSrvc', 'StorageSrvc',
                           'DateFormatFilter', 'TimeFormatFilter', 'UnixFormatFilter'
                          ],
 function($rootScopeProvider) {

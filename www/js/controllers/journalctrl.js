@@ -2,7 +2,7 @@
 angular.module('JournalCtrl', [])
 .controller('JournalController', function($scope, $stateParams, $sce,
                                            JournalService, PostService,
-                                           AvatarService, LJService) {
+                                           AvatarService, ngLJService) {
     
     $scope.journalData = JournalService;
     $scope.postData = PostService;
@@ -38,7 +38,7 @@ angular.module('JournalCtrl', [])
 
     $scope.get_title = function(i,id) {
 		if (!$scope.titles.hasOwnProperty(id)) {		    
-		    LJService.array_buffer_to_string($scope.postData.posts[i].subject).then(
+		    ngLJService.array_buffer_to_string($scope.postData.posts[i].subject).then(
 		        function (v) {
 		            $scope.titles[id] = v;
 		        });
@@ -47,7 +47,7 @@ angular.module('JournalCtrl', [])
     
     $scope.get_content = function(content,id) {
 		if (!$scope.contents.hasOwnProperty(id)) {		    
-		    LJService.array_buffer_to_string(content).then(
+		    ngLJService.array_buffer_to_string(content).then(
 		        function (v) {
 		            $scope.contents[id] = $sce.trustAsHtml(v);
 		        });    

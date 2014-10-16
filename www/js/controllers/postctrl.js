@@ -1,7 +1,7 @@
 
 angular.module('PostCtrl', [])
 .controller('PostController', function($scope, $stateParams, $sce,
-                                        AvatarService, LJService) {
+                                        AvatarService, ngLJService) {
 
     $scope.avatarData = AvatarService;
 
@@ -21,9 +21,9 @@ angular.module('PostCtrl', [])
     
     $scope.load_post = function() {
     
-        LJService.get_event($scope.journalName,
-                            $scope.postId,
-                            cbGoodPost,cbFailPost,$scope.postId);
+        ngLJService.get_event($scope.journalName,
+                              $scope.postId,
+                              cbGoodPost,cbFailPost,$scope.postId);
 	                
     };   
     
@@ -33,11 +33,11 @@ angular.module('PostCtrl', [])
         
         $scope.post = data[0].events[0];
         
-	    LJService.array_buffer_to_string($scope.post.subject).then(
+	    ngLJService.array_buffer_to_string($scope.post.subject).then(
 	        function (v) {
 	            $scope.title = v;
 	        });
-	    LJService.array_buffer_to_string($scope.post.event).then(
+	    ngLJService.array_buffer_to_string($scope.post.event).then(
 	        function (v) {
 	            $scope.content = $sce.trustAsHtml(v);
 	        });
@@ -56,7 +56,7 @@ angular.module('PostCtrl', [])
     
         console.log('get_post_comments');
        
-        LJService.get_comments($scope.post.itemid,
+        ngLJService.get_comments($scope.post.itemid,
                                $scope.post.anum,
                                $scope.journalName,
                                cbGoodComments,cbFailComments,$scope.post.poster);
@@ -74,7 +74,7 @@ angular.module('PostCtrl', [])
     $scope.get_content = function(content,id) {
 //        console.log('get_content for ' + id);
 		if (!$scope.contents.hasOwnProperty(id)) {		    
-		    LJService.array_buffer_to_string(content).then(
+		    ngLJService.array_buffer_to_string(content).then(
 		        function (v) {
 //		            console.log('test: ' + v);
 		            $scope.contents[id] = $sce.trustAsHtml(v);

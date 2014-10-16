@@ -1,6 +1,6 @@
 
 angular.module('AvatarSrvc', [])
-.factory('AvatarService', function(LJService) {
+.factory('AvatarService', function(ngLJService) {
     
     var avatars = [];
     var def = 'img/ios7-person.png';
@@ -30,7 +30,7 @@ angular.module('AvatarSrvc', [])
 				    if (!failCallback) {
 					    failCallback = cbFailUserpics;
 				    }
-		            LJService.get_userpics(n,cbGoodUserpics,failCallback,post);    
+		            ngLJService.get_userpics(n,cbGoodUserpics,failCallback,post);    
 		        }
 		        else {
 		            setAvatar(data,post);
@@ -44,7 +44,7 @@ angular.module('AvatarSrvc', [])
     	if (post) {
     		if (post.props && post.props.picture_keyword) {
     			if (data.pickws) {    			
-					LJService.array_buffer_to_string(post.props.picture_keyword).then(
+					ngLJService.array_buffer_to_string(post.props.picture_keyword).then(
 						function (v) {
 							post.props.picture_keyword = v;							
 							for (var i in data.pickws) {
@@ -84,7 +84,7 @@ angular.module('AvatarSrvc', [])
 		    if (avatar.data.pickws && avatar.data.pickws.length > 0) {
 		        for (var i in avatar.data.pickws) {
                     var pos = 0;
-				    LJService.array_buffer_to_string(avatar.data.pickws[i]).then(
+				    ngLJService.array_buffer_to_string(avatar.data.pickws[i]).then(
 					    function (v) {
 						    avatar.data.pickws[pos] = v;
 					        pos++;
