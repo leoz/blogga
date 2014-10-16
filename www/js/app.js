@@ -4,9 +4,10 @@
 angular.module('blogga', ['ionic', 'MainRoute', 'MainCtrl', 'JournalCtrl', 'PostCtrl',
                           'JournalSrvc', 'PostSrvc', 'AvatarSrvc', 'StorageSrvc', 'LJSrvc',
                           'DateFormatFilter', 'TimeFormatFilter', 'UnixFormatFilter'
-                         ])
-
-.run(function($ionicPlatform) {
+                         ],
+function($rootScopeProvider) {
+	$rootScopeProvider.digestTtl(Infinity);
+}).run(function($ionicPlatform) {
 
     // ImgCache
     ImgCache.options.debug = true;
