@@ -30,7 +30,11 @@ angular.module('MainCtrl', [])
 	};   
 
     // Form data for the login modal
-    $scope.loginData = {};
+    $scope.loginData = {
+		username : null,
+		password : null,
+		loggedin : false
+	};
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -58,6 +62,25 @@ angular.module('MainCtrl', [])
         $timeout(function() {
             $scope.closeLogin();
         }, 1000);
+
+		$scope.loginData.loggedin = true;
+    };
+
+    $scope.logout = function() {
+		// Simulate logout
+        $timeout(function() {
+			$scope.loginData.loggedin = false;
+		    //$scope.loginData.do_logout();
+        }, 1000);
+    };
+    
+    $scope.profile = function() {
+        //$scope.modal.show();
+    };
+    
+    $scope.loggedin = function() {
+		return $scope.loginData.loggedin;
+        //$scope.modal.show();
     };
 
 });
