@@ -57,8 +57,14 @@
                 </ion-item>
 
                 <ion-item class="item-icon-left" nav-clear menu-close ng-show="loggedin()" ng-click="profile()">
-                    <i class="icon ion-ios7-person"></i>
-                    Profile
+                
+		                <div class="icon">
+		                
+			            <img ng-cache ng-src="{{loginData.get_avatar()}}" class="blg-icon">
+
+		                </div>                
+
+                    {{loginData.get_name()}}
                 </ion-item>            	
                 <ion-item class="item-icon-left" nav-clear menu-close ng-show="loggedin()" ng-click="logout()">
                     <i class="icon ion-log-out"></i>

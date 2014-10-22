@@ -4,17 +4,17 @@ angular.module('LoginSrvc', [])
 
     var mUsername  = null;
     var mPassword  = null;
-    var mLoggedin  = false;
+    var mData      = null;
     
     function resetData() {
         console.log('doLogout');
 		mUsername  = null;
 		mPassword  = null;
-		mLoggedin  = false;
+		mData      = null;
     };
     
     function getLoggedin() {
-        return mLoggedin;
+        return (mData != null);
     };
     
     function getUsername() {
@@ -36,8 +36,9 @@ angular.module('LoginSrvc', [])
     };
         
     function cbGoodLogin(data,response) {
-        mLoggedin = true;
+        mData = data[0];
         console.log('cbGoodLogin');
+        console.log(mData);
     };
     
     function cbFailLogin(err) {
@@ -49,12 +50,23 @@ angular.module('LoginSrvc', [])
     	resetData();
     };
     
+    function getAvatar() {
+    	return mData ? mData.defaultpicurl : '';
+    };
+    
+    function getName() {
+    	return mData ? mData.fullname : '';
+    };
+    
     return {
+        data          : mData,
         do_login      : doLogin,
         do_logout     : doLogout,
         get_loggedin  : getLoggedin,
         get_username  : getUsername,
         get_password  : getPassword,
+        get_avatar    : getAvatar,
+        get_name      : getName
     };
 	
 });
