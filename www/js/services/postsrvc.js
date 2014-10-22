@@ -1,6 +1,6 @@
 
 angular.module('PostSrvc', [])
-.factory('PostService', function(ngLJService) {
+.factory('PostService', function(ngLJService,LoginService) {
     
     var count = 20; // Minimum count is 4 (seems to be a bug in LJ)
 
@@ -43,7 +43,9 @@ angular.module('PostSrvc', [])
 			last_date = posts[posts.length - 1].eventtime;
 		}
 		
-        ngLJService.get_events(count,title,last_date,cbGoodEvents,cbFailEvents,callback);
+        ngLJService.get_events(count,title,last_date,cbGoodEvents,cbFailEvents,callback,
+                               LoginService.get_username(),
+                               LoginService.get_password());
 	};
 	
     function cbGoodEvents(data,callback) {

@@ -29,8 +29,8 @@ angular.module('LoginSrvc', [])
         return mChallenge;
     };
     
-    function getResponse() {
-        return mResponse;
+    function getPassword() {
+        return mPassword;
     };
         
     function doLogin(username,password) {
@@ -77,7 +77,7 @@ angular.module('LoginSrvc', [])
         get_loggedin  : getLoggedin,
         get_username  : getUsername,
         get_challenge : getChallenge,
-        get_response  : getResponse,
+        get_password  : getPassword,
     };
 	
 });

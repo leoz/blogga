@@ -1,9 +1,10 @@
 
 angular.module('PostCtrl', [])
 .controller('PostController', function($scope, $stateParams, $sce,
-                                        AvatarService, ngLJService) {
+                                        AvatarService, ngLJService, LoginService) {
 
     $scope.avatarData = AvatarService;
+    $scope.loginData = LoginService;
 
     $scope.journalName = $stateParams.journalName;
     $scope.postId = $stateParams.postId;
@@ -23,7 +24,9 @@ angular.module('PostCtrl', [])
     
         ngLJService.get_event($scope.journalName,
                               $scope.postId,
-                              cbGoodPost,cbFailPost,$scope.postId);
+                              cbGoodPost,cbFailPost,$scope.postId,
+                              $scope.loginData.get_username(),
+                              $scope.loginData.get_password());
 	                
     };   
     
@@ -59,7 +62,9 @@ angular.module('PostCtrl', [])
         ngLJService.get_comments($scope.post.itemid,
                                $scope.post.anum,
                                $scope.journalName,
-                               cbGoodComments,cbFailComments,$scope.post.poster);
+                               cbGoodComments,cbFailComments,$scope.post.poster,
+                               $scope.loginData.get_username(),
+                               $scope.loginData.get_password());
     };    
     
     cbGoodComments = function(data,id) {

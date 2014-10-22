@@ -1,6 +1,6 @@
 
 angular.module('AvatarSrvc', [])
-.factory('AvatarService', function(ngLJService) {
+.factory('AvatarService', function(ngLJService,LoginService) {
     
     var avatars = [];
     var def = 'img/ios7-person.png';
@@ -30,7 +30,9 @@ angular.module('AvatarSrvc', [])
 				    if (!failCallback) {
 					    failCallback = cbFailUserpics;
 				    }
-		            ngLJService.get_userpics(n,cbGoodUserpics,failCallback,post);    
+		            ngLJService.get_userpics(n,cbGoodUserpics,failCallback,post,
+											 LoginService.get_username(),
+											 LoginService.get_password());    
 		        }
 		        else {
 		            setAvatar(data,post);
