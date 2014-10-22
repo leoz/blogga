@@ -5,6 +5,7 @@ angular.module('LoginSrvc', [])
     var mUsername  = null;
     var mPassword  = null;
     var mData      = null;
+    var mGroups    = [];
     
     function resetData() {
         console.log('doLogout');
@@ -37,6 +38,11 @@ angular.module('LoginSrvc', [])
         
     function cbGoodLogin(data,response) {
         mData = data[0];
+        
+		for(var i in data[0].usejournals) {
+			mGroups.push(data[0].usejournals[i]);
+		}
+                
         console.log('cbGoodLogin');
         console.log(mData);
     };
@@ -58,7 +64,12 @@ angular.module('LoginSrvc', [])
     	return mData ? mData.fullname : '';
     };
     
+    function hasGroups() {
+    	return (mGroups.length > 0);
+    };
+            
     return {
+        groups        : mGroups,
         data          : mData,
         do_login      : doLogin,
         do_logout     : doLogout,
@@ -66,7 +77,8 @@ angular.module('LoginSrvc', [])
         get_username  : getUsername,
         get_password  : getPassword,
         get_avatar    : getAvatar,
-        get_name      : getName
+        get_name      : getName,
+        has_groups    : hasGroups
     };
 	
 });

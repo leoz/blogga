@@ -74,6 +74,17 @@
                     <i class="icon ion-log-in"></i>
                     Login
                 </ion-item>
+
+                <ion-item class="item-divider" ng-show="loggedin() && loginData.has_groups()">
+                </ion-item>
+                
+            	<ion-list ng-show="loggedin() && loginData.has_groups()">
+		            <ion-item ng-repeat="group in loginData.groups">		                
+             
+		                {{group}}
+                  
+		            </ion-item>                
+            	</ion-list>                
                 
                 <ion-item class="item-divider">
                 </ion-item>
