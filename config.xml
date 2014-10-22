@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.leoz.blogga" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.leoz.blogga"
+	version="0.0.1"
+	xmlns="http://www.w3.org/ns/widgets"
+	xmlns:cdv="http://cordova.apache.org/ns/1.0">
+	
     <name>Blogga</name>
+    
     <description>
         Blogga LiveJournal client.
     </description>
+    
     <author email="blogga@leoz.net" href="http://leoz.net/">
         Blogga Team
     </author>
+    
     <content src="index.html"/>
     <access origin="*"/>
     <preference name="webviewbounce" value="false"/>
     <preference name="UIWebViewBounce" value="false"/>
     <preference name="DisallowOverscroll" value="true"/>
     <preference name="BackupWebStorage" value="none"/>
+    
+	<gap:plugin name="org.apache.cordova.splashscreen" />
+	<gap:plugin name="org.apache.cordova.statusbar" />
+	<gap:plugin name="org.apache.cordova.device" />
+	<gap:plugin name="org.apache.cordova.file" />
+	<gap:plugin name="org.apache.cordova.file-transfer" />
+    
+
+	<feature name="SplashScreen">
+		<param name="ios-package" value="CDVSplashScreen" />
+		<param name="android-package" value="org.apache.cordova.SplashScreen" />
+	</feature>
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true"/>
     </feature>
-    
+	<feature name="Device">
+		<param name="ios-package" value="CDVDevice" />
+		<param name="android-package" value="org.apache.cordova.device.Device" />
+	</feature>
+	<feature name="File">
+		<param name="ios-package" value="CDVFile" />
+		<param name="android-package" value="org.apache.cordova.file.FileUtils" />
+	</feature>
+	<feature name="FileTransfer">
+		<param name="ios-package" value="CDVFileTransfer" />
+		<param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+	</feature>
+	    
     <platform name="ios">
         <!-- images are determined by width and height. The following are supported -->
         <splash src="screen/ios/Default~iphone.png" width="320" height="480"/>
