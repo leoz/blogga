@@ -47,6 +47,7 @@
 		                </div>		                
 	                
 		                {{journal}}
+		                
 						<ion-delete-button class="ion-minus-circled"
 							               ng-click="journalData.delete_journal(journal)">
 						</ion-delete-button>                    
@@ -79,7 +80,18 @@
                 </ion-item>
                 
             	<ion-list ng-show="loggedin() && loginData.has_groups()">
-		            <ion-item ng-repeat="group in loginData.groups">		                
+		            <ion-item class="item-icon-left" nav-clear menu-close
+		                      ng-repeat="group in loginData.groups"
+		                      href="#/app/journal/{{group}}">
+		                      
+		                <div class="icon">
+		                
+			            <img ng-cache ng-init="o = {poster:group}; avatarData.load_avatar(o)"
+			                          ng-src="{{o.$$avatar}}"
+			                          class="blg-icon"
+			                          >
+
+		                </div>
              
 		                {{group}}
                   
