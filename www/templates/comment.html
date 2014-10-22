@@ -7,7 +7,8 @@
 			<img ng-cache ng-init="avatarData.load_avatar(child)"
 			              ng-src="{{child.$$avatar}}"
 	                      ng-click="load_journal(child.postername)"
-	                      stop-event="click">			              
+	                      stop-event="click"
+	                      class="blg-avatar">			              
 			<span>
 				<h2>{{child.postername}}</h2>
 				<p>{{child.datepostunix | unixFormat}}</p>

@@ -6,7 +6,9 @@
 	    <div class="item item-avatar">
 		    <img ng-cache ng-src="{{post.$$avatar}}"
 	                      ng-click="load_journal(post.poster)"
-	                      stop-event="click">
+	                      stop-event="click"
+	                      class="blg-avatar"
+	                      >
 		                  
 		    <h2>{{post.poster}}</h2>
 		    <p>{{post.eventtime | dateFormat}}, {{post.eventtime | timeFormat}}</p>

@@ -1,8 +1,12 @@
-/* Empty. Add your own CSS if you like */
+/* Blogga LiveJournal client CSS */
 
 .blg-content img {
     max-width: 100%;
     height: auto;
 }
 
+.blg-avatar {
+	width: auto !important;
+	height: auto !important;
+}
 
