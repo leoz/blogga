@@ -45,15 +45,15 @@ angular.module('LoginSrvc', [])
         if (data && data[0] && data[0].challenge) {
             mChallenge = data[0].challenge;
         	console.log('The challenge is ' + mChallenge);
-        	ngLJService.login(mUsername,
-        	                  mPassword,
-        	                  mChallenge,
-        	                  cbGoodLogin,cbFailLogin);
+        	ngLJService.do_login(mUsername,
+        	                     mPassword,
+        	                     mChallenge,
+        	                     cbGoodLogin,cbFailLogin);
         }
     };
     
     function cbFailChallenge(dummy) {
-        console.log('cbFailChallenge');
+        console.log('cbFailChallenge ' + dummy);
     };
     
     function cbGoodLogin(data,response) {

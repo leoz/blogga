@@ -2,10 +2,11 @@
 angular.module('MainCtrl', [])
 .controller('MainController', function($scope, $ionicSideMenuDelegate,
                                         $ionicModal, $timeout, $state,
-                                        JournalService, AvatarService) {
+                                        JournalService, AvatarService, LoginService) {
 
     $scope.journalData = JournalService;
     $scope.avatarData = AvatarService;
+    $scope.loginData = LoginService;
 
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
@@ -30,10 +31,9 @@ angular.module('MainCtrl', [])
 	};   
 
     // Form data for the login modal
-    $scope.loginData = {
+    $scope.loginState = {
 		username : null,
-		password : null,
-		loggedin : false
+		password : null
 	};
 
     // Create the login modal that we will use later
@@ -55,22 +55,21 @@ angular.module('MainCtrl', [])
 
     // Perform the login action when the user submits the login form
     $scope.doLogin = function() {
-        console.log('Doing login', $scope.loginData);
+        console.log('Doing login', $scope.loginState);
 
         // Simulate a login delay. Remove this and replace with your login
         // code if using a login system
         $timeout(function() {
+        	$scope.loginData.do_login($scope.loginState.username,
+                                      $scope.loginState.password);
             $scope.closeLogin();
         }, 1000);
-
-		$scope.loginData.loggedin = true;
     };
 
     $scope.logout = function() {
 		// Simulate logout
         $timeout(function() {
-			$scope.loginData.loggedin = false;
-		    //$scope.loginData.do_logout();
+        	$scope.loginData.do_logout();
         }, 1000);
     };
     
@@ -79,7 +78,7 @@ angular.module('MainCtrl', [])
     };
     
     $scope.loggedin = function() {
-		return $scope.loginData.loggedin;
+		return $scope.loginData.get_loggedin();
         //$scope.modal.show();
     };
 
