@@ -21,13 +21,6 @@
     <preference name="DisallowOverscroll" value="true"/>
     <preference name="BackupWebStorage" value="none"/>
     
-	<gap:plugin name="org.apache.cordova.splashscreen" />
-	<gap:plugin name="org.apache.cordova.statusbar" />
-	<gap:plugin name="org.apache.cordova.device" />
-	<gap:plugin name="org.apache.cordova.file" />
-	<gap:plugin name="org.apache.cordova.file-transfer" />
-    
-
 	<feature name="SplashScreen">
 		<param name="ios-package" value="CDVSplashScreen" />
 		<param name="android-package" value="org.apache.cordova.SplashScreen" />
