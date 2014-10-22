@@ -1,7 +1,7 @@
 {
   "name": "nglivejournal",
   "main": "ng-livejournal.js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "homepage": "https://github.com/leoz2011/ngLiveJournal",
   "authors": [
     "Leonid Zolotarev <leoz@yahoo.com>"
@@ -29,13 +29,13 @@
     "xmlrpc": "leoz2011/xmlrpc.js#0.1.2",
     "angular-md5": "gdi2290/angular-md5#v0.1.7"
   },
-  "_release": "0.0.3",
+  "_release": "0.0.4",
   "_resolution": {
     "type": "version",
-    "tag": "0.0.3",
-    "commit": "8ca3780595c91e449578833f56dabf61904b3295"
+    "tag": "0.0.4",
+    "commit": "a5ba445379f629bf7813c285a65eef7dc65979bc"
   },
   "_source": "git://github.com/leoz2011/ngLiveJournal.git",
-  "_target": "0.0.3",
+  "_target": "0.0.4",
   "_originalSource": "leoz2011/ngLiveJournal"
 }
