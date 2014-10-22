@@ -4,16 +4,12 @@ angular.module('LoginSrvc', [])
 
     var mUsername  = null;
     var mPassword  = null;
-    var mChallenge = null;
-    var mResponse  = null;
     var mLoggedin  = false;
     
     function resetData() {
         console.log('doLogout');
 		mUsername  = null;
 		mPassword  = null;
-		mChallenge = null;
-		mResponse  = null;
 		mLoggedin  = false;
     };
     
@@ -25,10 +21,6 @@ angular.module('LoginSrvc', [])
         return mUsername;
     };
     
-    function getChallenge() {
-        return mChallenge;
-    };
-    
     function getPassword() {
         return mPassword;
     };
@@ -37,27 +29,13 @@ angular.module('LoginSrvc', [])
         mUsername = username;
         mPassword = password;
         console.log('Doing login for ' + mUsername);
-        ngLJService.get_challenge(cbGoodChallenge,cbFailChallenge);
+    	ngLJService.do_login(mUsername,
+    	                     mPassword,
+    	                     cbGoodLogin,cbFailLogin);
+
     };
-    
-    function cbGoodChallenge(data,dummy) {
-        console.log('cbGoodChallenge');
-        if (data && data[0] && data[0].challenge) {
-            mChallenge = data[0].challenge;
-        	console.log('The challenge is ' + mChallenge);
-        	ngLJService.do_login(mUsername,
-        	                     mPassword,
-        	                     mChallenge,
-        	                     cbGoodLogin,cbFailLogin);
-        }
-    };
-    
-    function cbFailChallenge(dummy) {
-        console.log('cbFailChallenge ' + dummy);
-    };
-    
+        
     function cbGoodLogin(data,response) {
-        mResponse = response;
         mLoggedin = true;
         console.log('cbGoodLogin');
     };
@@ -76,7 +54,6 @@ angular.module('LoginSrvc', [])
         do_logout     : doLogout,
         get_loggedin  : getLoggedin,
         get_username  : getUsername,
-        get_challenge : getChallenge,
         get_password  : getPassword,
     };
 	
