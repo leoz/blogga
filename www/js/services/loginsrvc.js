@@ -6,6 +6,7 @@ angular.module('LoginSrvc', [])
     var mPassword  = null;
     var mData      = null;
     var mGroups    = [];
+    var mFriends   = [];
     
     function resetData() {
         console.log('doLogout');
@@ -39,12 +40,32 @@ angular.module('LoginSrvc', [])
     function cbGoodLogin(data,response) {
         mData = data[0];
         
+		//FIXME
 		for(var i in data[0].usejournals) {
 			mGroups.push(data[0].usejournals[i]);
 		}
                 
         console.log('cbGoodLogin');
         console.log(mData);
+        
+    	ngLJService.get_friends(mUsername,
+    	                        mPassword,
+    	                        cbGoodFriends,cbFailFriends);
+        
+    };
+    
+    function cbGoodFriends(data,response) {
+		//FIXME
+		for(var i in data[0].friends) {
+			mFriends.push(data[0].friends[i]);
+		}
+
+        console.log('cbGoodFriends');
+        console.log(data);
+    };
+    
+    function cbFailFriends(err) {
+        console.log('cbFailFriends: ' + err);
     };
     
     function cbFailLogin(err) {
@@ -64,11 +85,16 @@ angular.module('LoginSrvc', [])
     	return mData ? mData.fullname : '';
     };
     
+    function hasFriends() {
+    	return (mFriends.length > 0);
+    };
+    
     function hasGroups() {
     	return (mGroups.length > 0);
     };
             
     return {
+        friends       : mFriends,
         groups        : mGroups,
         data          : mData,
         do_login      : doLogin,
@@ -78,6 +104,7 @@ angular.module('LoginSrvc', [])
         get_password  : getPassword,
         get_avatar    : getAvatar,
         get_name      : getName,
+        has_friends   : hasFriends,
         has_groups    : hasGroups
     };
 	

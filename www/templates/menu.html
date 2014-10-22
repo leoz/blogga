@@ -63,6 +63,32 @@
 		                {{group}}
                   
 		            </ion-item>                
+            	</ion-list>
+            	
+                <ion-item class="item-divider" ng-show="loggedin() && loginData.has_friends()">
+                	Friends
+                </ion-item>
+                
+            	<ion-list ng-show="loggedin() && loginData.has_friends()">
+		            <ion-item class="item-icon-left" nav-clear menu-close
+		                      ng-repeat="friend in loginData.friends"
+		                      href="#/app/journal/{{friend.username}}">
+		                      
+		                <div class="icon">
+		                
+			            <img ng-cache ng-init="avatarData.load_avatar(friend)"
+			                          ng-src="{{friend.$$avatar}}"
+			                          class="blg-icon"
+			                          >
+			                          
+		                </div>
+		                
+					    <span>
+				        	<div ng-init="get_fullname($index,$id)">{{fullnames[$id]}}</div>
+						    <div ng-show="friend.fullname != friend.username">{{friend.username}}</div>
+					    </span>
+					    
+		            </ion-item>                
             	</ion-list>            
             
             	<!-- Bookmarks -->            

@@ -13,6 +13,9 @@ angular.module('AvatarSrvc', [])
     		if (o.postername) {
     			return o.postername;
     		}
+    		if (o.username) {
+    			return o.username;
+    		}
     	}
     	return null;
     };

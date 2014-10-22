@@ -2,11 +2,13 @@
 angular.module('MainCtrl', [])
 .controller('MainController', function($scope, $ionicSideMenuDelegate,
                                         $ionicModal, $timeout, $state,
-                                        JournalService, AvatarService, LoginService) {
+                                        JournalService, AvatarService, LoginService, ngLJService) {
 
     $scope.journalData = JournalService;
     $scope.avatarData = AvatarService;
     $scope.loginData = LoginService;
+
+    $scope.fullnames = [];
 
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
@@ -82,5 +84,13 @@ angular.module('MainCtrl', [])
         //$scope.modal.show();
     };
 
+    $scope.get_fullname = function(i,id) {
+		if (!$scope.fullnames.hasOwnProperty(id)) {		    
+		    ngLJService.array_buffer_to_string($scope.loginData.friends[i].fullname).then(
+		        function (v) {
+		            $scope.fullnames[id] = v;
+		        });
+        }
+    };
 });
 
