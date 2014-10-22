@@ -10,3 +10,14 @@
 	height: auto !important;
 }
 
+.blg-icon {
+	width: auto !important;
+	height: auto !important;
+    max-width: 1em;
+    max-height: 1em;
+    border-top-left-radius: 0.1em !important;
+    border-top-right-radius: 0.1em !important;    
+    border-bottom-left-radius: 0.1em !important;
+    border-bottom-right-radius: 0.1em !important;
+}
+
