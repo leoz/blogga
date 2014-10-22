@@ -12,10 +12,65 @@
 
     <ion-side-menu side="left" expose-aside-when="(min-width:769px)">
         <header class="bar bar-header bar-light">
-            <h1 class="title">Settings</h1>
+            <h1 class="title">Menu</h1>
         </header>
         <ion-content class="has-header">
             <ion-list>
+            
+            	<!-- Account -->            	
+
+                <ion-item class="item-divider">
+                	Account
+                </ion-item>
+
+                <ion-item class="item-icon-left" nav-clear menu-close ng-show="loggedin()" ng-click="profile()">
+                
+		                <div class="icon">
+		                
+			            <img ng-cache ng-src="{{loginData.get_avatar()}}" class="blg-icon">
+
+		                </div>                
+
+                    {{loginData.get_name()}}
+                </ion-item>            	
+                <ion-item class="item-icon-left" nav-clear menu-close ng-show="loggedin()" ng-click="logout()">
+                    <i class="icon ion-log-out"></i>
+                    Logout
+                </ion-item>                
+                <ion-item class="item-icon-left" nav-clear menu-close ng-show="!loggedin()" ng-click="login()">
+                    <i class="icon ion-log-in"></i>
+                    Login
+                </ion-item>
+
+                <ion-item class="item-divider" ng-show="loggedin() && loginData.has_groups()">
+                	Groups
+                </ion-item>
+                
+            	<ion-list ng-show="loggedin() && loginData.has_groups()">
+		            <ion-item class="item-icon-left" nav-clear menu-close
+		                      ng-repeat="group in loginData.groups"
+		                      href="#/app/journal/{{group}}">
+		                      
+		                <div class="icon">
+		                
+			            <img ng-cache ng-init="o = {poster:group}; avatarData.load_avatar(o)"
+			                          ng-src="{{o.$$avatar}}"
+			                          class="blg-icon"
+			                          >
+
+		                </div>
+             
+		                {{group}}
+                  
+		            </ion-item>                
+            	</ion-list>            
+            
+            	<!-- Bookmarks -->            
+
+                <ion-item class="item-divider">
+                	Bookmarks
+                </ion-item>
+            
 				<ion-item class="item-input-inset">
 					<button class="button button-small button-icon icon ion-ios7-minus-outline"
 					        ng-disabled="!journalData.has_journals()"
@@ -53,52 +108,11 @@
 						</ion-delete-button>                    
 		            </ion-item>                
             	</ion-list>
-
-                <ion-item class="item-divider">
-                </ion-item>
-
-                <ion-item class="item-icon-left" nav-clear menu-close ng-show="loggedin()" ng-click="profile()">
-                
-		                <div class="icon">
-		                
-			            <img ng-cache ng-src="{{loginData.get_avatar()}}" class="blg-icon">
-
-		                </div>                
-
-                    {{loginData.get_name()}}
-                </ion-item>            	
-                <ion-item class="item-icon-left" nav-clear menu-close ng-show="loggedin()" ng-click="logout()">
-                    <i class="icon ion-log-out"></i>
-                    Logout
-                </ion-item>                
-                <ion-item class="item-icon-left" nav-clear menu-close ng-show="!loggedin()" ng-click="login()">
-                    <i class="icon ion-log-in"></i>
-                    Login
-                </ion-item>
-
-                <ion-item class="item-divider" ng-show="loggedin() && loginData.has_groups()">
-                </ion-item>
-                
-            	<ion-list ng-show="loggedin() && loginData.has_groups()">
-		            <ion-item class="item-icon-left" nav-clear menu-close
-		                      ng-repeat="group in loginData.groups"
-		                      href="#/app/journal/{{group}}">
-		                      
-		                <div class="icon">
-		                
-			            <img ng-cache ng-init="o = {poster:group}; avatarData.load_avatar(o)"
-			                          ng-src="{{o.$$avatar}}"
-			                          class="blg-icon"
-			                          >
-
-		                </div>
-             
-		                {{group}}
-                  
-		            </ion-item>                
-            	</ion-list>                
+            	            	
+            	<!-- Settings -->
                 
                 <ion-item class="item-divider">
+                	Settings
                 </ion-item>
 
                 <ion-item class="item-icon-left" nav-clear menu-close href="#/app/search">
