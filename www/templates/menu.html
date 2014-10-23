@@ -116,18 +116,19 @@
             	<ion-list show-delete="journalData.show_delete">
 		            <ion-item class="item-icon-left" nav-clear menu-close
 		                      ng-repeat="journal in journalData.journals | filter: menuData.name"
-		                      href="#/app/journal/{{journal}}">		                
+		                      href="#/app/journal/{{journal.username}}"
+		                      ng-class="{active: journal.$$active}">		                
 		                
 		                <div class="icon">
 		                
-			            <img ng-cache ng-init="o = {poster:journal}; avatarData.load_avatar(o)"
-			                          ng-src="{{o.$$avatar}}"
+			            <img ng-cache ng-init="avatarData.load_avatar(journal)"
+			                          ng-src="{{journal.$$avatar}}"
 			                          class="blg-icon"
 			                          >
 
 		                </div>		                
 	                
-		                {{journal}}
+		                {{journal.username}}
 		                
 						<ion-delete-button class="ion-minus-circled"
 							               ng-click="journalData.delete_journal(journal)">

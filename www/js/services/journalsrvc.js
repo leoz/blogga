@@ -25,27 +25,26 @@ angular.module('JournalSrvc', [])
 
         if (!mJournals) {
             mJournals = [];
-			mJournals.push('torontoru');
-			mJournals.push('toronto-ru');
-			mJournals.push('tema');
-			mJournals.push('russos');
-			mJournals.push('tanyant');
-			mJournals.push('leoz-net');
+			addJournal('torontoru');
+			addJournal('toronto-ru');
+			addJournal('tema');
+			addJournal('russos');
+			addJournal('tanyant');
+			addJournal('leoz-net');
         }
         
         //FIXME!
         
         if (!mCurrent && hasJournals()) {
-        	setCurrent(mJournals[0]);
+        	setCurrent(mJournals[0].username);
 		}
 		                
         //FIXME!
 
         angular.forEach(mJournals, function(journal) {
             // This is to check the validity of the journal
-            console.log('journal: ' + journal);
-            var o = {poster:journal};
-            AvatarService.load_avatar(o,cbFailUserpics);    
+            console.log('journal: ' + journal.username);
+            AvatarService.load_avatar(journal,cbFailUserpics);    
         });    
         
 	};    
@@ -55,8 +54,13 @@ angular.module('JournalSrvc', [])
         deleteJournal(name);
     };
     
-    function addJournal(journal) {
-		mJournals.push(journal);
+    function addJournal(name) {
+    	var o = {
+    		username : name,
+    		$$active : false
+    	};
+    	
+		mJournals.push(o);
 		StorageService.setObject(JOURNALS_TAG, mJournals);
     };
     
@@ -74,12 +78,18 @@ angular.module('JournalSrvc', [])
     
     function setCurrent(name) {
     	mCurrent = name;
+    	
+		// This is to set active journal
+        angular.forEach(mJournals, function(journal) {
+			journal.$$active = (journal.username == name);
+        });    	
+    	
 		StorageService.setObject(CURRENT_TAG, mCurrent);
 	};
 	
     function hasJournal(name) {
 		for(var i in mJournals) {			
-			if(mJournals[i] == name) {
+			if(mJournals[i].username == name) {
 				return true;
 			}
 		}
