@@ -7,7 +7,7 @@ angular.module('blogga', ['ionic', 'ngLiveJournal', 'MainRoute', 'MainCtrl', 'Jo
                          ],
 function($rootScopeProvider) {
 	$rootScopeProvider.digestTtl(Infinity);
-}).run(function($ionicPlatform) {
+}).run(function($ionicPlatform,$location,$rootScope,JournalService) {
 
     // ImgCache
     ImgCache.options.debug = true;
@@ -43,6 +43,11 @@ function($rootScopeProvider) {
         }, function(){
             console.log('ImgCache init: error! Check the log for errors');
         });
+        
+		// Load journals and set default page
+		//JournalService.load_journals();
+		$location.path(JournalService.get_current_url());
+		$rootScope.$apply();        
         
     });
 }).directive('ngCache', function() {

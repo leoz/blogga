@@ -10,6 +10,8 @@ angular.module('JournalCtrl', [])
 
     $scope.journalName = $stateParams.journalName;
     
+    $scope.journalData.set_current($scope.journalName);
+    
     $scope.titles    = [];
     $scope.contents  = [];
         
