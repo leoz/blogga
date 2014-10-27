@@ -50,8 +50,8 @@
 		        </ion-item>
 		        <ion-item class="item-accordion" ng-show="post.m_show || listExpanded">		   
 			        <div class="blg-content" style="white-space: normal"
-				         ng-init="get_content(post.event,$id)"
-				         ng-bind-html="contents[$id]"></div>			
+				         ng-init="get_content(post)"
+				         ng-bind-html="post.$$content"></div>			
 		        </ion-item>
 	
 	        </div>

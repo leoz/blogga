@@ -12,8 +12,7 @@ angular.module('JournalCtrl', [])
     
     $scope.journalData.set_current($scope.journalName);
     
-    $scope.titles    = [];
-    $scope.contents  = [];
+    $scope.titles = [];
         
     $scope.refresh_posts = function() {
     	$scope.postData.reset_posts();
@@ -54,11 +53,11 @@ angular.module('JournalCtrl', [])
         }
     };
     
-    $scope.get_content = function(content,id) {
-		if (!$scope.contents.hasOwnProperty(id)) {		    
-		    ngLJService.array_buffer_to_string(content).then(
+    $scope.get_content = function(post) {
+		if (!post.$$content) {		    
+		    ngLJService.array_buffer_to_string(post.event).then(
 		        function (v) {
-		            $scope.contents[id] = $sce.trustAsHtml(v);
+		            post.$$content = $sce.trustAsHtml(v);
 		        });    
         }
     };

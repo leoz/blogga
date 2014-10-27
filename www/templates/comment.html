@@ -21,8 +21,8 @@
 		</ion-item>
 		<ion-item class="item-accordion" ng-show="true">
 			<div style="white-space: normal"
-				 ng-init="get_content(child.body,$id)"
-				 ng-bind-html="contents[$id]"></div>
+				 ng-init="get_body(child)"
+				 ng-bind-html="child.$$body"></div>
 		</ion-item>
 		<div ng-show="child.m_show">
 			<ng-include ng-if="child.children" src="'templates/comment.html'"></ng-include>

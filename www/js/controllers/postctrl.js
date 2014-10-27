@@ -10,15 +10,12 @@ angular.module('PostCtrl', [])
     $scope.postId = $stateParams.postId;
     
     $scope.title = '';
-    $scope.content = '';
     
     $scope.post = {};
     
     $scope.child = {
     	children: []
-    };    
-    
-    $scope.contents = [];
+    };
     
     $scope.load_post = function() {
     
@@ -40,10 +37,8 @@ angular.module('PostCtrl', [])
 	        function (v) {
 	            $scope.title = v;
 	        });
-	    ngLJService.array_buffer_to_string($scope.post.event).then(
-	        function (v) {
-	            $scope.content = $sce.trustAsHtml(v);
-	        });
+	        
+	    $scope.get_content($scope.post);
 	        
 	    $scope.avatarData.load_avatar($scope.post);
 	        
@@ -75,14 +70,21 @@ angular.module('PostCtrl', [])
     cbFailComments = function(id) {
         console.log('cbFailComments for ' + id);
     };    
-
-    $scope.get_content = function(content,id) {
-//        console.log('get_content for ' + id);
-		if (!$scope.contents.hasOwnProperty(id)) {		    
-		    ngLJService.array_buffer_to_string(content).then(
+    
+    $scope.get_content = function(post) {
+		if (!post.$$content) {		    
+		    ngLJService.array_buffer_to_string(post.event).then(
 		        function (v) {
-//		            console.log('test: ' + v);
-		            $scope.contents[id] = $sce.trustAsHtml(v);
+		            post.$$content = $sce.trustAsHtml(v);
+		        });    
+        }
+    };    
+    
+    $scope.get_body = function(child) {
+		if (!child.$$body) {		    
+		    ngLJService.array_buffer_to_string(child.body).then(
+		        function (v) {
+		            child.$$body = $sce.trustAsHtml(v);
 		        });    
         }
     };    
