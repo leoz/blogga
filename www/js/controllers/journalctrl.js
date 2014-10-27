@@ -43,13 +43,13 @@ angular.module('JournalCtrl', [])
 		    $scope.load_posts();
 		}
 	});
-
-    $scope.get_title = function(i,id) {
-		if (!$scope.titles.hasOwnProperty(id)) {		    
-		    ngLJService.array_buffer_to_string($scope.postData.posts[i].subject).then(
+    
+    $scope.get_title = function(post) {
+		if (!post.$$title) {		    
+		    ngLJService.array_buffer_to_string(post.subject).then(
 		        function (v) {
-		            $scope.titles[id] = v;
-		        });
+		            post.$$title = v;
+		        });    
         }
     };
     

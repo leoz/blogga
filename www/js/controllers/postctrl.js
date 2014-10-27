@@ -9,8 +9,6 @@ angular.module('PostCtrl', [])
     $scope.journalName = $stateParams.journalName;
     $scope.postId = $stateParams.postId;
     
-    $scope.title = '';
-    
     $scope.post = {};
     
     $scope.child = {
@@ -32,12 +30,9 @@ angular.module('PostCtrl', [])
         console.log('cbGoodPost for ' + id);
         
         $scope.post = data[0].events[0];
-        
-	    ngLJService.array_buffer_to_string($scope.post.subject).then(
-	        function (v) {
-	            $scope.title = v;
-	        });
 	        
+	    $scope.get_title($scope.post);
+	    
 	    $scope.get_content($scope.post);
 	        
 	    $scope.avatarData.load_avatar($scope.post);
@@ -69,7 +64,16 @@ angular.module('PostCtrl', [])
     
     cbFailComments = function(id) {
         console.log('cbFailComments for ' + id);
-    };    
+    };
+    
+    $scope.get_title = function(post) {
+		if (!post.$$title) {		    
+		    ngLJService.array_buffer_to_string(post.subject).then(
+		        function (v) {
+		            post.$$title = v;
+		        });    
+        }
+    };
     
     $scope.get_content = function(post) {
 		if (!post.$$content) {		    
