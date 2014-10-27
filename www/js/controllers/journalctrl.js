@@ -34,9 +34,16 @@ angular.module('JournalCtrl', [])
     	$scope.$broadcast('scroll.infiniteScrollComplete');
     };
     
-	$scope.$on('$stateChangeSuccess', function() {
-		$scope.load_posts();
-	});    
+	$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        if (fromParams && fromParams.journalName &&
+            toParams && toParams.journalName &&
+            toParams.journalName == fromParams.journalName) {
+            // DO NOTHING
+		}
+		else {
+		    $scope.load_posts();
+		}
+	});
 
     $scope.get_title = function(i,id) {
 		if (!$scope.titles.hasOwnProperty(id)) {		    
