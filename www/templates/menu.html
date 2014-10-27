@@ -84,7 +84,7 @@
 		                </div>
 		                
 					    <span>
-				        	<div ng-init="get_fullname($index,$id)">{{fullnames[$id]}}</div>
+				        	<div ng-init="get_fullname(friend)">{{friend.$$fullname}}</div>
 						    <div ng-show="friend.fullname != friend.username">{{friend.username}}</div>
 					    </span>
 					    

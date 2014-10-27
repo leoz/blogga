@@ -8,8 +8,6 @@ angular.module('MainCtrl', [])
     $scope.avatarData = AvatarService;
     $scope.loginData = LoginService;
 
-    $scope.fullnames = [];
-
     $scope.toggleLeft = function() {
         $ionicSideMenuDelegate.toggleLeft();
     };
@@ -83,13 +81,13 @@ angular.module('MainCtrl', [])
 		return $scope.loginData.get_loggedin();
         //$scope.modal.show();
     };
-
-    $scope.get_fullname = function(i,id) {
-		if (!$scope.fullnames.hasOwnProperty(id)) {		    
-		    ngLJService.array_buffer_to_string($scope.loginData.friends[i].fullname).then(
+    
+    $scope.get_fullname = function(friend) {
+		if (!friend.$$fullname) {		    
+		    ngLJService.array_buffer_to_string(friend.fullname).then(
 		        function (v) {
-		            $scope.fullnames[id] = v;
-		        });
+		            friend.$$fullname = v;
+		        });    
         }
     };
 });
