@@ -23,7 +23,7 @@ angular.module('PostCtrl', [])
                               $scope.loginData.get_username(),
                               $scope.loginData.get_password());
 	                
-    };   
+    };
     
     cbGoodPost = function(data,id) {
     

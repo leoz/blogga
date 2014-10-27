@@ -20,32 +20,38 @@ angular.module('AvatarSrvc', [])
     	return null;
     };
     
+    function setUrl(post,url) {
+        post.$$avatar = url;
+        post.$$avatar_loaded = true;
+    };
+    
     function loadAvatar(post,failCallback) {
 
-        if (post && post.poster_userpic_url) {
-            post.$$avatar = post.poster_userpic_url;
-        }
-        else {
-		    var n = getPosterName(post);
-		    if (n) {
-			    var data = getAvatarData(n);
-			    if (!data) {
-				    if (!failCallback) {
-					    failCallback = cbFailUserpics;
-				    }
-		            ngLJService.get_userpics(n,cbGoodUserpics,failCallback,post,
-											 LoginService.get_username(),
-											 LoginService.get_password());    
+        if (!post.$$avatar_loaded) {
+            if (post && post.poster_userpic_url) {
+                setUrl(post,post.poster_userpic_url);
+            }
+            else {
+		        var n = getPosterName(post);
+		        if (n) {
+			        var data = getAvatarData(n);
+			        if (!data) {
+				        if (!failCallback) {
+					        failCallback = cbFailUserpics;
+				        }
+		                ngLJService.get_userpics(n,cbGoodUserpics,failCallback,post,
+											     LoginService.get_username(),
+											     LoginService.get_password());    
+		            }
+		            else {
+		                setAvatar(data,post);
+		            }		
 		        }
-		        else {
-		            setAvatar(data,post);
-		        }		
-		    }
-        }    
+            }
+        }  
     };
     
     function setAvatar(data,post) {
-		var n = getPosterName(post);
     	if (post) {
     		if (post.props && post.props.picture_keyword) {
     			if (data.pickws) {    			
@@ -54,7 +60,7 @@ angular.module('AvatarSrvc', [])
 							post.props.picture_keyword = v;							
 							for (var i in data.pickws) {
 								if (data.pickws[i] == post.props.picture_keyword) {
-									post.$$avatar = data.pickwurls[i];
+								    setUrl(post,data.pickwurls[i]);
 									break;
 								}
 							}							
@@ -62,14 +68,14 @@ angular.module('AvatarSrvc', [])
     			
     			}
     			else {
-    				post.$$avatar = def;
+    			    setUrl(post,def);
     			}
     		}
     		else if (data.defaultpicurl) {
-    			post.$$avatar = data.defaultpicurl;
+    		    setUrl(post, data.defaultpicurl);
     		}
     		else {
-    			post.$$avatar = def;
+                setUrl(post,def);
     		}
     	}
 	};
