@@ -83,11 +83,8 @@ angular.module('MainCtrl', [])
     };
     
     $scope.get_fullname = function(friend) {
-		if (!friend.$$fullname) {		    
-		    ngLJService.array_buffer_to_string(friend.fullname).then(
-		        function (v) {
-		            friend.$$fullname = v;
-		        });    
+		if (!friend.$$fullname) {
+            friend.$$fullname = ngLJService.decode_array_buffer(friend.fullname);   
         }
     };
 });

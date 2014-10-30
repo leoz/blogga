@@ -67,29 +67,20 @@ angular.module('PostCtrl', [])
     };
     
     $scope.get_title = function(post) {
-		if (!post.$$title) {		    
-		    ngLJService.array_buffer_to_string(post.subject).then(
-		        function (v) {
-		            post.$$title = v;
-		        });    
+		if (!post.$$title) {
+            post.$$title = ngLJService.decode_array_buffer(post.subject); 
         }
     };
     
     $scope.get_content = function(post) {
-		if (!post.$$content) {		    
-		    ngLJService.array_buffer_to_string(post.event).then(
-		        function (v) {
-		            post.$$content = $sce.trustAsHtml(v);
-		        });    
+		if (!post.$$content) {
+            post.$$content = $sce.trustAsHtml(ngLJService.decode_array_buffer(post.event));   
         }
     };    
     
     $scope.get_body = function(child) {
-		if (!child.$$body) {		    
-		    ngLJService.array_buffer_to_string(child.body).then(
-		        function (v) {
-		            child.$$body = $sce.trustAsHtml(v);
-		        });    
+		if (!child.$$body) {
+            child.$$body = $sce.trustAsHtml(ngLJService.decode_array_buffer(child.body));  
         }
     };    
 });

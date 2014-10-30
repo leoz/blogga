@@ -55,17 +55,13 @@ angular.module('AvatarSrvc', [])
     	if (post) {
     		if (post.props && post.props.picture_keyword) {
     			if (data.pickws) {    			
-					ngLJService.array_buffer_to_string(post.props.picture_keyword).then(
-						function (v) {
-							post.props.picture_keyword = v;							
-							for (var i in data.pickws) {
-								if (data.pickws[i] == post.props.picture_keyword) {
-								    setUrl(post,data.pickwurls[i]);
-									break;
-								}
-							}							
-						});
-    			
+					post.props.picture_keyword = ngLJService.decode_array_buffer(post.props.picture_keyword);							
+					for (var i in data.pickws) {
+						if (data.pickws[i] == post.props.picture_keyword) {
+						    setUrl(post,data.pickwurls[i]);
+							break;
+						}
+					}    			
     			}
     			else {
     			    setUrl(post,def);
@@ -93,19 +89,14 @@ angular.module('AvatarSrvc', [])
 		        data : data[0]
 		    };
 		    if (avatar.data.pickws && avatar.data.pickws.length > 0) {
+		    
 		        for (var i in avatar.data.pickws) {
-                    var pos = 0;
-				    ngLJService.array_buffer_to_string(avatar.data.pickws[i]).then(
-					    function (v) {
-						    avatar.data.pickws[pos] = v;
-					        pos++;
-					        if (pos == avatar.data.pickws.length) {
-                            	avatars.push(avatar);
-                            	console.log('cbGoodUserpics - cache size ' + avatars.length);
-			                    setAvatar(avatar.data,post);
-                            }
-					    });		    
+				    avatar.data.pickws[i] = ngLJService.decode_array_buffer(avatar.data.pickws[i]);
 		        }
+		        
+            	avatars.push(avatar);
+            	console.log('cbGoodUserpics - cache size ' + avatars.length);
+                setAvatar(avatar.data,post);		        
 		    }
 		    else {
             	avatars.push(avatar);
