@@ -7,17 +7,17 @@
                 ng-click="toggleShowDelete()">
             </button>
             <label class="item-input-wrapper">
-                <input type="text" placeholder="Journal" ng-model="newJournal">
+                <input type="text" placeholder="Journal" ng-model="data.name">
             </label>
             <button
                 class="button button-small button-icon icon ion-ios7-plus-outline"
-                ng-disabled="!newJournal || service.has_journal(newJournal)"
-                ng-click="addJournal(newJournal)">
+                ng-disabled="!data.name || service.has_journal(data.name)"
+                ng-click="addJournal(data.name)">
             </button>
         </ion-item>
         <ion-list show-delete="showDelete()">
             <ion-item class="blg-item item-avatar item-icon-right"
-                collection-repeat="bookmark in service.get_bookmarks()"
+                collection-repeat="bookmark in service.get_bookmarks() | filter: data.name"
                 collection-item-width="'100%'"
                 collection-item-height="76"
                 type="item-text-wrap"

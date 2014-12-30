@@ -6,6 +6,8 @@ angular.module('BookmarksCtrl', [])
 
     $scope.canDelete = false;
 
+    $scope.data = { name: null };
+
     $scope.toggleShowDelete = function(){
         $scope.canDelete = !$scope.canDelete;
     };
