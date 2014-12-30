@@ -6,7 +6,7 @@ angular.module('AppCtrl', [])
     $scope.activeList = 'bookmarks';
     $scope.loginData = {};
 
-    $ionicModal.fromTemplateUrl('templates/login.html', {
+    $ionicModal.fromTemplateUrl('app/main/login.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.modal = modal;

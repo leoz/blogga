@@ -7,7 +7,7 @@ angular.module('MainRoute', [])
     .state('app', {
         url: "/app",
         abstract: true,
-        templateUrl: "templates/app.html",
+        templateUrl: "app/main/app.html",
         controller: 'AppController'
     })
 
@@ -15,7 +15,7 @@ angular.module('MainRoute', [])
         url: '/journal/:journalName',
         views: {
             'app-content': {
-                templateUrl: 'templates/journal.html',
+                templateUrl: 'app/journal/journal.html',
                 controller: 'JournalController'
             }
         }
@@ -24,7 +24,7 @@ angular.module('MainRoute', [])
         url: '/journal/:journalName/:postId',
         views: {
             'app-content': {
-                templateUrl: 'templates/post.html',
+                templateUrl: 'app/post/post.html',
                 controller: 'PostController'
             }
         }
