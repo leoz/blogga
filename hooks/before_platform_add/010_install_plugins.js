@@ -4,11 +4,13 @@
 
 // add your plugins to this list--either the identifier, the filesystem location or the URL
 var pluginlist = [
+    "com.ionic.keyboard",
     "org.apache.cordova.splashscreen",
-    "org.apache.cordova.statusbar",
-    "org.apache.cordova.device",
-    "org.apache.cordova.file",
-    "org.apache.cordova.file-transfer"
+//    "org.apache.cordova.statusbar",
+    "org.apache.cordova.console",
+    "org.apache.cordova.device"
+//    "org.apache.cordova.file",
+//    "org.apache.cordova.file-transfer"
 ];
 
 // no need to configure below
@@ -25,4 +27,3 @@ function puts(error, stdout, stderr) {
 pluginlist.forEach(function(plug) {
     exec("cordova plugin add " + plug, puts);
 });
-
