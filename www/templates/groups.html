@@ -1,0 +1,20 @@
+<ion-view ng-controller="GroupsController" view-title="Groups" hide-back-button="true">
+    <ion-content class="blg-menu-content">
+        <ion-item class="blg-divider">
+            Groups
+        </ion-item>
+        <ion-list>
+            <ion-item class="blg-item item-avatar item-icon-right"
+                collection-repeat="group in service.get_groups()"
+                collection-item-width="'100%'"
+                collection-item-height="76"
+                type="item-text-wrap"
+                href="#/app/journal/{{group.username}}">
+                <img class="blg-avatar" ng-src="{{group.$$userpic}}">
+                <h2>{{group.username}}</h2>
+                <p>{{group.lastText}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,52 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-stable"></ion-nav-bar>
+        <ion-nav-view name="app-content"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+        <ion-header-bar class="bar-stable">
+            <h1 class="title">Journals</h1>
+        </ion-header-bar>
+        <ion-header-bar class="blg-menu-bar bar-subheader">
+
+            <div class="blg-menu-tabs tabs tabs-secondary tabs-icon-top">
+                <a ng-if="isLoggedIn()"
+                    class="tab-item"
+                    ng-class="{'active': getList() === 'bookmarks'}"
+                    ng-click="setList('bookmarks')">
+                    <i class="icon ion-bookmark"></i>
+                    Bookmarks
+                </a>
+                <a ng-if="isLoggedIn()"
+                    class="tab-item"
+                    ng-class="{'active': getList() === 'friends'}"
+                    ng-click="setList('friends')">
+                    <i class="icon ion-heart"></i>
+                    Friends
+                </a>
+                <a ng-if="isLoggedIn()"
+                    class="tab-item"
+                    ng-class="{'active': getList() === 'groups'}"
+                    ng-click="setList('groups')">
+                    <i class="icon ion-person-stalker"></i>
+                    Groups
+                </a>
+                <a ng-if="isLoggedIn()" class="tab-item" ng-click="logout()">
+                    <i class="icon ion-log-out"></i>
+                    Logout
+                </a>
+                <a ng-if="!isLoggedIn()" class="tab-item" ng-click="login()">
+                    <i class="icon ion-log-in"></i>
+                    Login
+                </a>
+            </div>
+
+        </ion-header-bar>
+
+        <ng-include ng-if="getList() === 'bookmarks'" src="'templates/bookmarks.html'"></ng-include>
+        <ng-include ng-if="getList() === 'friends'" src="'templates/friends.html'"></ng-include>
+        <ng-include ng-if="getList() === 'groups'" src="'templates/groups.html'"></ng-include>
+
+    </ion-side-menu>
+</ion-side-menus>

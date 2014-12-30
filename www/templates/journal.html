@@ -1,69 +1,27 @@
-<ion-view ng-init="postData.set_title(journalName)" title="{{journalName}}">
-    <ion-nav-buttons side="left">
-        <button class="button button-icon ion-navicon" ng-click="toggleLeft()" ng-hide="$exposeAside.active"></button>
+<ion-view view-title="Posts @ {{journal}}" hide-back-button="true">
+    <ion-nav-buttons side="primary">
+        <button class="button button-icon button-clear ion-navicon"
+            menu-toggle="left">
+        </button>
     </ion-nav-buttons>
-    <ion-nav-buttons side="right">
-        <button class="button button-icon {{listExpanded ? 'ion-arrow-shrink' : 'ion-arrow-expand'}}" ng-click="listExpanded = !listExpanded"></button>
-    </ion-nav-buttons>    
-    <ion-content class="has-header">
-    
-        <ion-refresher
-            pulling-text="Pull to refresh..."
-            on-refresh="refresh_posts()">
+    <ion-content>
+        <ion-refresher on-refresh="update()">
         </ion-refresher>
-    
         <ion-list>
-        
-	        <div ng-init="set_last_date($last,$index)" ng-repeat="post in postData.posts">
-	
-		        <ion-item class="item-stable item-avatar item-button-right"
-		                  ng-click="toggle_show($index)">
-		
-			        <img ng-cache ng-init="post.poster ? post.poster = post.poster : post.poster = journalName; avatarData.load_avatar(post)"
-			                      ng-src="{{post.$$avatar}}"
-			                      ng-click="load_journal(post.poster)"
-			                      stop-event="click"
-			                      class="blg-avatar"
-			                      >
-			
-			        <span>
-				        <h2 ng-init="get_title(post)">{{post.$$title}}</h2>
-				        <p>{{post.poster}}</p>
-			        </span>
-						
-			        <span class="badge">
-				        <div style="font-weight: normal;">
-					        <div>{{post.eventtime | dateFormat}}</div>
-					        <div>{{post.eventtime | timeFormat}}</div>
-				        </div>
-			        </span>
-			
-			
-			        <a class="button"
-					        href="#/app/journal/{{journalName}}/{{post.itemid}}"
-					        style="top: 20px"
-					        ng-show="post.reply_count"
-					        stop-event="click">
-				        {{post.reply_count}}
-			        </a>
-		
-		        </ion-item>
-		        <ion-item class="item-accordion" ng-show="post.m_show || listExpanded">		   
-			        <div class="blg-content" style="white-space: normal"
-				         ng-init="get_content(post)"
-				         ng-bind-html="post.$$content"></div>			
-		        </ion-item>
-	
-	        </div>
-
+            <ion-item class="blg-item item-avatar item-icon-right"
+                collection-repeat="post in posts"
+                collection-item-width="'100%'"
+                collection-item-height="76"
+                type="item-text-wrap"
+                href="#/app/journal/{{journal}}/{{post.itemid}}">
+                <img class="blg-avatar" ng-src="{{post.$$userpic}}">
+                <i class="icon ion-chatbubble light">{{post.reply_count}}</i>
+                <h2>{{post.$$subject}}</h2>
+                <p class="blg-right">{{post.eventtime | dateFormat}}</p>
+                <p>{{post.poster}}</p>
+            </ion-item>
         </ion-list>
-        
-		<ion-infinite-scroll
-			ng-if="can_load_posts()"
-			on-infinite="load_posts()"
-			distance="1%">
-		</ion-infinite-scroll>        
-        
+        <ion-infinite-scroll icon="" on-infinite="loadMore()" distance="5%">
+        </ion-infinite-scroll>
     </ion-content>
 </ion-view>
-

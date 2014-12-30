@@ -1,0 +1,20 @@
+<ion-view ng-controller="FriendsController" view-title="Friends" hide-back-button="true">
+    <ion-content class="blg-menu-content">
+        <ion-item class="blg-divider">
+            Friends
+        </ion-item>
+        <ion-list>
+            <ion-item class="blg-item item-avatar item-icon-right"
+                collection-repeat="friend in service.get_friends()"
+                collection-item-width="'100%'"
+                collection-item-height="76"
+                type="item-text-wrap"
+                href="#/app/journal/{{friend.username}}">
+                <img class="blg-avatar" ng-src="{{friend.$$userpic}}">
+                <h2>{{friend.username}}</h2>
+                <p>{{friend.$$fullname}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

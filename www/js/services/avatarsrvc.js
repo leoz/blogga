@@ -1,131 +1,81 @@
 
 angular.module('AvatarSrvc', [])
-.factory('AvatarService', function(ngLJService,LoginService) {
-    
-    var avatars = [];
-    var def = 'img/ios7-person.png';
-    
-    function getPosterName(o) {
-    	if (o) {
-    		if (o.poster) {
-    			return o.poster;
-    		}
-    		if (o.postername) {
-    			return o.postername;
-    		}
-    		if (o.username) {
-    			return o.username;
-    		}
-    	}
-    	return null;
-    };
-    
-    function setUrl(post,url) {
-        post.$$avatar = url;
-        post.$$avatar_loaded = true;
-    };
-    
-    function loadAvatar(post,failCallback) {
+.factory('AvatarService', ['ngLJService','StorageService','AuthService',function(ngLJService,StorageService,AuthService) {
 
-        if (!post.$$avatar_loaded) {
-            if (post && post.poster_userpic_url) {
-                setUrl(post,post.poster_userpic_url);
+    var defUserPic = 'img/ios7-person.png';
+    var tmp = '$$userpic';
+
+    function getUserPic(obj,user) {
+        if(!setUserPicFromPost(obj)) {
+            var key = 'userpic/' + user;
+            var data = null;
+            data = StorageService.getCache(key);
+            if (data) {
+                setUserPicFromData(obj,data);
+//                console.log('### User Pic: Got cached data for ' + user);
             }
             else {
-		        var n = getPosterName(post);
-		        if (n) {
-			        var data = getAvatarData(n);
-			        if (!data) {
-				        if (!failCallback) {
-					        failCallback = cbFailUserpics;
-				        }
-		                ngLJService.get_userpics(n,cbGoodUserpics,failCallback,post,
-											     LoginService.get_username(),
-											     LoginService.get_password());    
-		            }
-		            else {
-		                setAvatar(data,post);
-		            }		
-		        }
+//                console.log('### User Pic: NO cached data for ' + user);
+                ngLJService.get_userpics(AuthService.get_username(),AuthService.get_authdata(),user).then(function(response){
+                    data = response[0];
+                    setUserPicKeywords(data);
+                    StorageService.setCache(key,data);
+                    setUserPicFromData(obj,data);
+//                    console.log('userPic: Got data for ' + user);
+                }, function(){ setUrl(obj,null);});
             }
-        }  
+        }
     };
-    
-    function setAvatar(data,post) {
-    	if (post) {
-    		if (post.props && post.props.picture_keyword) {
-    			if (data.pickws) {    			
-					post.props.picture_keyword = ngLJService.decode_array_buffer(post.props.picture_keyword);							
-					for (var i in data.pickws) {
-						if (data.pickws[i] == post.props.picture_keyword) {
-						    setUrl(post,data.pickwurls[i]);
-							break;
-						}
-					}    			
-    			}
-    			else {
-    			    setUrl(post,def);
-    			}
-    		}
-    		else if (data.defaultpicurl) {
-    		    setUrl(post, data.defaultpicurl);
-    		}
-    		else {
-                setUrl(post,def);
-    		}
-    	}
-	};
-    
-    function cbGoodUserpics(data,post) {
-    	if (!data || !data[0]) {
-    		throw 'Invalid icon data';
-    	}
-    	// Store avatar
-		var n = getPosterName(post);
-		var d = getAvatarData(n);
-		if (!d) {
-		    var avatar = {
-		        name : n,
-		        data : data[0]
-		    };
-		    if (avatar.data.pickws && avatar.data.pickws.length > 0) {
-		    
-		        for (var i in avatar.data.pickws) {
-				    avatar.data.pickws[i] = ngLJService.decode_array_buffer(avatar.data.pickws[i]);
-		        }
-		        
-            	avatars.push(avatar);
-            	console.log('cbGoodUserpics - cache size ' + avatars.length);
-                setAvatar(avatar.data,post);		        
-		    }
-		    else {
-            	avatars.push(avatar);
-                console.log('cbGoodUserpics - cache size ' + avatars.length);
-                setAvatar(avatar.data,post);
-		    }
-		}
-		else {
-            setAvatar(d,post);
-		}
-    };
-    
-    function cbFailUserpics(post) {
-    };     
-    
-	function getAvatarData(name) {
-		for(var i in avatars) {			
-			if(avatars[i].name == name) {
-				return avatars[i].data;
-			}
-		}
-		return null;
-	};       
-    
-    return {
-        avatars     : avatars,
-        load_avatar : loadAvatar
-    };
-	
-});
 
+    function setUserPicKeywords(data) {
+//        console.log('### User Pic: setUserPicKeywords');
+        if (data & data.pickws) {
+            for (var i = 0; i < data.pickws.length; i++) {
+                data.pickws[i] = ngLJService.decode_array_buffer(data.pickws[i]);
+            }
+        }
+    };
 
+    function setUserPicFromPost(obj) {
+//        console.log('### User Pic: setUserPicFromPost');
+        if (obj && obj.poster_userpic_url) {
+            setUrl(obj,obj.poster_userpic_url);
+            return true;
+        }
+        return false;
+    };
+
+    function setUserPicFromData(obj,data) {
+//        console.log('### User Pic: setUserPicFromData');
+        if (obj.props && obj.props.picture_keyword) {
+//            console.log('### User Pic: has keyword!');
+            if(data.pickws) {
+                obj.props.picture_keyword = ngLJService.decode_array_buffer(obj.props.picture_keyword);
+                for (var i = 0; i < data.pickws.length; i++) {
+                    if (data.pickws[i] == obj.props.picture_keyword) {
+                        setUrl(obj,data.pickwurls[i]);
+//                        console.log('### User Pic: pic by keyword is set!');
+                        return true;
+                    }
+                }
+            }
+
+        }
+        setUrl(obj,data.defaultpicurl);
+        return false;
+    };
+
+    function setUrl(obj,url) {
+        obj[tmp] = url ? url : defUserPic;
+    };
+
+    return{
+        getAvatar: function(obj,user){
+//            console.log('userPic: Call for ' + user);
+            if (obj && !obj[tmp]) {
+                getUserPic(obj,user);
+            }
+            return obj ? obj[tmp] : null;
+        }
+    }
+}]);

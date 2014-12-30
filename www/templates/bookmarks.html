@@ -1,0 +1,35 @@
+<ion-view ng-controller="BookmarksController" view-title="Bookmarks" hide-back-button="true">
+    <ion-content class="blg-menu-content">
+        <ion-item class="blg-divider item-input-inset">
+            <button
+                class="button button-small button-icon icon ion-ios7-minus-outline"
+                ng-disabled="!service.has_journals()"
+                ng-click="toggleShowDelete()">
+            </button>
+            <label class="item-input-wrapper">
+                <input type="text" placeholder="Journal" ng-model="newJournal">
+            </label>
+            <button
+                class="button button-small button-icon icon ion-ios7-plus-outline"
+                ng-disabled="!newJournal || service.has_journal(newJournal)"
+                ng-click="addJournal(newJournal)">
+            </button>
+        </ion-item>
+        <ion-list show-delete="showDelete()">
+            <ion-item class="blg-item item-avatar item-icon-right"
+                collection-repeat="bookmark in service.get_bookmarks()"
+                collection-item-width="'100%'"
+                collection-item-height="76"
+                type="item-text-wrap"
+                href="#/app/journal/{{bookmark.username}}">
+                <ion-delete-button class="ion-minus-circled"
+                    ng-click="service.delete_journal(bookmark)">
+                </ion-delete-button>
+                <img class="blg-avatar" ng-src="{{bookmark.$$userpic}}">
+                <h2>{{bookmark.username}}</h2>
+                <p>{{bookmark.lastText}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

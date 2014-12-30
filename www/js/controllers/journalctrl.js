@@ -1,73 +1,56 @@
 
 angular.module('JournalCtrl', [])
-.controller('JournalController', function($scope, $stateParams, $sce,
-                                           JournalService, PostService,
-                                           AvatarService, ngLJService) {
-    
-    $scope.journalData = JournalService;
-    $scope.postData = PostService;
-    $scope.avatarData = AvatarService;
+.controller('JournalController', function($scope, $stateParams, ngLJService, AuthService, TextService, AvatarService) {
 
-    $scope.journalName = $stateParams.journalName;
-    
-    $scope.journalData.set_current($scope.journalName);
-        
-    $scope.refresh_posts = function() {
-    	$scope.postData.reset_posts();
-    	$scope.postData.set_title($scope.journalName);
-    	$scope.postData.load_posts(cbLoadPosts);
-    };
-    
-    $scope.load_posts = function() {
-    	$scope.postData.load_posts(cbLoadPosts);
-    };
-    
-    $scope.can_load_posts = function() {
-    	return $scope.postData.can_load_more();
-    };
-        
-    cbLoadPosts = function() {
-        $scope.$broadcast('scroll.refreshComplete');
-    	$scope.$broadcast('scroll.infiniteScrollComplete');
-    };
-    
-	$scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-        if (fromParams && fromParams.journalName &&
-            toParams && toParams.journalName &&
-            toParams.journalName == fromParams.journalName) {
-            // DO NOTHING
-		}
-		else {
-		    $scope.load_posts();
-		}
-	});
-    
-    $scope.get_title = function(post) {
-		if (!post.$$title) {
-            post.$$title = ngLJService.decode_array_buffer(post.subject);   
-        }
-    };
-    
-    $scope.get_content = function(post) {
-		if (!post.$$content) {
-            post.$$content = $sce.trustAsHtml(ngLJService.decode_array_buffer(post.event));    
-        }
+    $scope.journal = $stateParams.journalName;
+
+    $scope.posts = null;
+    $scope.error = false;
+
+    var last_date = null;
+    var count = 10;
+
+    $scope.update = function(){
+        console.log('JournalCtrl - update');
+        lastDate = null;
+        ngLJService.get_events(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,count,lastDate).then(function(response){
+            $scope.error = false;
+            $scope.preProcessPosts(response[0].events);
+            $scope.posts = response[0].events;
+            $scope.$broadcast('scroll.refreshComplete');
+        }, function(){$scope.error = true;});
     };
 
-    $scope.toggle_show = function(i) {
-        console.log(i + ' toggle_show');
-        $scope.postData.posts[i].m_show = !$scope.postData.posts[i].m_show;
+    $scope.update();
+
+    $scope.loadMore = function(){
+        console.log('JournalCtrl - loadMore');
+        if($scope.posts && $scope.posts.length) {
+            last_date = $scope.posts[$scope.posts.length - 1].eventtime;
+        }
+        ngLJService.get_events(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,count,last_date).then(function(response){
+            $scope.error = false;
+            $scope.preProcessPosts(response[0].events);
+            if ($scope.posts) {
+                for (var i = 0; i < response[0].events.length; i++) {
+                    $scope.posts.push(response[0].events[i]);
+                }
+            }
+            else {
+                $scope.posts = response[0].events;
+            }
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+        }, function(){$scope.error = true;});
     };
-    
-})
-.directive('stopEvent', function () {
-	return {
-		restrict: 'A',
-		link: function (scope, element, attr) {
-			element.bind(attr.stopEvent, function (e) {
-				e.stopPropagation();
-			});
-		}
-	};
+
+    $scope.preProcessPosts = function(posts){
+        for (var i = 0; i < posts.length; i++) {
+            if(!posts[i]['poster']) {
+                posts[i]['poster'] = $scope.journal;
+            }
+            TextService.convert(posts[i], 'subject');
+            AvatarService.getAvatar(posts[i], posts[i].poster);
+        }
+    };
+
 });
-

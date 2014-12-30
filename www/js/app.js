@@ -1,75 +1,22 @@
-
+//
 // Blogga LiveJournal client
+//
 
-angular.module('blogga', ['ionic', 'ngLiveJournal', 'MainRoute', 'MainCtrl', 'JournalCtrl', 'PostCtrl',
-                          'JournalSrvc', 'PostSrvc', 'AvatarSrvc', 'StorageSrvc', 'LoginSrvc',
-                          'DateFormatFilter', 'TimeFormatFilter', 'UnixFormatFilter'
-                         ],
-function($rootScopeProvider) {
-	$rootScopeProvider.digestTtl(Infinity);
-}).run(function($ionicPlatform,$location,$rootScope,JournalService) {
+angular.module('blogga', ['ngLiveJournal', 'ionic', 'MainRoute',
+    'AppCtrl', 'PostCtrl', 'JournalCtrl', 'GroupsCtrl', 'FriendsCtrl', 'BookmarksCtrl',
+    'blogga.filters',
+    'AvatarSrvc', 'AuthSrvc', 'StorageSrvc', 'BookmarksSrvc', 'FriendsSrvc', 'GroupsSrvc', 'TextSrvc'])
 
-    // ImgCache
-    ImgCache.options.debug = true;
-    ImgCache.options.chromeQuota = 50*1024*1024;
-   
+.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
-
-        // Splash Screen
-        // Need following plug-ins:
-		// cordova plugin add org.apache.cordova.splashscreen
-        if(navigator && navigator.splashscreen) {
-			setTimeout(function() {
-				navigator.splashscreen.hide();
-			}, 100);
-		}
-    
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
-        if(window.cordova && window.cordova.plugins.Keyboard) {
+        if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
-        if(window.StatusBar) {
+        if (window.StatusBar) {
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
-        
-        // ImgCache
-        // Need following plug-ins:
-        // cordova plugin add org.apache.cordova.file
-        // cordova plugin add org.apache.cordova.file-transfer        
-        ImgCache.init(function() {
-            console.log('ImgCache init: success!');
-        }, function(){
-            console.log('ImgCache init: error! Check the log for errors');
-        });
-        
-		// Load journals and set default page
-		//JournalService.load_journals();
-		$location.path(JournalService.get_current_url());
-		$rootScope.$apply();        
-        
     });
-}).directive('ngCache', function() {
-    return {
-        restrict: 'A',
-        link: function(scope, el, attrs) {
-
-            attrs.$observe('ngSrc', function(src) {
-
-                ImgCache.isCached(src, function(path, success) {
-                    if (success) {
-                        ImgCache.useCachedFile(el);
-                    } else {
-                        ImgCache.cacheFile(src, function() {
-                            ImgCache.useCachedFile(el);
-                        });
-                    }
-                });
-            });
-        }
-    };
 });
-
-
-
