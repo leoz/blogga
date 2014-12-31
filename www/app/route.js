@@ -1,6 +1,6 @@
 
 angular.module('MainRoute', [])
-.config(function($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
 
@@ -30,7 +30,12 @@ angular.module('MainRoute', [])
         }
     });
 
-    // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/journal/torontoru');
-
-});
+    $urlRouterProvider.otherwise(function($injector, $location) {
+        var active = 'leoz-net';
+        var bmksrvc = $injector.get('BookmarksService');
+        if (bmksrvc) {
+            active = bmksrvc.get_active_journal();
+        }
+        $location.path('/app/journal/' + active);
+    });
+}]);
