@@ -22,7 +22,8 @@
                 collection-item-height="76"
                 type="item-text-wrap"
                 href="#/app/journal/{{bookmark.username}}"
-                ng-class="{active: isItemActive(bookmark.username)}"
+                ng-class="{active: (service.get_active_journal() == bookmark.username)}"
+                ng-click="service.set_active_journal(bookmark.username)"
                 >
                 <ion-delete-button class="ion-minus-circled"
                     ng-click="service.delete_journal(bookmark)">

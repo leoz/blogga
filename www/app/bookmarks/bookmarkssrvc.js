@@ -1,21 +1,41 @@
 
 angular.module('BookmarksSrvc', [])
-.factory('BookmarksService', ['AvatarService', function(AvatarService) {
+.factory('BookmarksService', ['AvatarService', 'StorageService',
+    function(AvatarService, StorageService) {
+
     var data = null;
+    var key = 'bookmarks';
+    var adata = null;
+    var akey = 'active';
+
+    function readData() {
+        readActiveJournal();
+        readBookmarks();
+    };
+    readData();
+
     function readBookmarks() {
         console.log('BookmarksService - readBookmarks');
-        data = {'bookmarks':null};
-        data.bookmarks = [
-        'torontoru',
-        'toronto-ru',
-        'tema',
-        'russos',
-        'tanyant',
-        'leoz-net'
-        ];
+        data = StorageService.getCache(key);
+        console.log(data);
+        if (!data || !data.bookmarks || !data.bookmarks.length) {
+            setDefaultBookmarks();
+        }
         preProcessBookmarks();
     };
-    readBookmarks();
+
+    function setDefaultBookmarks(){
+        data = {'bookmarks':null};
+        data.bookmarks = [
+            {'username':'torontoru'},
+            {'username':'toronto-ru'},
+            {'username':'tema'},
+            {'username':'russos'},
+            {'username':'tanyant'},
+            {'username':'leoz-net'}
+        ];
+        StorageService.setCache(key,data);
+    };
 
     function preProcessBookmarks(){
         for (var i = 0; i < data.bookmarks.length; i++) {
@@ -24,7 +44,6 @@ angular.module('BookmarksSrvc', [])
     };
 
     function preProcessBookmark(i){
-        data.bookmarks[i] = {'username':data.bookmarks[i]};
         //            TextService.convert(friends[i], 'fullname');
         AvatarService.getAvatar(data.bookmarks[i],data.bookmarks[i].username);
     };
@@ -43,23 +62,55 @@ angular.module('BookmarksSrvc', [])
     };
 
     function addJournal(journalName){
-        data.bookmarks.push(journalName);
+        var o = {'username':journalName};
+        data.bookmarks.push(o);
         preProcessBookmark(data.bookmarks.length - 1);
+        StorageService.setCache(key,data);
     };
 
     function deleteJournal(journal){
         data.bookmarks.splice(data.bookmarks.indexOf(journal), 1);
+        StorageService.setCache(key,data);
     };
 
     function getBookmarks(){
         return data.bookmarks;
     };
 
+    /**/
+
+    function readActiveJournal() {
+        console.log('BookmarksService - readActiveJournal');
+        adata = StorageService.getCache(akey);
+        console.log(adata);
+        if (!adata || !adata.active) {
+            setDefaultActiveJournal();
+        }
+    };
+
+    function setDefaultActiveJournal(){
+        adata = {'active':null};
+        setActiveJournal('torontoru');
+    };
+
+    function getActiveJournal(){
+        return adata.active;
+    };
+
+    function setActiveJournal(journalName){
+        adata.active = journalName;
+        StorageService.setCache(akey,adata);
+    };
+
+    /**/
+
     return{
         has_journals: hasJournals,
         has_journal: hasJournal,
         add_journal: addJournal,
         delete_journal: deleteJournal,
-        get_bookmarks: getBookmarks
+        get_bookmarks: getBookmarks,
+        get_active_journal: getActiveJournal,
+        set_active_journal: setActiveJournal
     }
 }]);
