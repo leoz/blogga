@@ -1,0 +1,48 @@
+/*
+* Blogga Menu Style
+*/
+
+.blg-menu-bar {
+    top: 46px;
+    padding: 0;
+    height: 48px;
+    padding-bottom: 10px;
+}
+
+.blg-menu-tabs {
+    height: 48px;
+    border-top-width: 0;
+}
+
+.blg-menu-content {
+    top: 94px;
+}
+
+/**/
+
+.blg-menu-item {
+    width: 100%;
+    border-left: 0;
+    border-right: 0;
+}
+
+/**/
+
+.blg-icon-cropper {
+    max-width: 1.1em;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.blg-icon-rounded {
+    display: block;
+    margin: 0 auto;
+    height: 1.1em;
+    width: 1.1em;
+    border-radius: 1.1em;
+    background: center no-repeat;
+    background-size: cover;
+}
+
+/**/

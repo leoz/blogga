@@ -13,13 +13,6 @@
     float: right;
 }
 
-.blg-divider {
-    height: 48px;
-    border-bottom-width: 1px;
-    border-bottom-color: #B2B2B2;
-    margin-bottom: 0;
-}
-
 .blg-avatar {
     width: 40px;
     height: 40px;
@@ -75,24 +68,6 @@
 .blg-content img {
     max-width: 100%;
     height: auto;
-}
-
-/**/
-
-.blg-menu-bar {
-    top: 46px;
-    padding: 0;
-    height: 48px;
-    padding-bottom: 10px;
-}
-
-.blg-menu-tabs {
-    height: 48px;
-    border-top-width: 0;
-}
-
-.blg-menu-content {
-    top: 94px;
 }
 
 /**/

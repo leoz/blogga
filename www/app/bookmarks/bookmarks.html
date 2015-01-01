@@ -1,6 +1,6 @@
 <ion-view ng-controller="BookmarksController" view-title="Bookmarks" hide-back-button="true">
     <ion-content class="blg-menu-content">
-        <ion-item class="blg-divider item-input-inset">
+        <ion-item class="item-input-inset">
             <button
                 class="button button-small button-icon icon ion-ios7-minus-outline"
                 ng-disabled="!service.has_journals()"
@@ -16,22 +16,29 @@
             </button>
         </ion-item>
         <ion-list show-delete="showDelete()">
-            <ion-item class="blg-item item-avatar item-icon-right"
+            <ion-item class="blg-menu-item item-icon-left"
                 collection-repeat="bookmark in service.get_bookmarks() | filter: data.name"
                 collection-item-width="'100%'"
-                collection-item-height="76"
+                collection-item-height="52"
                 type="item-text-wrap"
                 href="#/app/journal/{{bookmark.username}}"
                 ng-class="{active: (service.get_active_journal() == bookmark.username)}"
-                ng-click="service.set_active_journal(bookmark.username)"
-                >
+                ng-click="service.set_active_journal(bookmark.username)">
+
                 <ion-delete-button class="ion-minus-circled"
                     ng-click="service.delete_journal(bookmark)">
                 </ion-delete-button>
-                <img class="blg-avatar" ng-src="{{bookmark.$$userpic}}">
-                <h2>{{bookmark.username}}</h2>
-                <p>{{bookmark.lastText}}</p>
-                <i class="icon ion-chevron-right icon-accessory"></i>
+
+                <div class="icon blg-icon-cropper">
+                    <div class="blg-icon-rounded"
+                        style = 'background-image: url({{bookmark.$$userpic}})'>
+                    </div>
+                </div>
+
+
+                    <h5>{{bookmark.username}}</h5>
+
+
             </ion-item>
         </ion-list>
     </ion-content>
