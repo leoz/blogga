@@ -1,5 +1,8 @@
 <ion-view ng-controller="BookmarksController" view-title="Bookmarks" hide-back-button="true">
     <ion-content class="blg-menu-content">
+        <ion-item class="item-divider">
+            Bookmarks
+        </ion-item>
         <ion-item class="item-input-inset">
             <button
                 class="button button-small button-icon icon ion-ios7-minus-outline"
@@ -35,9 +38,7 @@
                     </div>
                 </div>
 
-
-                    <h5>{{bookmark.username}}</h5>
-
+                <h2>{{bookmark.username}}</h2>
 
             </ion-item>
         </ion-list>
