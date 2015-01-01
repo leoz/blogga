@@ -1,6 +1,6 @@
 
 angular.module('JournalCtrl', [])
-.controller('JournalController', function($scope, $stateParams, ngLJService, AuthService, TextService, AvatarService) {
+.controller('JournalController', function($scope, $state, $stateParams, ngLJService, AuthService, TextService, AvatarService) {
 
     $scope.journal = $stateParams.journalName;
 
@@ -53,4 +53,21 @@ angular.module('JournalCtrl', [])
         }
     };
 
+    $scope.loadPost = function(journalName,postId){
+        $state.go('app.post',{journalName:journalName,postId:postId});
+    };
+
+    $scope.loadJournal = function(journalName){
+        $state.go('app.journal',{journalName:journalName});
+    };
+})
+.directive('stopEvent', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            element.bind(attr.stopEvent, function (e) {
+                e.stopPropagation();
+            });
+        }
+    };
 });

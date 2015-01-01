@@ -19,6 +19,32 @@
     overflow: hidden;
 }
 
+.blg-avatar-button {
+    border: 0 !important;
+    padding: 0;
+    width: 3.2em;
+    height: 3.2em;
+    border-radius: 50% !important;
+}
+
+.blg-avatar-cropper {
+    margin-left: 2px;
+    max-width: 3em;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.blg-avatar-rounded {
+    display: block;
+    margin: 0 auto;
+    height: 3em;
+    width: 3em;
+    border-radius: 3em;
+    background: center no-repeat;
+    background-size: cover;
+}
+
 /**/
 
 .ion-chatbubble.light {
