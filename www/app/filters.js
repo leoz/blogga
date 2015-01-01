@@ -9,7 +9,7 @@ angular.module('blogga.filters', [])
 		if(input == null) {
 			return '';
 		}
-		return $filter('date')(new Date(input.replace(/-/g, '/')), 'dd MMM yyyy');
+		return $filter('date')(new Date(input.replace(/-/g, '/')), 'dd MMM yyyy - HH:mm');
 	};
 })
 
