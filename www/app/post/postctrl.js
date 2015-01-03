@@ -25,7 +25,7 @@ angular.module('PostCtrl', [])
         }
         TextService.convert(post, 'subject');
         AvatarService.getAvatar(post, post.poster);
-        TextService.convert(post, 'event');
+        TextService.convert(post, 'event', true);
     };
 
     $scope.getComments = function(){
