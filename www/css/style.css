@@ -9,33 +9,6 @@
 
 /**/
 
-.ion-chatbubble.light {
-    color: #aaa;
-    -webkit-text-stroke: 0px transparent;
-    font-size: 14px;
-    width: 50px;
-    padding-top: 10px;
-    text-align: center;
-    position: relative;
-    right: -48px;
-    display: block;
-    float: right;
-    height: 86px;
-}
-
-.ion-chatbubble.light::before {
-    color: #fff;
-    text-decoration: none;
-    -webkit-text-stroke: 1px #aaa;
-    position: absolute;
-    font-size: 48px;
-    right: 13px;
-    top: -4px;
-    z-index: -1;
-}
-
-/**/
-
 .blg-comment p.blg-right {
     float: right;
 }
