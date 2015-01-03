@@ -11,12 +11,11 @@
         <ion-header-bar class="blg-menu-bar bar-subheader">
 
             <ion-item class="item-divider">
-                Account
+                <b>Account</b>
             </ion-item>
 
-            <ion-item ng-if="!isLoggedIn()" class="item-button-left">
-                <button class="button button-icon icon ion-log-in" ng-click="login()">
-                </button>
+            <ion-item ng-if="!isLoggedIn()" class="item-icon-left" ng-click="login()">
+                <i class="icon ion-log-in"></i>
                 Login
             </ion-item>
 
