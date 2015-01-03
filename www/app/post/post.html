@@ -6,8 +6,16 @@
     </ion-nav-buttons>
     <ion-content>
         <div class="card">
-            <div class="blg-item item-avatar item item-divider">
-                <img class="blg-avatar" ng-src="{{post.$$userpic}}">
+            <div class="blg-item item-button-left item item-divider">
+
+                <button class="button button-light blg-avatar-button" ng-click="loadJournal(post.poster)">
+                    <div class="blg-avatar-cropper">
+                        <div class="blg-avatar-rounded"
+                            style = 'background-image: url({{post.$$userpic}})'>
+                        </div>
+                    </div>
+                </button>
+
                 <h2>{{post.$$subject}}</h2>
                 <p class="blg-right">{{post.eventtime | dateFormat}}</p>
                 <p>{{post.poster}}</p>

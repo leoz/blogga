@@ -1,6 +1,6 @@
 
 angular.module('PostCtrl', [])
-.controller('PostController', function($scope, $stateParams, $ionicScrollDelegate, ngLJService, AuthService, TextService, AvatarService) {
+.controller('PostController', function($scope, $state, $stateParams, $ionicScrollDelegate, ngLJService, AuthService, TextService, AvatarService) {
 
     $scope.journal = $stateParams.journalName;
     $scope.postId = $stateParams.postId;
@@ -55,5 +55,9 @@ angular.module('PostCtrl', [])
     $scope.toggleComment = function(child) {
         child.$$show = !child.$$show;
         $ionicScrollDelegate.resize();
+    };
+
+    $scope.loadJournal = function(journalName){
+        $state.go('app.journal',{journalName:journalName});
     };
 });
