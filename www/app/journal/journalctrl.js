@@ -65,7 +65,12 @@ angular.module('JournalCtrl', [])
         }
     };
 
-    $scope.loadPost = function(journalName,postId) {
+    $scope.loadPost = function(journalName,post) {
+        //console.log(post);
+        var postId = post.itemid;
+        if (post.journalname) {
+            journalName = post.journalname;
+        }
         $state.go('app.post',{journalName:journalName,postId:postId});
     };
 
