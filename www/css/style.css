@@ -30,6 +30,18 @@
     border-bottom: 0;
 }
 
+.blg-html {
+    font-size: 18px !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    color: #000 !important;
+}
+
+.blg-html * {
+    font-size: 18px !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    color: #000 !important;
+}
+
 .blg-html img {
     max-width: 100%;
     height: auto;
