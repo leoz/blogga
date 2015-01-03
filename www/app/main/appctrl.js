@@ -1,6 +1,6 @@
 
 angular.module('AppCtrl', [])
-.controller('AppController', function($scope, $ionicModal, AuthService, FriendsService, GroupsService) {
+.controller('AppController', function($scope, $ionicModal, AuthService, AvatarService, FriendsService, GroupsService) {
 
     $scope.loggedIn = false;
     $scope.activeList = 'bookmarks';
@@ -23,6 +23,7 @@ angular.module('AppCtrl', [])
     $scope.doLogin = function() {
         console.log('Doing login', $scope.loginData);
         AuthService.set_credentials($scope.loginData.username,$scope.loginData.password);
+        AvatarService.getAvatar($scope.loginData, $scope.loginData.username);
         FriendsService.read_friends();
         GroupsService.read_groups();
         $scope.loggedIn = true;
@@ -46,4 +47,8 @@ angular.module('AppCtrl', [])
     $scope.setList = function(list) {
         return $scope.activeList = list;
     };
+
+    $scope.getTop = function() {
+        return ($scope.isLoggedIn() ? 272 : 134) + 'px';
+    }
 });

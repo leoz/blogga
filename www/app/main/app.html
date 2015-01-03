@@ -19,7 +19,25 @@
                 Login
             </ion-item>
 
-            <div ng-if="isLoggedIn()" class="blg-menu-tabs tabs tabs-secondary tabs-icon-top">
+            <ion-item ng-if="isLoggedIn()" class="item-icon-left" href="#/app/journal/{{loginData.username}}">
+                <div class="icon blg-icon-cropper">
+                    <div class="blg-icon-rounded"
+                        style = 'background-image: url({{loginData.$$userpic}})'>
+                    </div>
+                </div>
+                {{loginData.username}}
+            </ion-item>
+
+            <ion-item ng-if="isLoggedIn()" class="item-icon-left" ng-click="logout()">
+                <i class="icon ion-log-out"></i>
+                Logout
+            </ion-item>
+
+            <ion-item ng-if="isLoggedIn()" class="item-divider">
+                <b>Journals</b>
+            </ion-item>
+
+            <div ng-if="isLoggedIn()" class="item tabs blg-menu-tabs tabs-secondary tabs-icon-top">
                 <a class="tab-item"
                     ng-class="{'active': getList() === 'bookmarks'}"
                     ng-click="setList('bookmarks')">
@@ -37,10 +55,6 @@
                     ng-click="setList('groups')">
                     <i class="icon ion-person-stalker"></i>
                     Groups
-                </a>
-                <a class="tab-item" ng-click="logout()">
-                    <i class="icon ion-log-out"></i>
-                    Logout
                 </a>
             </div>
 

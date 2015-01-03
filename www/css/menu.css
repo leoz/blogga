@@ -10,14 +10,12 @@
 }
 
 .blg-menu-tabs {
-    padding-top: 3px;
-    height: 52px;
-    border-top-width: 0;
-    background-color: #FFFFFF;
+    border-left: 0;
+    border-right: 0;
 }
 
 .blg-menu-content {
-    top: 134px;
+    top: 272px;
 }
 
 /**/
