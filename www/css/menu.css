@@ -3,19 +3,21 @@
 */
 
 .blg-menu-bar {
-    top: 46px;
+    top: 44px;
     padding: 0;
-    height: 48px;
+    height: 90px;
     padding-bottom: 10px;
 }
 
 .blg-menu-tabs {
-    height: 48px;
+    padding-top: 3px;
+    height: 52px;
     border-top-width: 0;
+    background-color: #FFFFFF;
 }
 
 .blg-menu-content {
-    top: 94px;
+    top: 134px;
 }
 
 /**/

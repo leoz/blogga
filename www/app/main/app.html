@@ -10,35 +10,38 @@
         </ion-header-bar>
         <ion-header-bar class="blg-menu-bar bar-subheader">
 
-            <div class="blg-menu-tabs tabs tabs-secondary tabs-icon-top">
-                <a ng-if="isLoggedIn()"
-                    class="tab-item"
+            <ion-item class="item-divider">
+                Account
+            </ion-item>
+
+            <ion-item ng-if="!isLoggedIn()" class="item-button-left">
+                <button class="button button-icon icon ion-log-in" ng-click="login()">
+                </button>
+                Login
+            </ion-item>
+
+            <div ng-if="isLoggedIn()" class="blg-menu-tabs tabs tabs-secondary tabs-icon-top">
+                <a class="tab-item"
                     ng-class="{'active': getList() === 'bookmarks'}"
                     ng-click="setList('bookmarks')">
                     <i class="icon ion-bookmark"></i>
                     Bookmarks
                 </a>
-                <a ng-if="isLoggedIn()"
-                    class="tab-item"
+                <a class="tab-item"
                     ng-class="{'active': getList() === 'friends'}"
                     ng-click="setList('friends')">
                     <i class="icon ion-heart"></i>
                     Friends
                 </a>
-                <a ng-if="isLoggedIn()"
-                    class="tab-item"
+                <a class="tab-item"
                     ng-class="{'active': getList() === 'groups'}"
                     ng-click="setList('groups')">
                     <i class="icon ion-person-stalker"></i>
                     Groups
                 </a>
-                <a ng-if="isLoggedIn()" class="tab-item" ng-click="logout()">
+                <a class="tab-item" ng-click="logout()">
                     <i class="icon ion-log-out"></i>
                     Logout
-                </a>
-                <a ng-if="!isLoggedIn()" class="tab-item" ng-click="login()">
-                    <i class="icon ion-log-in"></i>
-                    Login
                 </a>
             </div>
 
