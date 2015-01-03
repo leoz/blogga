@@ -1,15 +1,26 @@
 <div ng-init="preProcessComments(child.children)" class="blg-comment-padding padding">
 <div ng-repeat="child in child.children">
-    <ion-item class="blg-comment item-stable item-avatar item-button-right">
-        <img class="blg-avatar" ng-src="{{child.$$userpic}}">
-        <p class="blg-right">{{child.datepostunix | unixFormat}}</p>
-        <p>{{child.postername}}</p>
-        <button class="button button-icon icon {{child.$$show ? 'ion-minus' : 'ion-plus'}}"
+
+    <div class="item item-stable blg-item-comment item-button-left item-button-right">
+
+            <button class="button button-light blg-avatar-button" ng-click="loadJournal(child.postername)">
+                <div class="blg-avatar-cropper">
+                    <div class="blg-avatar-rounded"
+                        style = 'background-image: url({{child.$$userpic}})'>
+                    </div>
+                </div>
+            </button>
+
+            <p class="blg-right">{{child.datepostunix | unixFormat}}</p>
+            <p>{{child.postername}}</p>
+
+            <button class="blg-button-expand button button-icon icon {{child.$$show ? 'ion-minus' : 'ion-plus'}}"
                 ng-click="toggleComment(child)"
-                style="top: 20px"
                 ng-show="child.children">
-        </button>
-    </ion-item>
+            </button>
+
+    </div>
+
     <ion-item class="blg-content blg-html">
         <pre
              ng-bind-html="child.$$body"

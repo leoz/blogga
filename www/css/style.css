@@ -7,9 +7,19 @@
     overflow: hidden;
 }
 
+.blg-button-expand {
+    left: -webkit-calc(100% - 58px) !important;
+    top: -webkit-calc(100% - 58px) !important;
+}
+
 /**/
 
-.blg-comment p.blg-right {
+.blg-item-comment {
+    width: 100%;
+    height: 76px;
+}
+
+.blg-item-comment p.blg-right {
     float: right;
 }
 
