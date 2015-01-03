@@ -1,12 +1,6 @@
 
 /**/
 
-.blg-avatar {
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-}
-
 .blg-button-expand {
     left: -webkit-calc(100% - 58px) !important;
     top: -webkit-calc(100% - 58px) !important;
