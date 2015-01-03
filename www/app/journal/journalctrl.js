@@ -8,12 +8,14 @@ angular.module('JournalCtrl', [])
     $scope.error = false;
 
     var last_date = null;
-    var count = 10;
+    var load_more = true;
+    var count = 20; // Maybe should be 10
 
-    $scope.update = function(){
+    $scope.update = function() {
         console.log('JournalCtrl - update');
-        lastDate = null;
-        ngLJService.get_events(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,count,lastDate).then(function(response){
+        last_date = null;
+        load_more = true;
+        ngLJService.get_events(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,count,last_date).then(function(response){
             $scope.error = false;
             $scope.preProcessPosts(response[0].events);
             $scope.posts = response[0].events;
@@ -23,13 +25,18 @@ angular.module('JournalCtrl', [])
 
     $scope.update();
 
-    $scope.loadMore = function(){
+    $scope.loadMore = function() {
         console.log('JournalCtrl - loadMore');
         if($scope.posts && $scope.posts.length) {
             last_date = $scope.posts[$scope.posts.length - 1].eventtime;
         }
         ngLJService.get_events(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,count,last_date).then(function(response){
             $scope.error = false;
+
+            if (!response[0].events.length) {
+                load_more = false;
+            }
+
             $scope.preProcessPosts(response[0].events);
             if ($scope.posts) {
                 for (var i = 0; i < response[0].events.length; i++) {
@@ -43,7 +50,12 @@ angular.module('JournalCtrl', [])
         }, function(){$scope.error = true;});
     };
 
-    $scope.preProcessPosts = function(posts){
+
+    $scope.canLoadMore = function() {
+        return load_more;
+    };
+
+    $scope.preProcessPosts = function(posts) {
         for (var i = 0; i < posts.length; i++) {
             if(!posts[i]['poster']) {
                 posts[i]['poster'] = $scope.journal;
@@ -53,11 +65,11 @@ angular.module('JournalCtrl', [])
         }
     };
 
-    $scope.loadPost = function(journalName,postId){
+    $scope.loadPost = function(journalName,postId) {
         $state.go('app.post',{journalName:journalName,postId:postId});
     };
 
-    $scope.loadJournal = function(journalName){
+    $scope.loadJournal = function(journalName) {
         $state.go('app.journal',{journalName:journalName});
     };
 })
