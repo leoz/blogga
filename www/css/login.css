@@ -12,3 +12,12 @@
 .blg-login-error-text {
     color: red !important;
 }
+
+label.item.has-error {
+    border-bottom: 2px solid red;
+}
+
+.form-error {
+    padding: 2px 0 2px 16px;
+    color: red;
+}

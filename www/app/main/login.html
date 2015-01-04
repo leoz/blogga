@@ -2,28 +2,45 @@
     <ion-header-bar>
         <h1 class="title">Login</h1>
         <div class="buttons">
-            <button class="button button-clear" ng-click="closeLogin()">Close</button>
+            <button class="button button-clear" ng-click="closeLogin()">
+                Close
+            </button>
         </div>
     </ion-header-bar>
     <ion-content>
-        <form ng-submit="doLogin()">
+        <form ng-submit="doLogin()" name="loginForm" novalidate="">
             <div class="list">
-                <label class="item blg-login-item item-input">
+                <label class="item item-input"
+                    ng-class="{ 'has-error' : loginForm.username.$invalid}">
                     <span class="input-label">Username</span>
-                    <input type="text" ng-model="loginData.username">
+                    <input type="text" name="username"
+                        ng-model="loginData.username" required>
                 </label>
-                <label class="item blg-login-item item-input">
+                <div ng-messages="loginForm.username.$error">
+                    <div class="form-error" ng-message="required">
+                        This field is required
+                    </div>
+                </div>
+                <label class="item item-input">
                     <span class="input-label">Password</span>
-                    <input type="password" ng-model="loginData.password">
-                </label>
-                <label class="item blg-login-item">
-                    <button class="button button-block button-positive" type="submit">Log in</button>
+                    <input type="password" name="password"
+                        ng-model="loginData.password">
                 </label>
             </div>
+            <div class="padding">
+                <button class="button button-block button-positive"
+                    type="submit">
+                    Log in
+                </button>
+            </div>
+            <div ng-if="loginData.$$error" class="padding">
+                <p class="blg-login-error-text">
+                    <b>Login failed</b>
+                </p>
+                <p class="blg-login-error-text">
+                    {{loginData.$$error.$$message}}
+                </p>
+            </div>
         </form>
-        <ion-item ng-if="loginData.$$error" class="blg-login-item item-text-wrap">
-            <p class="blg-login-error-text"><b>Login failed</b></p>
-            <p class="blg-login-error-text">{{loginData.$$error.$$message}}</p>
-        </ion-item>
     </ion-content>
 </ion-modal-view>

@@ -6,6 +6,11 @@ angular.module('AppCtrl', [])
     $scope.activeList = 'bookmarks';
     $scope.loginData = {};
 
+    $scope.user = {
+        username: '',
+        password : ''
+    };
+
     $ionicModal.fromTemplateUrl('app/main/login.html', {
         scope: $scope
     }).then(function(modal) {
@@ -15,8 +20,8 @@ angular.module('AppCtrl', [])
     $scope.closeLogin = function() {
         $scope.modal.hide();
         $scope.loginData.$$error = null;
-        AuthService.clear_credentials();
-        $scope.loggedIn = false;
+//        AuthService.clear_credentials();
+//        $scope.loggedIn = false;
     };
 
     $scope.login = function() {
