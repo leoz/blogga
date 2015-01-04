@@ -1,6 +1,6 @@
 
 angular.module('AppCtrl', [])
-.controller('AppController', function($scope, $ionicModal, AuthService, AvatarService, FriendsService, GroupsService) {
+.controller('AppController', function($scope, $ionicModal, TextService, AuthService, AvatarService, FriendsService, GroupsService) {
 
     $scope.loggedIn = false;
     $scope.activeList = 'bookmarks';
@@ -14,6 +14,9 @@ angular.module('AppCtrl', [])
 
     $scope.closeLogin = function() {
         $scope.modal.hide();
+        $scope.loginData.$$error = null;
+        AuthService.clear_credentials();
+        $scope.loggedIn = false;
     };
 
     $scope.login = function() {
@@ -21,13 +24,28 @@ angular.module('AppCtrl', [])
     };
 
     $scope.doLogin = function() {
-        console.log('Doing login', $scope.loginData);
+        console.log('Doing login ', $scope.loginData);
+        $scope.loginData.$$error = null;
         AuthService.set_credentials($scope.loginData.username,$scope.loginData.password);
+        GroupsService.read_groups($scope.cbLoginOk,$scope.cbLoginFailed);
+    };
+
+    $scope.cbLoginOk = function() {
+        console.log('Login OK');
+        $scope.loginData.$$error = null;
         AvatarService.getAvatar($scope.loginData, $scope.loginData.username);
         FriendsService.read_friends();
-        GroupsService.read_groups();
         $scope.loggedIn = true;
         $scope.closeLogin();
+    };
+
+    $scope.cbLoginFailed = function(reason) {
+        console.log('Login Failed');
+        TextService.convert(reason, 'message');
+        console.log(reason);
+        $scope.loginData.$$error = reason;
+        AuthService.clear_credentials();
+        $scope.loggedIn = false;
     };
 
     $scope.logout = function() {

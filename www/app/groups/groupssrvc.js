@@ -5,7 +5,7 @@ angular.module('GroupsSrvc', [])
     var data = null;
     var error = false;
 
-    function readGroups() {
+    function readGroups(cb_ok,cb_failed) {
         console.log('GroupsService - readGroups');
         if (data) {
             data = null;
@@ -14,7 +14,11 @@ angular.module('GroupsSrvc', [])
             error = false;
             preProcessGroups(response[0].usejournals);
             data = response[0];
-        }, function(){error = true;});
+            cb_ok();
+        }, function(reason){
+            cb_failed(reason);
+            error = true;
+        });
     };
 
     function preProcessGroups(groups){

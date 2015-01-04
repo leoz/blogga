@@ -2,7 +2,7 @@
 // Blogga LiveJournal client
 //
 
-angular.module('blogga', ['ngLiveJournal', 'ionic', 'MainRoute',
+angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal', 'MainRoute',
     'AppCtrl', 'PostCtrl', 'JournalCtrl', 'GroupsCtrl', 'FriendsCtrl', 'BookmarksCtrl',
     'blogga.filters',
     'AvatarSrvc', 'AuthSrvc', 'StorageSrvc', 'BookmarksSrvc', 'FriendsSrvc', 'GroupsSrvc', 'TextSrvc'])
