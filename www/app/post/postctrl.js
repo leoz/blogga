@@ -10,7 +10,7 @@ angular.module('PostCtrl', [])
     $scope.post = null;
     $scope.child = {};
 
-    $scope.getPost = function(){
+    $scope.getPost = function() {
         console.log('PostController - getPost');
         ngLJService.get_event(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,$scope.postId).then(function(response){
             $scope.error = false;
@@ -19,7 +19,7 @@ angular.module('PostCtrl', [])
         }, function(){$scope.error = true;});
     };
 
-    $scope.preProcessPost = function(post){
+    $scope.preProcessPost = function(post) {
         if(!post['poster']) {
             post['poster'] = $scope.journal;
         }
@@ -28,7 +28,7 @@ angular.module('PostCtrl', [])
         TextService.convert(post, 'event', true);
     };
 
-    $scope.getComments = function(){
+    $scope.getComments = function() {
         console.log('PostController - getComments');
         ngLJService.get_comments(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,$scope.postId).then(function(response){
             $scope.loading = false;
@@ -37,14 +37,40 @@ angular.module('PostCtrl', [])
         }, function(){$scope.error = true;});
     };
 
-    $scope.preProcessComments = function(comments){
-        for (var i = 0; i < comments.length; i++) {
-            TextService.convert(comments[i], 'body');
-            AvatarService.getAvatar(comments[i], comments[i].postername);
+    $scope.preProcessComments = function(child) {
+        $scope.loadComments(child);
+        for (var i = 0; i < child.children.length; i++) {
+            TextService.convert(child.children[i], 'body');
+            AvatarService.getAvatar(child.children[i], child.children[i].postername);
         }
     };
 
-    $scope.update = function(){
+    $scope.loadComments = function(child) {
+        if (!child.$$last_index) {
+            child.$$last_index = 0;
+        }
+
+        var count = 10; // Max number of comments to load
+
+        for (var i = count; child.$$last_index < child.children.length; i--) {
+            if (!i) {
+                break;
+            }
+            child.children[child.$$last_index].$$load = true;
+            child.$$last_index++;
+        }
+
+        if (child.$$last_index < (child.children.length - 1)) {
+            child.$$load_more = true;
+        }
+        else {
+            child.$$load_more = false;
+        }
+
+        $ionicScrollDelegate.resize();
+    };
+
+    $scope.update = function() {
         console.log('PostController - update');
         $scope.getPost();
         $scope.getComments();
@@ -57,15 +83,15 @@ angular.module('PostCtrl', [])
         $ionicScrollDelegate.resize();
     };
 
-    $scope.loadJournal = function(journalName){
+    $scope.loadJournal = function(journalName) {
         $state.go('app.journal',{journalName:journalName});
     };
 
-    $scope.loadPost = function(journalName,postId){
+    $scope.loadPost = function(journalName,postId) {
         $state.go('app.post',{journalName:journalName,postId:postId});
     };
 
-    $scope.loadURL = function(url){
+    $scope.loadURL = function(url) {
 
         // open the page in the inAppBrowser plugin. Falls back to a blank page if the plugin isn't installed
         var params = 'location=no,' +
@@ -81,7 +107,7 @@ angular.module('PostCtrl', [])
 //        });
     };
 
-    $scope.processLink = function(e){
+    $scope.processLink = function(e) {
         if(e.toElement.tagName == "A"){
             console.log('processLink: ' + e.toElement.href);
             console.log('hostname: ' + e.toElement.hostname);

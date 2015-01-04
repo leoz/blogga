@@ -1,8 +1,7 @@
-<div ng-init="preProcessComments(child.children)" class="blg-comment-padding padding">
+<div ng-init="preProcessComments(child)" class="blg-comment-padding padding">
 <div ng-repeat="child in child.children">
-
+<div ng-if="child.$$load">
     <div class="item item-stable blg-item-comment item-button-left item-button-right">
-
             <button class="button button-light blg-avatar-button" ng-click="loadJournal(child.postername)">
                 <div class="blg-avatar-cropper">
                     <div class="blg-avatar-rounded"
@@ -18,9 +17,7 @@
                 ng-click="toggleComment(child)"
                 ng-show="child.children">
             </button>
-
     </div>
-
     <ion-item class="blg-content blg-html">
         <pre
              ng-bind-html="child.$$body"
@@ -32,4 +29,11 @@
         </ng-include>
     </div>
 </div>
+</div>
+<ion-item
+    ng-if="child.$$load_more"
+    class="button icon-left ion-ios7-chatboxes-outline button-positive"
+    ng-click="loadComments(child)">
+    More comments
+</ion-item>
 </div>
