@@ -7,28 +7,25 @@ angular.module('JournalCtrl', [])
     $scope.posts = null;
     $scope.error = false;
 
+    var read_lock = false;
     var last_date = null;
     var load_more = true;
     var count = 20; // Maybe should be 10
 
-    $scope.update = function() {
-        console.log('JournalCtrl - update');
-        last_date = null;
-        load_more = true;
-        ngLJService.get_events(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,count,last_date).then(function(response){
-            $scope.error = false;
-            $scope.preProcessPosts(response[0].events);
-            $scope.posts = response[0].events;
-            $scope.$broadcast('scroll.refreshComplete');
-        }, function(){$scope.error = true;});
-    };
+    $scope.readPosts = function(callback) {
 
-    $scope.update();
+        if (read_lock) {
+            if(callback) {
+                callback();
+            }
+            return;
+        }
 
-    $scope.loadMore = function() {
-        console.log('JournalCtrl - loadMore');
+        read_lock = true;
+
+        console.log('JournalCtrl - readPosts');
         if($scope.posts && $scope.posts.length) {
-            last_date = $scope.posts[$scope.posts.length - 1].eventtime;
+            last_date = $scope.posts[$scope.posts.length - 1].logtime;
         }
         ngLJService.get_events(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,count,last_date).then(function(response){
             $scope.error = false;
@@ -38,6 +35,7 @@ angular.module('JournalCtrl', [])
             }
 
             $scope.preProcessPosts(response[0].events);
+
             if ($scope.posts) {
                 for (var i = 0; i < response[0].events.length; i++) {
                     $scope.posts.push(response[0].events[i]);
@@ -46,8 +44,39 @@ angular.module('JournalCtrl', [])
             else {
                 $scope.posts = response[0].events;
             }
+
+            if(callback) {
+                callback();
+            }
+
+            read_lock = false;
+
+        }, function(){
+            $scope.error = true;
+            read_lock = false;
+        });
+    };
+
+    $scope.update = function() {
+        console.log('JournalCtrl - update');
+
+        $scope.posts = null;
+        last_date = null;
+        load_more = true;
+
+        $scope.readPosts(function() {
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+
+    $scope.update();
+
+    $scope.loadMore = function() {
+        console.log('JournalCtrl - loadMore');
+
+        $scope.readPosts(function() {
             $scope.$broadcast('scroll.infiniteScrollComplete');
-        }, function(){$scope.error = true;});
+        });
     };
 
 
