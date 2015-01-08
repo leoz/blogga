@@ -26,6 +26,11 @@
                 <p class="blg-right ion-ios7-clock-outline"> {{post.eventtime | dateFormat}}</p>
                 <p>{{post.poster}}</p>
             </ion-item>
+            <ion-item class="padding text-center" ng-if="error">
+                <h3 class="blg-journal-error-text">Request Failed</h3>
+                <small ng-if="errorData">{{errorData.$$message}}</small>
+                <small ng-if="!errorData">Check that you are online</small>
+            </ion-item>
         </ion-list>
         <ion-infinite-scroll
             icon=""

@@ -6,6 +6,7 @@ angular.module('JournalCtrl', [])
 
     $scope.posts = null;
     $scope.error = false;
+    $scope.errorData = null;
 
     var read_lock = false;
     var last_date = null;
@@ -29,6 +30,7 @@ angular.module('JournalCtrl', [])
         }
         ngLJService.get_events(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,count,last_date).then(function(response){
             $scope.error = false;
+            $scope.errorData = null;
 
             if (!response[0].events.length) {
                 load_more = false;
@@ -51,8 +53,12 @@ angular.module('JournalCtrl', [])
 
             read_lock = false;
 
-        }, function(){
+        }, function(reason){
             $scope.error = true;
+            if (reason) {
+                TextService.convert(reason, 'message');
+                $scope.errorData = reason;
+            }
             read_lock = false;
         });
     };
