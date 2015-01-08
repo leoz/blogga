@@ -4,6 +4,12 @@
             menu-toggle="left" ng-hide="$exposeAside.active">
         </button>
     </ion-nav-buttons>
+    <ion-nav-buttons side="secondary">
+        <button class="button button-icon icon ion-ios7-star"
+            ng-class="{yellow: isBookmarked(journal), grey: !isBookmarked(journal)}"
+            ng-click="toggleBookmarked(journal)">
+        </button>
+    </ion-nav-buttons>
     <ion-content>
         <ion-refresher on-refresh="update()">
         </ion-refresher>

@@ -85,7 +85,6 @@ angular.module('JournalCtrl', [])
         });
     };
 
-
     $scope.canLoadMore = function() {
         return load_more;
     };
@@ -111,6 +110,16 @@ angular.module('JournalCtrl', [])
 
     $scope.loadJournal = function(journalName) {
         $state.go('app.journal',{journalName:journalName});
+    };
+
+    $scope.bookmarked = false;
+
+    $scope.isBookmarked = function(journalName) {
+        return $scope.bookmarked;
+    };
+
+    $scope.toggleBookmarked = function(journalName) {
+        $scope.bookmarked = !$scope.bookmarked;
     };
 })
 .directive('stopEvent', function () {
