@@ -77,7 +77,13 @@ angular.module('JournalCtrl', [])
         });
     };
 
-    $scope.update();
+    $scope.$on('$ionicView.loaded', function(){
+        $scope.update();
+    });
+
+    $scope.$on('$ionicView.beforeEnter', function(){
+        BookmarksService.set_active_journal($scope.journal);
+    });
 
     $scope.loadMore = function() {
         console.log('JournalCtrl - loadMore');
