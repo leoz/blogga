@@ -5,8 +5,9 @@
         </button>
     </ion-nav-buttons>
     <ion-nav-buttons side="secondary">
-        <button class="button button-icon icon ion-ios7-star"
-            ng-class="{yellow: isBookmarked(journal), grey: !isBookmarked(journal)}"
+        <button class="button button-icon icon"
+            ng-class="{'ion-ios7-star yellow': isBookmarked(journal),
+                'ion-ios7-star-outline grey': !isBookmarked(journal)}"
             ng-click="toggleBookmarked(journal)">
         </button>
     </ion-nav-buttons>

@@ -1,6 +1,8 @@
 
 angular.module('JournalCtrl', [])
-.controller('JournalController', function($scope, $state, $stateParams, ngLJService, AuthService, TextService, AvatarService) {
+.controller('JournalController', function($scope, $state, $stateParams,
+        ngLJService, AuthService, TextService,
+        AvatarService, BookmarksService) {
 
     $scope.journal = $stateParams.journalName;
 
@@ -112,14 +114,18 @@ angular.module('JournalCtrl', [])
         $state.go('app.journal',{journalName:journalName});
     };
 
-    $scope.bookmarked = false;
-
     $scope.isBookmarked = function(journalName) {
-        return $scope.bookmarked;
+        return BookmarksService.has_journal(journalName);
     };
 
     $scope.toggleBookmarked = function(journalName) {
-        $scope.bookmarked = !$scope.bookmarked;
+        // This code should be optimized and moved to BookmarksService
+        if (BookmarksService.has_journal(journalName)) {
+            BookmarksService.delete_journal_by_name(journalName);
+        }
+        else {
+            BookmarksService.add_journal(journalName);
+        }
     };
 })
 .directive('stopEvent', function () {

@@ -73,6 +73,15 @@ angular.module('BookmarksSrvc', [])
         StorageService.setCache(key,data);
     };
 
+    function deleteJournalbyName(journalName){
+        for (var i = 0; i < data.bookmarks.length; i++) {
+            if(data.bookmarks[i].username == journalName) {
+                data.bookmarks.splice(i, 1);
+                break;
+            }
+        }
+    };
+
     function getBookmarks(){
         return data.bookmarks;
     };
@@ -109,6 +118,7 @@ angular.module('BookmarksSrvc', [])
         has_journal: hasJournal,
         add_journal: addJournal,
         delete_journal: deleteJournal,
+        delete_journal_by_name: deleteJournalbyName,
         get_bookmarks: getBookmarks,
         get_active_journal: getActiveJournal,
         set_active_journal: setActiveJournal
