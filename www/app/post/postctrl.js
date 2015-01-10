@@ -76,7 +76,9 @@ angular.module('PostCtrl', [])
         $scope.getComments();
     };
 
-    $scope.update();
+    $scope.$on('$ionicView.loaded', function(){
+        $scope.update();
+    });
 
     $scope.toggleComment = function(child) {
         child.$$show = !child.$$show;
