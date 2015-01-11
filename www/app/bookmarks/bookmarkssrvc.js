@@ -9,10 +9,14 @@ angular.module('BookmarksSrvc', [])
     var akey = 'active';
 
     function readData() {
-        readActiveJournal();
-        readBookmarks();
+        console.log('BookmarksService - readData');
+        if (!adata) {
+            readActiveJournal();
+        }
+        if (!data) {
+            readBookmarks();
+        }
     };
-    readData();
 
     function readBookmarks() {
         console.log('BookmarksService - readBookmarks');
@@ -114,6 +118,8 @@ angular.module('BookmarksSrvc', [])
     /**/
 
     return{
+        read_data: readData,
+        read_active_journal: readActiveJournal,
         has_journals: hasJournals,
         has_journal: hasJournal,
         add_journal: addJournal,

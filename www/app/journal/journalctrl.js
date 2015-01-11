@@ -78,6 +78,7 @@ angular.module('JournalCtrl', [])
     };
 
     $scope.$on('$ionicView.loaded', function(){
+        BookmarksService.read_data();
         $scope.update();
     });
 

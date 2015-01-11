@@ -34,6 +34,7 @@ angular.module('MainRoute', [])
         var active = 'leoz-net';
         var bmksrvc = $injector.get('BookmarksService');
         if (bmksrvc) {
+            bmksrvc.read_active_journal();
             active = bmksrvc.get_active_journal();
         }
         $location.path('/app/journal/' + active);
