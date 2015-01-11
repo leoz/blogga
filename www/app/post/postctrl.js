@@ -1,6 +1,6 @@
 
 angular.module('PostCtrl', [])
-.controller('PostController', function($scope, $state, $stateParams, $ionicScrollDelegate, ngLJService, AuthService, TextService, AvatarService) {
+.controller('PostController', function($scope, $state, $stateParams, $ionicScrollDelegate, ngLJService, BookmarksService, AuthService, TextService, AvatarService) {
 
     $scope.journal = $stateParams.journalName;
     $scope.postId = $stateParams.postId;
@@ -77,6 +77,7 @@ angular.module('PostCtrl', [])
     };
 
     $scope.$on('$ionicView.loaded', function(){
+        BookmarksService.read_data();
         $scope.update();
     });
 
