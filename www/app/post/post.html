@@ -5,7 +5,7 @@
         </a>
     </ion-nav-buttons>
     <ion-content>
-        <div class="card">
+        <div class="blg-card card">
             <div class="blg-item item-button-left item item-divider">
 
                 <button class="button button-light blg-avatar-button" ng-click="loadJournal(post.poster)">
@@ -36,8 +36,16 @@
             </ion-list>
         </div>
 
-        <div class="spinner" ng-show="loading">
+        <div class="spinner ng-hide"
+            ng-show="loading.post"
+            ng-style="{'top':getPostSpinnerHeight()+'px'}">
             <i class="icon ion-loading-d positive"></i>
+        </div>
+
+        <div class="spinner ng-hide"
+            ng-show="loading.comments"
+            ng-style="{'top':getPostCommentsHeight()+'px'}">
+            <i class="icon ion-loading-d royal"></i>
         </div>
 
     </ion-content>

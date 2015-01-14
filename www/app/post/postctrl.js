@@ -6,16 +6,38 @@ angular.module('PostCtrl', [])
     $scope.postId = $stateParams.postId;
 
     $scope.error = false;
-    $scope.loading = true;
+    $scope.loading = {
+        post: false,
+        comments: false
+    };
     $scope.post = null;
     $scope.child = {};
 
+    var postHeight = null
+    $scope.getPostSpinnerHeight = function(){
+        if(!postHeight){
+            postHeight = (document.documentElement.clientHeight/2) - 200;
+        }
+        return postHeight;
+    };
+
+    var commentsHeight = null
+    $scope.getPostCommentsHeight = function(){
+        if(!commentsHeight) {
+            var rect = ionic.DomUtil.getTextBounds(document.querySelector('.blg-card'));
+            var commentsHeight = rect.top + rect.height;
+        }
+        return commentsHeight;
+    };
+
     $scope.getPost = function() {
         console.log('PostController - getPost');
+        $scope.loading.post = true;
         ngLJService.get_event(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,$scope.postId).then(function(response){
             $scope.error = false;
             $scope.preProcessPost(response[0].events[0]);
             $scope.post = response[0].events[0];
+            $scope.loading.post = false;
         }, function(){$scope.error = true;});
     };
 
@@ -30,10 +52,11 @@ angular.module('PostCtrl', [])
 
     $scope.getComments = function() {
         console.log('PostController - getComments');
+        $scope.loading.comments = true;
         ngLJService.get_comments(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,$scope.postId).then(function(response){
-            $scope.loading = false;
             $scope.error = false;
             $scope.child.children = response[0].comments;
+            $scope.loading.comments = false;
         }, function(){$scope.error = true;});
     };
 
