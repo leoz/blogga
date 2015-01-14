@@ -28,7 +28,15 @@
             </div>
         </div>
 
-        <div class="list list-inset">
+        <ion-item
+            ng-if="post.reply_count && !show.comments"
+            style="margin-left: 10px"
+            class="button icon-left ion-ios7-chatboxes-outline button-positive"
+            ng-click="show.comments = true; getComments();">
+            Show comments
+        </ion-item>
+
+        <div ng-if="show.comments" class="list list-inset">
             <ion-list>
                 <ng-include ng-if="child.children"
                     src="'app/post/comment.html'">

@@ -10,6 +10,9 @@ angular.module('PostCtrl', [])
         post: false,
         comments: false
     };
+    $scope.show = {
+        comments: false
+    };
     $scope.post = null;
     $scope.child = {};
 
@@ -96,7 +99,6 @@ angular.module('PostCtrl', [])
     $scope.update = function() {
         console.log('PostController - update');
         $scope.getPost();
-        $scope.getComments();
     };
 
     $scope.$on('$ionicView.loaded', function(){
