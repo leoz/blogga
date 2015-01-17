@@ -1,6 +1,6 @@
 
 angular.module('PostCtrl', [])
-.controller('PostController', function($scope, $state, $stateParams, $ionicScrollDelegate, ngLJService, BookmarksService, AuthService, TextService, AvatarService) {
+.controller('PostController', function($scope, $ionicModal, $state, $stateParams, $ionicScrollDelegate, ngLJService, BookmarksService, AuthService, TextService, AvatarService) {
 
     $scope.journal = $stateParams.journalName;
     $scope.postId = $stateParams.postId;
@@ -15,6 +15,26 @@ angular.module('PostCtrl', [])
     };
     $scope.post = null;
     $scope.child = {};
+
+    $ionicModal.fromTemplateUrl('app/edit/editcomment.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+
+    $scope.share = function() {
+        $scope.modal.hide();
+    };
+
+    $scope.canPostComment = function() {
+        console.log('PostController - canPostComment');
+        return false;
+    };
+
+    $scope.postComment = function() {
+        console.log('PostController - postComment');
+        $scope.modal.show();
+    };
 
     var postHeight = null
     $scope.getPostSpinnerHeight = function(){
@@ -53,7 +73,7 @@ angular.module('PostCtrl', [])
         TextService.convert(post, 'event', true);
 
         if(post.props && post.props.taglist) {
-            TextService.convert(post.props, 'taglist');            
+            TextService.convert(post.props, 'taglist');
         }
     };
 

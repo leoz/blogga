@@ -44,13 +44,21 @@
 
         </div>
 
-        <ion-item
-            ng-if="post.reply_count && !show.comments"
-            style="margin-left: 10px"
-            class="button icon-left ion-ios7-chatboxes-outline button-positive"
-            ng-click="show.comments = true; getComments();">
-            Show comments
-        </ion-item>
+        <div class="button-bar padding" style="padding-top: 0; padding-bottom: 0">
+            <a style="margin-right: 4px; border-right-width: 1px"
+                class="button icon-left ion-ios7-chatboxes-outline"
+                ng-class="{disabled: !(post.reply_count && !show.comments)}"
+                ng-click="show.comments = true; getComments();">
+                Show comments
+            </a>
+            <a
+                style="margin-left: 4px"
+                class="button icon-left ion-ios7-compose-outline"
+                ng-class="{disabled: !canPostComment()}"
+                ng-click="postComment()">
+                Post comment
+            </a>
+        </div>
 
         <div ng-if="show.comments" class="list list-inset">
             <ion-list>
