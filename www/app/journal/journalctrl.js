@@ -28,7 +28,13 @@ angular.module('JournalCtrl', [])
 
         console.log('JournalCtrl - readPosts');
         if($scope.posts && $scope.posts.length) {
-            last_date = $scope.posts[$scope.posts.length - 1].logtime;
+            var new_date = $scope.posts[$scope.posts.length - 1].logtime;
+            if (last_date == new_date) {
+                load_more = false;
+                read_lock = false;
+                return;
+            }
+            last_date = new_date;
         }
         ngLJService.get_events(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,count,last_date).then(function(response){
             $scope.error = false;
@@ -41,9 +47,16 @@ angular.module('JournalCtrl', [])
             $scope.preProcessPosts(response[0].events);
 
             if ($scope.posts) {
+
+                if ($scope.posts[$scope.posts.length - 1].logtime == response[0].events[response[0].events.length - 1].logtime) {
+                    load_more = false;
+                    read_lock = false;
+                    return;
+                }
+
                 for (var i = 0; i < response[0].events.length; i++) {
                     $scope.posts.push(response[0].events[i]);
-                }
+                }response[0].events
             }
             else {
                 $scope.posts = response[0].events;
