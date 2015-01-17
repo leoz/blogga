@@ -50,12 +50,19 @@
 
 /**/
 
+.spinner-post {
+    top: 50px;
+}
+
+.spinner-comments {
+    bottom: 0;
+}
+
 .spinner {
     margin: 100px auto 0;
     text-align: center;
     font-size: 50px;
     position: absolute;
-    top: 50px;
     left: -webkit-calc(50% - 25px);
     z-index: 2;
     -webkit-transition: all 0.4s cubic-bezier(0.6, -1.6, 0.92, 0.48);

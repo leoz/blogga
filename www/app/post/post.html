@@ -60,15 +60,14 @@
             </ion-list>
         </div>
 
-        <div class="spinner ng-hide"
+        <div class="spinner spinner-post ng-hide"
             ng-show="loading.post"
             ng-style="{'top':getPostSpinnerHeight()+'px'}">
             <i class="icon ion-loading-d positive"></i>
         </div>
 
-        <div class="spinner ng-hide"
-            ng-show="loading.comments"
-            ng-style="{'top':getPostCommentsHeight()+'px'}">
+        <div class="spinner spinner-comments ng-hide"
+            ng-show="loading.comments">
             <i class="icon ion-loading-d royal"></i>
         </div>
 
