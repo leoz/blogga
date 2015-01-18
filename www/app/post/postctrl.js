@@ -23,8 +23,17 @@ angular.module('PostCtrl', [])
     });
 
     $scope.new_comment = {
+        journal: null,
         body: null,
         subject: null
+    };
+
+    $scope.closeShare = function() {
+        $scope.modal.hide();
+        $scope.new_comment.journal = null;
+        $scope.new_comment.body = null;
+        $scope.new_comment.subject = null;
+        //$scope.loginData.$$error = null;
     };
 
     $scope.share = function() {
@@ -45,6 +54,8 @@ angular.module('PostCtrl', [])
             $scope.error = false;
         }, function(){$scope.error = true;});
 
+        $scope.show.comments = false;
+        $scope.child = {};
         $scope.modal.hide();
     };
 
@@ -55,6 +66,11 @@ angular.module('PostCtrl', [])
 
     $scope.postComment = function() {
         console.log('PostController - postComment');
+        $scope.new_comment.journal = AuthService.get_username();
+        if (!$scope.new_comment.journal) {
+            $scope.new_comment.journal = "anonymous";
+        }
+        AvatarService.getAvatar($scope.new_comment, $scope.new_comment.journal);
         $scope.modal.show();
     };
 
@@ -112,6 +128,7 @@ angular.module('PostCtrl', [])
     $scope.preProcessComments = function(child) {
         $scope.loadComments(child);
         for (var i = 0; i < child.children.length; i++) {
+            TextService.convert(child.children[i], 'subject');
             TextService.convert(child.children[i], 'body');
             AvatarService.getAvatar(child.children[i], child.children[i].postername);
         }
