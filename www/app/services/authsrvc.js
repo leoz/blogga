@@ -2,8 +2,17 @@
 angular.module('AuthSrvc', [])
 .factory('AuthService', function() {
 
+    var loggedin = false;
     var username = null;
     var authdata = null;
+
+    function getLoggedIn() {
+        return loggedin;
+    };
+
+    function setLoggedIn(s) {
+        loggedin = s;
+    };
 
     function getUsername() {
         return username;
@@ -15,12 +24,14 @@ angular.module('AuthSrvc', [])
 
     function setCredentials(u,p) {
         console.log('AuthService - setCredentials');
+        loggedin = false;
         username = u;
         authdata = p;
     };
 
     function clearCredentials() {
         console.log('AuthService - clearCredentials');
+        loggedin = false;
         username = null;
         authdata = null;
     };
@@ -32,6 +43,8 @@ angular.module('AuthSrvc', [])
     readCredentials();
 
     return{
+        get_logged_in: getLoggedIn,
+        set_logged_in: setLoggedIn,
         get_username: getUsername,
         get_authdata: getAuthdata,
         set_credentials: setCredentials,

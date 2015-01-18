@@ -22,13 +22,35 @@ angular.module('PostCtrl', [])
         $scope.modal = modal;
     });
 
+    $scope.new_comment = {
+        body: null,
+        subject: null
+    };
+
     $scope.share = function() {
+
+        var parent = '0';
+
+        console.log('### parent ' + parent);
+        console.log('### body ' + $scope.new_comment.body);
+        console.log('### subject ' + $scope.new_comment.subject);
+
+        ngLJService.add_comment(AuthService.get_username(),
+                                AuthService.get_authdata(),
+                                $scope.journal,
+                                $scope.post.ditemid,
+                                parent,
+                                $scope.new_comment.body,
+                                $scope.new_comment.subject).then(function(response){
+            $scope.error = false;
+        }, function(){$scope.error = true;});
+
         $scope.modal.hide();
     };
 
     $scope.canPostComment = function() {
         console.log('PostController - canPostComment');
-        return false;
+        return AuthService.get_logged_in();
     };
 
     $scope.postComment = function() {

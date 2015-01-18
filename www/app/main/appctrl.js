@@ -2,7 +2,6 @@
 angular.module('AppCtrl', [])
 .controller('AppController', function($scope, $ionicModal, TextService, AuthService, AvatarService, FriendsService, GroupsService) {
 
-    $scope.loggedIn = false;
     $scope.activeList = 'bookmarks';
     $scope.loginData = {};
 
@@ -21,7 +20,6 @@ angular.module('AppCtrl', [])
         $scope.modal.hide();
         $scope.loginData.$$error = null;
 //        AuthService.clear_credentials();
-//        $scope.loggedIn = false;
     };
 
     $scope.login = function() {
@@ -40,7 +38,7 @@ angular.module('AppCtrl', [])
         $scope.loginData.$$error = null;
         AvatarService.getAvatar($scope.loginData, $scope.loginData.username);
         FriendsService.read_friends();
-        $scope.loggedIn = true;
+        AuthService.set_logged_in(true);
         $scope.closeLogin();
     };
 
@@ -50,17 +48,11 @@ angular.module('AppCtrl', [])
         console.log(reason);
         $scope.loginData.$$error = reason;
         AuthService.clear_credentials();
-        $scope.loggedIn = false;
     };
 
     $scope.logout = function() {
         AuthService.clear_credentials();
-        $scope.loggedIn = false;
         $scope.activeList = 'bookmarks';
-    };
-
-    $scope.isLoggedIn = function() {
-        return $scope.loggedIn;
     };
 
     $scope.getList = function() {
@@ -69,6 +61,10 @@ angular.module('AppCtrl', [])
 
     $scope.setList = function(list) {
         return $scope.activeList = list;
+    };
+
+    $scope.isLoggedIn = function() {
+        return AuthService.get_logged_in();
     };
 
     $scope.getTop = function() {
