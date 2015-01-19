@@ -23,6 +23,7 @@ angular.module('PostCtrl', [])
     });
 
     $scope.new_comment = {
+        child: null,
         journal: null,
         body: null,
         subject: null
@@ -30,6 +31,7 @@ angular.module('PostCtrl', [])
 
     $scope.closeShare = function() {
         $scope.modal.hide();
+        $scope.new_comment.child = null;
         $scope.new_comment.journal = null;
         $scope.new_comment.body = null;
         $scope.new_comment.subject = null;
@@ -40,9 +42,12 @@ angular.module('PostCtrl', [])
 
         var parent = '0';
 
-        console.log('### parent ' + parent);
-        console.log('### body ' + $scope.new_comment.body);
-        console.log('### subject ' + $scope.new_comment.subject);
+        if ($scope.new_comment.child) {
+            parent = $scope.new_comment.child.dtalkid;
+        }
+
+        //console.log('### body ' + $scope.new_comment.body);
+        //console.log('### subject ' + $scope.new_comment.subject);
 
         ngLJService.add_comment(AuthService.get_username(),
                                 AuthService.get_authdata(),
@@ -64,8 +69,9 @@ angular.module('PostCtrl', [])
         return AuthService.get_logged_in();
     };
 
-    $scope.postComment = function() {
+    $scope.postComment = function(child) {
         console.log('PostController - postComment');
+        $scope.new_comment.child = child;
         $scope.new_comment.journal = AuthService.get_username();
         if (!$scope.new_comment.journal) {
             $scope.new_comment.journal = "anonymous";

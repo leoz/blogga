@@ -2,22 +2,29 @@
 <div ng-repeat="child in child.children">
 <div ng-if="child.$$load">
     <div class="item item-stable blg-item-comment item-button-left item-button-right">
-            <button class="button button-light blg-avatar-button" ng-click="loadJournal(child.postername)">
-                <div class="blg-avatar-cropper">
-                    <div class="blg-avatar-rounded"
-                        style = 'background-image: url({{child.$$userpic}})'>
-                    </div>
+        <button class="button button-light blg-avatar-button" ng-click="loadJournal(child.postername)">
+            <div class="blg-avatar-cropper">
+                <div class="blg-avatar-rounded"
+                    style = 'background-image: url({{child.$$userpic}})'>
                 </div>
+            </div>
+        </button>
+
+        <p class="blg-right">{{child.datepostunix | unixFormat}}</p>
+        <h2>{{child.$$subject}}</h2>
+        <p>{{child.postername}}</p>
+
+
+        <div class="buttons blg-comment-buttons">
+            <button class="button button-icon icon ion-ios7-compose-outline"
+                ng-class="{disabled: !canPostComment()}"
+                ng-click="postComment(child)">
             </button>
-
-            <p class="blg-right">{{child.datepostunix | unixFormat}}</p>
-            <h2>{{child.$$subject}}</h2>
-            <p>{{child.postername}}</p>
-
-            <button class="blg-button-expand button button-icon icon {{child.$$show ? 'ion-minus' : 'ion-plus'}}"
+            <button class="button button-icon icon {{child.$$show ? 'ion-minus' : 'ion-plus'}}"
                 ng-click="toggleComment(child)"
                 ng-show="child.children">
             </button>
+        </div>
     </div>
     <ion-item class="blg-content blg-html">
         <pre

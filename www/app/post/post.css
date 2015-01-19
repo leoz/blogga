@@ -2,9 +2,9 @@
 * Blogga Post Style
 */
 
-.blg-button-expand {
-    left: -webkit-calc(100% - 58px) !important;
-    top: -webkit-calc(100% - 58px) !important;
+.blg-comment-buttons {
+    left: -webkit-calc(100% - 94px) !important;
+    top: -webkit-calc(100% - 54px) !important;
 }
 
 /**/
@@ -16,6 +16,7 @@
 
 .blg-item-comment p.blg-right {
     float: right;
+    padding-right: 26px;
 }
 
 .blg-comment-padding {
