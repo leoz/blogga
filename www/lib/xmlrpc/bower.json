@@ -1,8 +1,8 @@
 {
   "name": "xmlrpc",
   "main": "xmlrpc.js",
-  "version": "0.1.2",
-  "homepage": "https://github.com/leoz2011/xmlrpc.js",
+  "version": "0.1.3",
+  "homepage": "https://github.com/leoz/xmlrpc.js",
   "authors": [
     "Tim Heap <heap.tim@gmail.com>",
     "Leonid Zolotarev <leoz@yahoo.com>"
@@ -28,4 +28,3 @@
     "tests"
   ]
 }
-
