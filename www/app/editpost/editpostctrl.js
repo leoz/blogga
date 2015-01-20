@@ -1,6 +1,6 @@
 angular.module('EditPostCtrl', [])
-.controller('EditPostController', function($scope, $ionicModal, ngLJService,
-    AuthService, AvatarService) {
+.controller('EditPostController', function($scope, $state, $ionicModal,
+    ngLJService, AuthService, AvatarService) {
 
     $scope.newEntry = {
         journal: null,
@@ -47,6 +47,8 @@ angular.module('EditPostCtrl', [])
             $scope.error = false;
         }, function(){$scope.error = true;});
 
+        $scope.$emit('blgNewPost',{journalName: $scope.newEntry.journal});
+        $state.go('app.journal',{journalName: $scope.newEntry.journal});
         $scope.postEdit.hide();
     };
 

@@ -1,8 +1,8 @@
 
 angular.module('JournalCtrl', [])
 .controller('JournalController', function($scope, $state, $stateParams,
-        ngLJService, AuthService, TextService,
-        AvatarService, BookmarksService) {
+    $rootScope, ngLJService, AuthService, TextService,
+    AvatarService, BookmarksService) {
 
     $scope.journal = $stateParams.journalName;
 
@@ -97,6 +97,12 @@ angular.module('JournalCtrl', [])
 
     $scope.$on('$ionicView.beforeEnter', function(){
         BookmarksService.set_active_journal($scope.journal);
+    });
+
+    $rootScope.$on('blgNewPost', function(event, args) {
+        if (args && args.journalName && args.journalName == $scope.journal) {
+            $scope.update();
+        }
     });
 
     $scope.loadMore = function() {
