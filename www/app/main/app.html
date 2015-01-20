@@ -24,6 +24,11 @@
                 Login
             </ion-item>
 
+            <ion-item ng-if="isLoggedIn()" class="item-icon-left" ng-click="logout()">
+                <i class="icon ion-log-out"></i>
+                Logout
+            </ion-item>
+
             <ion-item ng-if="isLoggedIn()" class="item-icon-left" href="#/app/journal/{{loginData.username}}">
                 <div class="icon blg-icon-cropper">
                     <div class="blg-icon-rounded"
@@ -33,9 +38,9 @@
                 {{loginData.username}}
             </ion-item>
 
-            <ion-item ng-if="isLoggedIn()" class="item-icon-left" ng-click="logout()">
-                <i class="icon ion-log-out"></i>
-                Logout
+            <ion-item ng-if="isLoggedIn()" class="item-icon-left" ng-click="bloh()">
+                <i class="icon ion-ios7-compose-outline"></i>
+                Post to journal
             </ion-item>
 
             <ion-item ng-if="isLoggedIn()" class="item-divider">

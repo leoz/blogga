@@ -69,6 +69,6 @@ angular.module('AppCtrl', [])
 
     $scope.getTop = function() {
         var offset = ionic.Platform.isIOS() ? 20 : 0;
-        return (($scope.isLoggedIn() ? 272 : 134) + offset) + 'px';
+        return (($scope.isLoggedIn() ? 325 : 134) + offset) + 'px';
     }
 });
