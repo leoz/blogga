@@ -15,7 +15,7 @@
                     <div class="blg-icon-rounded" style = 'background-image: url({{newEntry.$$userpic}})'>
                     </div>
                 </div>
-                {{newEntry.journal}}
+                Post to "{{newEntry.journal}}"
             </div>
 
             <label class="item item-input">
@@ -26,7 +26,7 @@
                 <textarea placeholder="What's on your mind?" ng-model="newEntry.body" rows="10"></textarea>
             </label>
 
-            <button class="button button-block button-positive" ng-click="share()">
+            <button class="button button-block button-positive" ng-click="postEntry()">
                 Post a new entry
             </button>
         </div>

@@ -1,5 +1,6 @@
 angular.module('EditPostCtrl', [])
-.controller('EditPostController', function($scope, $ionicModal) {
+.controller('EditPostController', function($scope, $ionicModal, ngLJService,
+    AuthService, AvatarService) {
 
     $scope.newEntry = {
         journal: null,
@@ -24,11 +25,28 @@ angular.module('EditPostCtrl', [])
 
     $scope.openPostEdit = function() {
         console.log('openPostEdit');
+        $scope.newEntry.journal = AuthService.get_username();
+        AvatarService.getAvatar($scope.newEntry, $scope.newEntry.journal);
         $scope.postEdit.show();
     };
 
     $scope.closePostEdit = function() {
         console.log('closePostEdit');
+        $scope.postEdit.hide();
+    };
+
+    $scope.postEntry = function() {
+        console.log('postEntry');
+
+        ngLJService.post_event(
+            AuthService.get_username(),
+            AuthService.get_authdata(),
+            $scope.newEntry.journal,
+            $scope.newEntry.body,
+            $scope.newEntry.subject).then(function(response){
+            $scope.error = false;
+        }, function(){$scope.error = true;});
+
         $scope.postEdit.hide();
     };
 
@@ -39,6 +57,7 @@ angular.module('EditPostCtrl', [])
 
     $scope.$on('modal.hidden', function(event, modal) {
         console.log('Modal ' + modal.id + ' is hidden!');
+        $scope.clearEntry();
     });
 
     $scope.$on('modal.removed', function(event, modal) {

@@ -64,7 +64,6 @@ angular.module('AppCtrl', [])
     };
 
     $scope.isLoggedIn = function() {
-        return true;
         return AuthService.get_logged_in();
     };
 
