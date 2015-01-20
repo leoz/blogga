@@ -3,7 +3,7 @@
 //
 
 angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal', 'MainRoute',
-    'AppCtrl', 'PostCtrl', 'JournalCtrl', 'GroupsCtrl', 'FriendsCtrl', 'BookmarksCtrl',
+    'AppCtrl', 'PostCtrl', 'JournalCtrl', 'GroupsCtrl', 'FriendsCtrl', 'BookmarksCtrl', 'EditPostCtrl',
     'blogga.filters',
     'AvatarSrvc', 'AuthSrvc', 'StorageSrvc', 'BookmarksSrvc', 'FriendsSrvc', 'GroupsSrvc', 'TextSrvc'])
 

@@ -38,7 +38,7 @@
                 {{loginData.username}}
             </ion-item>
 
-            <ion-item ng-if="isLoggedIn()" class="item-icon-left" ng-click="bloh()">
+            <ion-item ng-controller="EditPostController" ng-if="isLoggedIn()" class="item-icon-left" ng-click="openPostEdit()">
                 <i class="icon ion-ios7-compose-outline"></i>
                 Post to journal
             </ion-item>
