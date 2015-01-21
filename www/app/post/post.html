@@ -45,14 +45,19 @@
         </div>
 
         <div class="button-bar padding" style="padding-top: 0; padding-bottom: 0">
-            <a style="margin-right: 4px; border-right-width: 1px"
-                class="button icon-left ion-ios7-chatboxes-outline"
+            <a
+                class="blg-post-button button icon-left ion-ios7-chatboxes-outline"
                 ng-class="{disabled: !(post.reply_count && !show.comments)}"
                 ng-click="show.comments = true; getComments();">
                 Show comments
             </a>
             <a
-                style="margin-left: 4px"
+                class="blg-post-button button icon-left ion-ios7-trash-outline"
+                ng-class="{disabled: !canDeleteEntry()}"
+                ng-click="deleteEntry()">
+                Delete entry
+            </a>
+            <a
                 class="button icon-left ion-ios7-compose-outline"
                 ng-class="{disabled: !canPostComment()}"
                 ng-click="postComment(null)">
