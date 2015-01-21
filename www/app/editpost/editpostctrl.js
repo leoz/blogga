@@ -48,22 +48,22 @@ angular.module('EditPostCtrl', [])
             $scope.error = false;
         }, function(){$scope.error = true;});
 
-        $scope.$emit('blgNewPost',{journalName: $scope.newEntry.journal});
+        $scope.$emit('blgUpdateJournal',{journalName: $scope.newEntry.journal});
         $state.go('app.journal',{journalName: $scope.newEntry.journal});
         $scope.postEdit.hide();
     };
 
     $scope.$on('$destroy', function(event, modal) {
-        console.log('Modal ' + modal.id + ' is destroyed!');
+//        console.log('Modal ' + modal.id + ' is destroyed!');
         $scope.postEdit.remove();
     });
 
     $scope.$on('modal.hidden', function(event, modal) {
-        console.log('Modal ' + modal.id + ' is hidden!');
+//        console.log('Modal ' + modal.id + ' is hidden!');
         $scope.clearEntry();
     });
 
     $scope.$on('modal.removed', function(event, modal) {
-        console.log('Modal ' + modal.id + ' is removed!');
+//        console.log('Modal ' + modal.id + ' is removed!');
     });
 });

@@ -18,6 +18,31 @@ angular.module('PostCtrl', [])
     $scope.post = null;
     $scope.child = {};
 
+    $scope.canDeleteEntry = function() {
+        console.log('PostController - canDeleteEntry');
+        return (
+            AuthService.get_logged_in() &&
+            $scope.post &&
+            $scope.post.poster &&
+            $scope.post.poster == AuthService.get_username());
+    };
+
+    $scope.deleteEntry = function() {
+        console.log('PostController - deleteEntry');
+
+        ngLJService.delete_event(
+            AuthService.get_username(),
+            AuthService.get_authdata(),
+            $scope.journal,
+            $scope.postId
+        ).then(function(response) {
+            $scope.error = false;
+        }, function(){$scope.error = true;});
+
+        $scope.$emit('blgUpdateJournal',{journalName: $scope.journal});
+        $scope.loadJournal($scope.journal);
+    };
+
     var postHeight = null
     $scope.getPostSpinnerHeight = function(){
         if(!postHeight){
@@ -38,7 +63,12 @@ angular.module('PostCtrl', [])
     $scope.getPost = function() {
         console.log('PostController - getPost');
         $scope.loading.post = true;
-        ngLJService.get_event(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,$scope.postId).then(function(response){
+        ngLJService.get_event(
+            AuthService.get_username(),
+            AuthService.get_authdata(),
+            $scope.journal,
+            $scope.postId
+        ).then(function(response) {
             $scope.error = false;
             $scope.preProcessPost(response[0].events[0]);
             $scope.post = response[0].events[0];
@@ -62,7 +92,12 @@ angular.module('PostCtrl', [])
     $scope.getComments = function() {
         console.log('PostController - getComments');
         $scope.loading.comments = true;
-        ngLJService.get_comments(AuthService.get_username(),AuthService.get_authdata(),$scope.journal,$scope.postId).then(function(response){
+        ngLJService.get_comments(
+            AuthService.get_username(),
+            AuthService.get_authdata(),
+            $scope.journal,
+            $scope.postId
+        ).then(function(response) {
             $scope.error = false;
             $scope.child.children = response[0].comments;
             $scope.loading.comments = false;

@@ -1,7 +1,7 @@
 
 angular.module('JournalCtrl', [])
 .controller('JournalController', function($scope, $state, $stateParams,
-    $rootScope, ngLJService, AuthService, TextService,
+    $rootScope, $timeout, ngLJService, AuthService, TextService,
     AvatarService, BookmarksService) {
 
     $scope.journal = $stateParams.journalName;
@@ -46,7 +46,7 @@ angular.module('JournalCtrl', [])
 
             $scope.preProcessPosts(response[0].events);
 
-            if ($scope.posts) {
+            if ($scope.posts && $scope.posts.length) {
 
                 if ($scope.posts[$scope.posts.length - 1].logtime == response[0].events[response[0].events.length - 1].logtime) {
                     load_more = false;
@@ -99,9 +99,14 @@ angular.module('JournalCtrl', [])
         BookmarksService.set_active_journal($scope.journal);
     });
 
-    $rootScope.$on('blgNewPost', function(event, args) {
+    $rootScope.$on('blgUpdateJournal', function(event, args) {
         if (args && args.journalName && args.journalName == $scope.journal) {
-            $scope.update();
+
+            $scope.posts = null;
+
+            $timeout(function() {
+                $scope.update();
+            },600);
         }
     });
 

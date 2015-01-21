@@ -77,16 +77,16 @@ angular.module('EditCommentCtrl', [])
     };
 
     $scope.$on('$destroy', function(event, modal) {
-        console.log('EditCommentCtrl - Modal ' + modal.id + ' is destroyed!');
+//        console.log('EditCommentCtrl - Modal ' + modal.id + ' is destroyed!');
         $scope.commentEdit.remove();
     });
 
     $scope.$on('modal.hidden', function(event, modal) {
-        console.log('EditCommentCtrl - Modal ' + modal.id + ' is hidden!');
+//        console.log('EditCommentCtrl - Modal ' + modal.id + ' is hidden!');
         $scope.clearComment();
     });
 
     $scope.$on('modal.removed', function(event, modal) {
-        console.log('EditCommentCtrl - Modal ' + modal.id + ' is removed!');
+//        console.log('EditCommentCtrl - Modal ' + modal.id + ' is removed!');
     });
 });
