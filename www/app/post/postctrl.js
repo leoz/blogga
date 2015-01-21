@@ -1,6 +1,8 @@
 
 angular.module('PostCtrl', [])
-.controller('PostController', function($scope, $ionicModal, $state, $stateParams, $ionicScrollDelegate, ngLJService, BookmarksService, AuthService, TextService, AvatarService) {
+.controller('PostController', function($scope, $state, $rootScope,
+    $stateParams, $ionicScrollDelegate, ngLJService,
+    BookmarksService, AuthService, TextService, AvatarService) {
 
     $scope.journal = $stateParams.journalName;
     $scope.postId = $stateParams.postId;
@@ -15,70 +17,6 @@ angular.module('PostCtrl', [])
     };
     $scope.post = null;
     $scope.child = {};
-
-    $ionicModal.fromTemplateUrl('app/edit/editcomment.html', {
-        scope: $scope
-    }).then(function(modal) {
-        $scope.modal = modal;
-    });
-
-    $scope.new_comment = {
-        child: null,
-        journal: null,
-        body: null,
-        subject: null
-    };
-
-    $scope.closeShare = function() {
-        $scope.modal.hide();
-        $scope.new_comment.child = null;
-        $scope.new_comment.journal = null;
-        $scope.new_comment.body = null;
-        $scope.new_comment.subject = null;
-        //$scope.loginData.$$error = null;
-    };
-
-    $scope.share = function() {
-
-        var parent = '0';
-
-        if ($scope.new_comment.child) {
-            parent = $scope.new_comment.child.dtalkid;
-        }
-
-        //console.log('### body ' + $scope.new_comment.body);
-        //console.log('### subject ' + $scope.new_comment.subject);
-
-        ngLJService.add_comment(AuthService.get_username(),
-                                AuthService.get_authdata(),
-                                $scope.journal,
-                                $scope.post.ditemid,
-                                parent,
-                                $scope.new_comment.body,
-                                $scope.new_comment.subject).then(function(response){
-            $scope.error = false;
-        }, function(){$scope.error = true;});
-
-        $scope.show.comments = false;
-        $scope.child = {};
-        $scope.modal.hide();
-    };
-
-    $scope.canPostComment = function() {
-        console.log('PostController - canPostComment');
-        return AuthService.get_logged_in();
-    };
-
-    $scope.postComment = function(child) {
-        console.log('PostController - postComment');
-        $scope.new_comment.child = child;
-        $scope.new_comment.journal = AuthService.get_username();
-        if (!$scope.new_comment.journal) {
-            $scope.new_comment.journal = "anonymous";
-        }
-        AvatarService.getAvatar($scope.new_comment, $scope.new_comment.journal);
-        $scope.modal.show();
-    };
 
     var postHeight = null
     $scope.getPostSpinnerHeight = function(){
@@ -173,6 +111,12 @@ angular.module('PostCtrl', [])
     $scope.$on('$ionicView.loaded', function(){
         BookmarksService.read_data();
         $scope.update();
+    });
+
+    $rootScope.$on('blgNewComment', function(event, args) {
+        $scope.error = false;
+        $scope.show.comments = false;
+        $scope.child = {};
     });
 
     $scope.toggleComment = function(child) {

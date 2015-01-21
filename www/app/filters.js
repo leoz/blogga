@@ -2,7 +2,7 @@
 // Blogga Filters
 //
 
-angular.module('blogga.filters', [])
+angular.module('AppFilters', [])
 
 .filter('dateFormat', function($filter) {
 	return function(input) {

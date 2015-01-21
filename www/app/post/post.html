@@ -4,7 +4,7 @@
             href="#/app/journal/{{journal}}">
         </a>
     </ion-nav-buttons>
-    <ion-content>
+    <ion-content ng-controller="EditCommentController">
         <div class="blg-card card">
             <div class="blg-item item-button-left item item-divider">
 
@@ -60,7 +60,7 @@
             <a
                 class="button icon-left ion-ios7-compose-outline"
                 ng-class="{disabled: !canPostComment()}"
-                ng-click="postComment(null)">
+                ng-click="openCommentEdit(journal,post.ditemid,null)">
                 Post comment
             </a>
         </div>

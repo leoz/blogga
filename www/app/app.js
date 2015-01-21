@@ -2,10 +2,12 @@
 // Blogga LiveJournal client
 //
 
-angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal', 'MainRoute',
-    'AppCtrl', 'PostCtrl', 'JournalCtrl', 'GroupsCtrl', 'FriendsCtrl', 'BookmarksCtrl', 'EditPostCtrl',
-    'blogga.filters',
-    'AvatarSrvc', 'AuthSrvc', 'StorageSrvc', 'BookmarksSrvc', 'FriendsSrvc', 'GroupsSrvc', 'TextSrvc'])
+angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
+    'MainRoute', 'AppFilters',
+    'AppCtrl', 'PostCtrl', 'JournalCtrl', 'GroupsCtrl', 'FriendsCtrl',
+    'BookmarksCtrl', 'EditPostCtrl', 'EditCommentCtrl',
+    'AvatarSrvc', 'AuthSrvc', 'StorageSrvc',
+    'BookmarksSrvc', 'FriendsSrvc', 'GroupsSrvc', 'TextSrvc'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

@@ -2,7 +2,7 @@
     <ion-header-bar>
         <h1 class="title">Leave a comment</h1>
         <div class="buttons">
-            <button class="button button-clear" ng-click="closeShare()">
+            <button class="button button-clear" ng-click="closeCommentEdit()">
                 Close
             </button>
         </div>
@@ -14,21 +14,21 @@
             <div class="item item-divider item-icon-left" style="height: 42px">
                 <div class="icon blg-icon-cropper">
                     <div class="blg-icon-rounded"
-                    style = 'background-image: url({{new_comment.$$userpic}})'>
+                    style = 'background-image: url({{newComment.$$userpic}})'>
                     </div>
                 </div>
-                {{new_comment.journal}}
+                {{newComment.poster}}
             </div>
 
             <label class="item item-input">
-                <input type="text" placeholder="Subject" ng-model="new_comment.subject">
+                <input type="text" placeholder="Subject" ng-model="newComment.subject">
             </label>
 
             <label class="item item-input">
-                <textarea placeholder="What's on your mind?" ng-model="new_comment.body" rows="10"></textarea>
+                <textarea placeholder="What's on your mind?" ng-model="newComment.body" rows="10"></textarea>
             </label>
 
-            <button class="button button-block button-positive" ng-click="share()">
+            <button class="button button-block button-positive" ng-click="addComment()">
                 Post a new comment
             </button>
 

@@ -43,7 +43,8 @@ angular.module('EditPostCtrl', [])
             AuthService.get_authdata(),
             $scope.newEntry.journal,
             $scope.newEntry.body,
-            $scope.newEntry.subject).then(function(response){
+            $scope.newEntry.subject
+        ).then(function(response){
             $scope.error = false;
         }, function(){$scope.error = true;});
 
