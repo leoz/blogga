@@ -1,0 +1,7 @@
+{
+    "name": "Blogga",
+    "description": "Blogga LiveJournal client",
+    "repository": "https://github.com/leoz/blogga",
+    "logo": "https://raw.githubusercontent.com/leoz/blogga/master/resources/icon.png",
+    "keywords": ["ionic", "heroku", "blogga", "livejournal"]
+}
