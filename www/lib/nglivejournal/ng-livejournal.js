@@ -21,8 +21,13 @@
 				method: 'POST',
 				url: URL,
 				data: params,
-				headers: {
-					'Content-Type': 'text/xml'
+
+				headers : {
+					"Content-Type": "text/xml",
+					"Origin" : "blogga.herokuapp.com",
+					"Access-Control-Expose-Headers": "X-Requested-With",
+					"Access-Control-Request-Method" : "POST",
+					"Access-Control-Request-Headers" : "Origin, X-Requested-With, Content-Type, Accept"
 				}
 			}).
 			success(function(data, status) {

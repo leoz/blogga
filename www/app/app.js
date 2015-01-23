@@ -21,4 +21,7 @@ angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
             StatusBar.styleDefault();
         }
     });
+}).config(function($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
