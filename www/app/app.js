@@ -12,7 +12,7 @@ angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
 .run(function($ionicPlatform, ngLJService) {
     $ionicPlatform.ready(function() {
         // Check if Cordova is presented
-        ngLJService.set_config(window.cordova);
+        ngLJService.set_config(!window.cordova);
 
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
