@@ -3,7 +3,7 @@
 */
 
 .blg-comment-buttons {
-    left: -webkit-calc(100% - 94px) !important;
+    left: -webkit-calc(100% - 128px) !important;
     top: -webkit-calc(100% - 54px) !important;
 }
 
@@ -23,7 +23,7 @@
 
 .blg-item-comment p.blg-right {
     float: right;
-    padding-right: 26px;
+    padding-right: 56px;
 }
 
 .blg-comment-padding {

@@ -20,6 +20,10 @@
                 ng-class="{disabled: !canPostComment()}"
                 ng-click="openCommentEdit(journal,post.ditemid,child)">
             </button>
+            <button class="button button-icon icon ion-ios7-trash-outline"
+                ng-class="{disabled: !canDeleteComment()}"
+                ng-click="deleteComment(journal,post.ditemid,child)">
+            </button>
             <button class="button button-icon icon {{child.$$show ? 'ion-minus' : 'ion-plus'}}"
                 ng-click="toggleComment(child)"
                 ng-show="child.children">
