@@ -13,7 +13,7 @@ angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
     $ionicPlatform.ready(function() {
 
         // Check if Cordova is presented
-        var useProxy = true; // !window.cordova
+        var useProxy = !ionic.Platform.isWebView();
         ngLJService.set_config(useProxy);
 
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

@@ -1,8 +1,9 @@
 var express = require('express')
+, request = require('request')
 , app = express();
 
 var postToLJ = function(req, res, next) {
-    res.redirect(307, 'http://www.livejournal.com' + req.path);
+    req.pipe(request.post('http://www.livejournal.com' + req.path)).pipe(res);
 };
 
 app.post('/interface/xmlrpc', postToLJ);
