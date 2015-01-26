@@ -1,8 +1,11 @@
 var express = require('express')
-, cors = require('cors')
 , app = express();
 
-app.use(cors());
+var postToLJ = function(req, res, next) {
+    res.redirect(307, 'http://www.livejournal.com' + req.path);
+};
+
+app.post('/interface/xmlrpc', postToLJ);
 
 app.use(express.static('www'));
 
