@@ -25,6 +25,7 @@
 			else {
 				URL = hostName + pathName;
 			}
+			console.log('ngLiveJournal - setConfig: ' + URL);
 		};
 
 		function newCall(params) {
