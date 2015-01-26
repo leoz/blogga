@@ -18,6 +18,23 @@ angular.module('PostCtrl', [])
     $scope.post = null;
     $scope.child = {};
 
+    $scope.canDeleteComment = function(child) {
+        console.log('PostController - canDeleteComment');
+
+        if (!AuthService.get_logged_in() || !child || !child.postername) {
+            return false;
+        }
+
+        var decoratedName = child.postername.replace(/_/g, '-');
+        console.log('### ' + decoratedName + ' ' + AuthService.get_username());
+
+        return (decoratedName == AuthService.get_username());
+    }
+
+    $scope.deleteComment = function() {
+        console.log('PostController - deleteComment');
+    };
+
     $scope.canDeleteEntry = function() {
         console.log('PostController - canDeleteEntry');
         return (
