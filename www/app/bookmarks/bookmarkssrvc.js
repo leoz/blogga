@@ -118,6 +118,7 @@ angular.module('BookmarksSrvc', [])
     /**/
 
     return{
+        default_avatar: AvatarService.defaultAvatar,
         read_data: readData,
         read_active_journal: readActiveJournal,
         has_journals: hasJournals,

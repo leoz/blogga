@@ -70,6 +70,7 @@ angular.module('AvatarSrvc', [])
     };
 
     return{
+        defaultAvatar: defUserPic,
         getAvatar: function(obj,user){
 //            console.log('userPic: Call for ' + user);
             if (obj && !obj[tmp]) {

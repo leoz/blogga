@@ -24,7 +24,7 @@
                 <button class="button button-light blg-avatar-button" ng-click="loadJournal(post.poster)" stop-event="click">
                     <div class="blg-avatar-cropper">
                         <div class="blg-avatar-rounded"
-                            style = 'background-image: url({{post.$$userpic}})'>
+                            style = 'background-image: url({{post.$$userpic ? post.$$userpic : defaultAvatar}})'>
                         </div>
                     </div>
                 </button>

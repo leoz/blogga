@@ -7,6 +7,8 @@ angular.module('PostCtrl', [])
     $scope.journal = $stateParams.journalName;
     $scope.postId = $stateParams.postId;
 
+    $scope.defaultAvatar = AvatarService.defaultAvatar;
+
     $scope.error = false;
     $scope.loading = {
         post: false,

@@ -10,6 +10,8 @@ angular.module('JournalCtrl', [])
     $scope.error = false;
     $scope.errorData = null;
 
+    $scope.defaultAvatar = AvatarService.defaultAvatar;
+
     var read_lock = false;
     var last_date = null;
     var load_more = true;
