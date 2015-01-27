@@ -28,16 +28,32 @@ angular.module('BookmarksSrvc', [])
         preProcessBookmarks();
     };
 
+    // English language bookmarks
+
+    var default_bookmarks_eng = [
+        {'username':'greatpoets'},
+        {'username':'ontd-science'},
+        {'username':'doctorwho'},
+        {'username':'toronto'},
+        {'username':'ohnotheydidnt'},
+        {'username':'linguaphiles'},
+        {'username':'lolcats'}
+    ];
+
+    // Russian language bookmarks
+
+    var default_bookmarks_cyr = [
+        {'username':'torontoru'},
+        {'username':'toronto-ru'},
+        {'username':'tema'},
+        {'username':'russos'},
+        {'username':'tanyant'},
+        {'username':'leoz-net'}
+    ];
+
     function setDefaultBookmarks(){
         data = {'bookmarks':null};
-        data.bookmarks = [
-            {'username':'torontoru'},
-            {'username':'toronto-ru'},
-            {'username':'tema'},
-            {'username':'russos'},
-            {'username':'tanyant'},
-            {'username':'leoz-net'}
-        ];
+        data.bookmarks = default_bookmarks_eng;
         StorageService.setCache(key,data);
     };
 
