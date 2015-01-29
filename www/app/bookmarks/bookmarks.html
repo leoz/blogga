@@ -1,26 +1,21 @@
 <ion-view ng-controller="BookmarksController" view-title="Bookmarks">
     <ion-content style = "top: {{getTop()}}">
-        <ion-item class="item-divider">
-            <b>Bookmarks</b>
-        </ion-item>
-        <ion-item class="item-input-inset">
+
+        <ion-item class="blg-item-divider item-button-left">
             <button
-                class="button button-small button-icon icon ion-ios7-minus-outline"
+                class="blg-divider-button button button-small button-icon"
                 ng-disabled="!service.has_journals()"
                 ng-click="toggleShowDelete()">
+                <i class="icon ion-minus-circled"></i>
             </button>
-            <label class="item-input-wrapper">
-                <input type="text" placeholder="Journal" ng-model="data.name">
-            </label>
-            <button
-                class="button button-small button-icon icon ion-ios7-plus-outline"
-                ng-disabled="!data.name || service.has_journal(data.name)"
-                ng-click="addJournal(data.name)">
-            </button>
+
+            <b>Bookmarks</b>
+
         </ion-item>
+
         <ion-list show-delete="showDelete()">
             <ion-item class="blg-menu-item item-icon-left"
-                collection-repeat="bookmark in service.get_bookmarks() | filter: data.name"
+                collection-repeat="bookmark in service.get_bookmarks()"
                 collection-item-width="'100%'"
                 collection-item-height="52"
                 type="item-text-wrap"

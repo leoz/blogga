@@ -67,8 +67,16 @@ angular.module('AppCtrl', [])
         return AuthService.get_logged_in();
     };
 
-    $scope.getTop = function() {
+    $scope.getOffset = function() {
         var offset = ionic.Platform.isIOS() ? 20 : 0;
-        return (($scope.isLoggedIn() ? 325 : 134) + offset) + 'px';
-    }
+        return (($scope.isLoggedIn() ? 365 : 158) + offset);
+    };
+
+    $scope.getTop = function() {
+        return $scope.getOffset() + 'px';
+    };
+
+    $scope.getHeight = function() {
+        return ($scope.getOffset() - 44) + 'px';
+    };
 });

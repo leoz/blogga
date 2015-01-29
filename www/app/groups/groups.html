@@ -1,8 +1,18 @@
 <ion-view ng-controller="GroupsController" view-title="Groups">
     <ion-content style = "top: {{getTop()}}">
-        <ion-item class="item-divider">
+
+        <ion-item class="blg-item-divider item-button-left">
+            <button
+                class="blg-divider-button button button-small button-icon"
+                ng-disabled="!service.has_groups()"
+                ng-click="toggleShowDelete()">
+                <i class="icon ion-minus-circled"></i>
+            </button>
+
             <b>Groups</b>
+
         </ion-item>
+
         <ion-list>
             <ion-item class="blg-menu-item item-icon-left"
                 collection-repeat="group in service.get_groups()"

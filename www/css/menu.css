@@ -5,16 +5,39 @@
 .blg-menu-bar {
     top: 44px;
     padding: 0;
-    height: 90px;
-    padding-bottom: 10px;
+    border-bottom-color: #ddd !important;
+    border-bottom-width: 1px !important;
+}
+
+.blg-address {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .blg-menu-tabs {
+    height: 52px;
     border-left: 0;
     border-right: 0;
 }
 
+.blg-menu-element {
+    border-bottom: 0;
+}
+
 /**/
+
+.blg-item-divider {
+    padding-left: 54px;
+    background-color: #f5f5f5;
+}
+
+.blg-divider-button {
+    padding-left: 4px;
+    padding-right: 0;
+}
+
+/**/
+
 
 .blg-menu-item {
     width: 100%;

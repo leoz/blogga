@@ -1,8 +1,18 @@
 <ion-view ng-controller="FriendsController" view-title="Friends">
     <ion-content style = "top: {{getTop()}}">
-        <ion-item class="item-divider">
+
+        <ion-item class="blg-item-divider item-button-left">
+            <button
+                class="blg-divider-button button button-small button-icon"
+                ng-disabled="!service.has_friends()"
+                ng-click="toggleShowDelete()">
+                <i class="icon ion-minus-circled"></i>
+            </button>
+
             <b>Friends</b>
+
         </ion-item>
+
         <ion-list>
             <ion-item class="blg-menu-item item-icon-left"
                 collection-repeat="friend in service.get_friends()"

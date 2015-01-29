@@ -1,6 +1,7 @@
 
 angular.module('BookmarksCtrl', [])
-.controller('BookmarksController', function($scope, $location, BookmarksService) {
+.controller('BookmarksController', function($scope, $location, $state,
+    BookmarksService) {
 
     $scope.service = BookmarksService;
 
@@ -19,5 +20,9 @@ angular.module('BookmarksCtrl', [])
     $scope.addJournal = function(journalName){
         $scope.canDelete = false;
         $scope.service.add_journal(journalName);
+    };
+
+    $scope.loadJournal = function(journalName) {
+        $state.go('app.journal',{journalName:journalName});
     };
 });

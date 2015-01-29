@@ -13,23 +13,35 @@
         <ion-header-bar class="bar-light">
             <h1 class="title">Journals</h1>
         </ion-header-bar>
-        <ion-header-bar class="blg-menu-bar bar-subheader">
+        <ion-header-bar class="blg-menu-bar bar-subheader" style = "height: {{getHeight()}}">
 
-            <ion-item class="item-divider">
-                <b>Account</b>
+            <ion-item ng-controller="BookmarksController" class="blg-address item-input-inset">
+                <button
+                    class="button button-small button-icon icon ion-plus-circled"
+                    ng-disabled="!data.name || service.has_journal(data.name)"
+                    ng-click="addJournal(data.name)">
+                </button>
+                <label class="item-input-wrapper">
+                    <input type="text" placeholder="Journal" ng-model="data.name">
+                </label>
+                <button
+                    class="button button-small button-icon icon ion-arrow-right-c"
+                    ng-disabled="!data.name"
+                    ng-click="loadJournal(data.name)">
+                </button>
             </ion-item>
 
-            <ion-item ng-if="!isLoggedIn()" class="item-icon-left" ng-click="login()">
+            <ion-item ng-if="!isLoggedIn()" class="blg-menu-element item-icon-left" ng-click="login()">
                 <i class="icon ion-log-in"></i>
                 Login
             </ion-item>
 
-            <ion-item ng-if="isLoggedIn()" class="item-icon-left" ng-click="logout()">
+            <ion-item ng-if="isLoggedIn()" class="blg-menu-element item-icon-left" ng-click="logout()">
                 <i class="icon ion-log-out"></i>
                 Logout
             </ion-item>
 
-            <ion-item ng-if="isLoggedIn()" class="item-icon-left" href="#/app/journal/{{loginData.username}}">
+            <ion-item ng-if="isLoggedIn()" class="blg-menu-element item-icon-left" href="#/app/journal/{{loginData.username}}">
                 <div class="icon blg-icon-cropper">
                     <div class="blg-icon-rounded"
                         style = 'background-image: url({{loginData.$$userpic}})'>
@@ -38,16 +50,17 @@
                 {{loginData.username}}
             </ion-item>
 
-            <ion-item ng-controller="EditPostController" ng-if="isLoggedIn()" class="item-icon-left" ng-click="openPostEdit()">
+            <ion-item ng-if="isLoggedIn()" class="blg-menu-element item-icon-left" ng-controller="EditPostController" ng-click="openPostEdit()">
                 <i class="icon ion-ios7-compose-outline"></i>
                 Post to journal
             </ion-item>
 
-            <ion-item ng-if="isLoggedIn()" class="item-divider">
-                <b>Journals</b>
+            <ion-item ng-if="isLoggedIn()" class="blg-menu-element item-icon-left" ng-click="bloh()">
+                <i class="icon ion-ios7-email-outline"></i>
+                Messages
             </ion-item>
 
-            <div ng-if="isLoggedIn()" class="item tabs blg-menu-tabs tabs-secondary tabs-icon-top">
+            <div ng-if="isLoggedIn()" class="blg-menu-element item tabs blg-menu-tabs tabs-secondary tabs-icon-top">
                 <a class="tab-item"
                     ng-class="{'active': getList() === 'bookmarks'}"
                     ng-click="setList('bookmarks')">
