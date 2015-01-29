@@ -21,7 +21,7 @@
             </button>
             <button class="button button-icon icon ion-ios7-trash-outline"
                 ng-class="{disabled: !canDeleteComment(child)}"
-                ng-click="deleteComment(journal,post.ditemid,child)">
+                ng-click="deleteComment(journal,post.ditemid,child.dtalkid)">
             </button>
             <button class="button button-icon icon {{child.$$show ? 'ion-minus' : 'ion-plus'}}"
                 ng-click="toggleComment(child)"

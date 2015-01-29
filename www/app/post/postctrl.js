@@ -33,8 +33,20 @@ angular.module('PostCtrl', [])
         return (decoratedName == AuthService.get_username());
     }
 
-    $scope.deleteComment = function() {
+    $scope.deleteComment = function(journal,ditemid,dtalkid) {
         console.log('PostController - deleteComment');
+
+        ngLJService.delete_comments(
+            AuthService.get_username(),
+            AuthService.get_authdata(),
+            journal,
+            ditemid,
+            dtalkid
+        ).then(function(response) {
+            $scope.error = false;
+        }, function(){$scope.error = true;});
+
+        $scope.clearComments();
     };
 
     $scope.canDeleteEntry = function() {
@@ -168,10 +180,14 @@ angular.module('PostCtrl', [])
     });
 
     $rootScope.$on('blgNewComment', function(event, args) {
+        $scope.clearComments();
+    });
+
+    $scope.clearComments = function() {
         $scope.error = false;
         $scope.show.comments = false;
         $scope.child = {};
-    });
+    };
 
     $scope.toggleComment = function(child) {
         child.$$show = !child.$$show;
