@@ -77,6 +77,7 @@ angular.module('AppCtrl', [])
     };
 
     $scope.getHeight = function() {
-        return ($scope.getOffset() - 44) + 'px';
+        var offset = ionic.Platform.isIOS() ? 20 : 0;
+        return ($scope.getOffset() - 44 - offset) + 'px';
     };
 });

@@ -115,8 +115,13 @@ angular.module('PostCtrl', [])
         AvatarService.getAvatar(post, post.poster);
         TextService.convert(post, 'event', true);
 
-        if(post.props && post.props.taglist) {
-            TextService.convert(post.props, 'taglist');
+        if(post.props) {
+            if(post.props.taglist) {
+                TextService.convert(post.props, 'taglist');
+            }
+            if(post.props.current_location) {
+                TextService.convert(post.props, 'current_location');
+            }
         }
     };
 
