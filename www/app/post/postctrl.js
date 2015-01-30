@@ -219,6 +219,7 @@ angular.module('PostCtrl', [])
     };
 
     $scope.processLink = function(e) {
+        console.log('PostCtrl - processLink: ' + e.toElement.tagName);
         if(e.toElement.tagName == "A"){
             console.log('processLink: ' + e.toElement.href);
             console.log('hostname: ' + e.toElement.hostname);
@@ -246,6 +247,13 @@ angular.module('PostCtrl', [])
             else {
                 $scope.loadURL(e.toElement.href);
             }
+        }
+        else if (e.toElement.tagName == "IMG") {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            //console.log(e);
+            $scope.loadURL(e.toElement.src);
         }
     }
 });
