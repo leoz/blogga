@@ -6,7 +6,7 @@
     </ion-nav-buttons>
     <ion-content ng-controller="EditCommentController">
         <div class="blg-card card">
-            <div class="blg-item item-button-left item item-divider">
+            <div class="blg-item-comment item item-divider item-button-left item-button-right">
 
                 <button class="button button-light blg-avatar-button" ng-click="loadJournal(post.poster)">
                     <div class="blg-avatar-cropper">
@@ -16,9 +16,28 @@
                     </div>
                 </button>
 
-                <h2>{{post.$$subject}}</h2>
                 <p class="blg-right">{{post.eventtime | dateFormat}}</p>
+                <h2>{{post.$$subject}}</h2>
                 <p>{{post.poster}}</p>
+
+                <div class="buttons blg-comment-buttons">
+                    <button
+                        class="button button-icon icon ion-ios7-compose-outline"
+                        ng-class="{disabled: !canPostComment()}"
+                        ng-click="openCommentEdit(journal,post.ditemid,null)">
+                    </button>
+                    <button
+                        class="button button-icon icon ion-ios7-trash-outline"
+                        ng-class="{disabled: !canDeleteEntry()}"
+                        ng-click="deleteEntry()">
+                    </button>
+                    <button
+                        class="button button-icon icon ion-ios7-chatboxes-outline"
+                        ng-class="{disabled: !(post.reply_count && !show.comments)}"
+                        ng-click="show.comments = true; getComments();">
+                    </button>
+                </div>
+
             </div>
             <div class="item item-text-wrap">
                 <pre class="blg-html"
@@ -42,27 +61,6 @@
                 <span>{{post.props.current_mood}}</span>
             </ion-item>
 
-        </div>
-
-        <div class="button-bar padding" style="padding-top: 0; padding-bottom: 0">
-            <a
-                class="blg-post-button button icon-left ion-ios7-chatboxes-outline"
-                ng-class="{disabled: !(post.reply_count && !show.comments)}"
-                ng-click="show.comments = true; getComments();">
-                Show comments
-            </a>
-            <a
-                class="blg-post-button button icon-left ion-ios7-trash-outline"
-                ng-class="{disabled: !canDeleteEntry()}"
-                ng-click="deleteEntry()">
-                Delete entry
-            </a>
-            <a
-                class="button icon-left ion-ios7-compose-outline"
-                ng-class="{disabled: !canPostComment()}"
-                ng-click="openCommentEdit(journal,post.ditemid,null)">
-                Post comment
-            </a>
         </div>
 
         <div ng-if="show.comments" class="list list-inset">

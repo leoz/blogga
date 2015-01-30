@@ -9,7 +9,7 @@ angular.module('AppFilters', [])
 		if(input == null) {
 			return '';
 		}
-		return $filter('date')(new Date(input.replace(/-/g, '/')), 'dd MMM yyyy - HH:mm');
+		return $filter('date')(new Date(input.replace(/-/g, '/')), 'dd MMM yyyy, hh:mm a');
 	};
 })
 
