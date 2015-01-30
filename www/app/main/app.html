@@ -10,9 +10,15 @@
     </ion-side-menu-content>
 
     <ion-side-menu side="left" expose-aside-when="(min-width:769px)">
-        <ion-header-bar class="bar-light">
-            <h1 class="title">Journals</h1>
+
+        <ion-header-bar class="bar-dark">
+            <div class="buttons">
+                <button class="button button-icon ion-ios7-information-outline" ng-click="bloh.blah()">
+                </button>
+            </div>
+            <h1 class="title">Blogga</h1>
         </ion-header-bar>
+
         <ion-header-bar class="blg-menu-bar bar-subheader" style = "height: {{getHeight()}}">
 
             <ion-item ng-controller="BookmarksController" class="blg-address item-input-inset">
