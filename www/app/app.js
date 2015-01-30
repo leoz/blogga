@@ -9,8 +9,10 @@ angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
     'AvatarSrvc', 'AuthSrvc', 'StorageSrvc',
     'BookmarksSrvc', 'FriendsSrvc', 'GroupsSrvc', 'TextSrvc'])
 
-.run(function($ionicPlatform, ngLJService) {
+.run(function($ionicPlatform, $rootScope, ngLJService) {
     $ionicPlatform.ready(function() {
+
+        $rootScope.appVersion = "0.0.0";
 
         // Check if Cordova is presented
         var useProxy = !ionic.Platform.isWebView();
@@ -24,6 +26,11 @@ angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
+        }
+        if (window.cordova) {
+            cordova.getAppVersion(function(version) {
+                $rootScope.appVersion = version;
+            });
         }
     });
 });

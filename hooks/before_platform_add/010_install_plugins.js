@@ -9,7 +9,8 @@ var pluginlist = [
     "org.apache.cordova.inappbrowser",
 //    "org.apache.cordova.statusbar",
     "org.apache.cordova.console",
-    "org.apache.cordova.device"
+    "org.apache.cordova.device",
+    "https://github.com/whiteoctober/cordova-plugin-app-version.git"
 //    "org.apache.cordova.file",
 //    "org.apache.cordova.file-transfer"
 ];
