@@ -1,5 +1,6 @@
 angular.module('EditPostCtrl', [])
-.controller('EditPostController', function($scope, $state, $ionicModal,
+.controller('EditPostController', [ '$scope', '$state', '$ionicModal',
+    'ngLJService', 'AuthService', 'AvatarService', function($scope, $state, $ionicModal,
     ngLJService, AuthService, AvatarService) {
 
     $scope.newEntry = {
@@ -66,4 +67,4 @@ angular.module('EditPostCtrl', [])
     $scope.$on('modal.removed', function(event, modal) {
 //        console.log('Modal ' + modal.id + ' is removed!');
     });
-});
+}]);

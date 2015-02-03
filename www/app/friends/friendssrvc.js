@@ -1,6 +1,8 @@
 
 angular.module('FriendsSrvc', [])
-.factory('FriendsService', ['ngLJService', 'AuthService', 'TextService', 'AvatarService', function(ngLJService, AuthService, TextService, AvatarService) {
+.factory('FriendsService', ['ngLJService', 'AuthService', 'TextService',
+    'AvatarService', function(ngLJService, AuthService, TextService,
+    AvatarService) {
 
     var data = null;
     var error = false;

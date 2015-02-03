@@ -1,5 +1,6 @@
 
 angular.module('GroupsCtrl', [])
-.controller('GroupsController', function($scope, GroupsService) {
+.controller('GroupsController', [ '$scope', 'GroupsService',
+    function($scope, GroupsService) {
     $scope.service = GroupsService;
-});
+}]);

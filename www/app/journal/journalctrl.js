@@ -1,6 +1,8 @@
 
 angular.module('JournalCtrl', [])
-.controller('JournalController', function($scope, $state, $stateParams,
+.controller('JournalController', [ '$scope', '$state', '$stateParams',
+    '$rootScope', '$timeout', 'ngLJService', 'AuthService', 'TextService',
+    'AvatarService', 'BookmarksService', function($scope, $state, $stateParams,
     $rootScope, $timeout, ngLJService, AuthService, TextService,
     AvatarService, BookmarksService) {
 
@@ -160,7 +162,7 @@ angular.module('JournalCtrl', [])
             BookmarksService.add_journal(journalName);
         }
     };
-})
+}])
 .directive('stopEvent', function () {
     return {
         restrict: 'A',

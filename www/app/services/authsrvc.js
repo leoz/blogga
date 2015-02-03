@@ -1,6 +1,6 @@
 
 angular.module('AuthSrvc', [])
-.factory('AuthService', function() {
+.factory('AuthService', [function() {
 
     var loggedin = false;
     var username = null;
@@ -53,4 +53,4 @@ angular.module('AuthSrvc', [])
             return (username != null);
         }
     }
-});
+}]);

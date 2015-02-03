@@ -9,7 +9,7 @@ angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
     'AvatarSrvc', 'AuthSrvc', 'StorageSrvc',
     'BookmarksSrvc', 'FriendsSrvc', 'GroupsSrvc', 'TextSrvc'])
 
-.run(function($ionicPlatform, $rootScope, ngLJService) {
+.run(['$ionicPlatform', '$rootScope', 'ngLJService', function($ionicPlatform, $rootScope, ngLJService) {
     $ionicPlatform.ready(function() {
 
         $rootScope.appVersion = "0.0.0";
@@ -33,4 +33,7 @@ angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
             });
         }
     });
-});
+}])
+.config(['$compileProvider', function ($compileProvider) {
+    $compileProvider.debugInfoEnabled(false);
+}]);

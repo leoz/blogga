@@ -4,29 +4,29 @@
 
 angular.module('AppFilters', [])
 
-.filter('dateFormat', function($filter) {
+.filter('dateFormat', [ '$filter', function($filter) {
 	return function(input) {
 		if(input == null) {
 			return '';
 		}
 		return $filter('date')(new Date(input.replace(/-/g, '/')), 'dd MMM yyyy, hh:mm a');
 	};
-})
+}])
 
-.filter('timeFormat', function($filter) {
+.filter('timeFormat', [ '$filter', function($filter) {
 	return function(input) {
 		if(input == null) {
 			return '';
 		}
 		return $filter('date')(new Date(input.replace(/-/g, '/')), 'hh:mm a');
 	};
-})
+}])
 
-.filter('unixFormat', function($filter) {
+.filter('unixFormat', [ '$filter', function($filter) {
 	return function(input) {
 		if(input == null) {
 			return '';
 		}
 		return $filter('date')(new Date(input*1000), 'dd MMM yyyy, hh:mm a');
 	};
-});
+}]);

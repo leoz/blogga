@@ -1,5 +1,7 @@
 angular.module('EditCommentCtrl', [])
-.controller('EditCommentController', function($scope, $state, $ionicModal,
+.controller('EditCommentController', [ '$scope', '$state', '$ionicModal',
+    'ngLJService', 'AuthService', 'AvatarService',
+    function($scope, $state, $ionicModal,
     ngLJService, AuthService, AvatarService) {
 
     $scope.postData = {
@@ -89,4 +91,4 @@ angular.module('EditCommentCtrl', [])
     $scope.$on('modal.removed', function(event, modal) {
 //        console.log('EditCommentCtrl - Modal ' + modal.id + ' is removed!');
     });
-});
+}]);

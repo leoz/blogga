@@ -1,6 +1,6 @@
 
 angular.module('StorageSrvc', [])
-.factory('StorageService', function() {
+.factory('StorageService', [function() {
     var cache = null;
     function readCache() {
         //console.log('StorageService - readCache');
@@ -25,4 +25,4 @@ angular.module('StorageSrvc', [])
             return typeof cache[key] === 'undefined' ? null : cache[key];
         }
     }
-});
+}]);

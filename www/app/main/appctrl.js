@@ -1,6 +1,6 @@
 
 angular.module('AppCtrl', [])
-.controller('AppController', function($scope, $ionicModal, TextService, AuthService, AvatarService, FriendsService, GroupsService) {
+.controller('AppController', ['$scope', '$ionicModal', 'TextService', 'AuthService', 'AvatarService', 'FriendsService', 'GroupsService', function($scope, $ionicModal, TextService, AuthService, AvatarService, FriendsService, GroupsService) {
 
     $scope.activeList = 'bookmarks';
     $scope.loginData = {};
@@ -80,4 +80,4 @@ angular.module('AppCtrl', [])
         var offset = ionic.Platform.isIOS() ? 20 : 0;
         return ($scope.getOffset() - 44 - offset) + 'px';
     };
-});
+}]);

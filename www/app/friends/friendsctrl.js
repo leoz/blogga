@@ -1,5 +1,6 @@
 
 angular.module('FriendsCtrl', [])
-.controller('FriendsController', function($scope, FriendsService) {
+.controller('FriendsController', [ '$scope', 'FriendsService',
+    function($scope, FriendsService) {
     $scope.service = FriendsService;
-});
+}]);

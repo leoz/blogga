@@ -1,6 +1,9 @@
 
 angular.module('PostCtrl', [])
-.controller('PostController', function($scope, $state, $rootScope,
+.controller('PostController', [ '$scope', '$state', '$rootScope',
+    '$stateParams', '$ionicScrollDelegate', 'ngLJService',
+    'BookmarksService', 'AuthService', 'TextService', 'AvatarService',
+    function($scope, $state, $rootScope,
     $stateParams, $ionicScrollDelegate, ngLJService,
     BookmarksService, AuthService, TextService, AvatarService) {
 
@@ -261,4 +264,4 @@ angular.module('PostCtrl', [])
             $scope.loadURL(e.toElement.src);
         }
     }
-});
+}]);
