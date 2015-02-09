@@ -14,6 +14,7 @@ angular.module('PostCtrl', [])
 
     $scope.error = false;
     $scope.loading = {
+        loaded: false,
         post: false,
         comments: false
     };
@@ -96,6 +97,7 @@ angular.module('PostCtrl', [])
 
     $scope.getPost = function() {
         console.log('PostController - getPost');
+        $scope.loading.loaded = false;
         $scope.loading.post = true;
         ngLJService.get_event(
             AuthService.get_username(),
@@ -106,6 +108,7 @@ angular.module('PostCtrl', [])
             $scope.error = false;
             $scope.preProcessPost(response[0].events[0]);
             $scope.post = response[0].events[0];
+            $scope.loading.loaded = true;
             $scope.loading.post = false;
         }, function(){$scope.error = true;});
     };

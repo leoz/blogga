@@ -5,7 +5,7 @@
         </a>
     </ion-nav-buttons>
     <ion-content ng-controller="EditCommentController">
-        <div class="blg-card card">
+        <div ng-if="loading.loaded" class="blg-card card">
             <div class="blg-item-comment item item-divider item-button-left item-button-right">
 
                 <button class="button button-light blg-avatar-button" ng-click="loadJournal(post.poster)">
@@ -58,7 +58,8 @@
 
         </div>
 
-        <button class="button button-full button-clear button-positive"
+        <button ng-if="loading.loaded"
+            class="button button-full button-clear button-positive"
             ng-class="{disabled: !(post.reply_count && !show.comments)}"
             ng-click="show.comments = true; getComments();">
             <i class="icon ion-ios7-chatboxes-outline" style="margin-right: 8px"></i>
