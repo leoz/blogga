@@ -1,0 +1,41 @@
+/*
+* Blogga Journal Style
+*/
+
+.icon-stack {
+    margin-top: -2px !important;
+    display: block !important;
+    width: 16px !important;
+    height: 36px !important;
+    text-align: center !important;
+}
+.icon-stack i {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+.first_ico {
+    font-size: 36px !important;
+}
+
+.first_ico_enabled {
+    color: #b3ff00;
+}
+
+.second_ico {
+    padding-top: 3px;
+    font-size: 24px !important;
+}
+
+.second_ico_enabled {
+    color: #d9534f;
+}
+
+/**/
+
+.blg-journal-error-text {
+    color: red !important;
+}
+
+/**/

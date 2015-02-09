@@ -5,10 +5,20 @@
         </button>
     </ion-nav-buttons>
     <ion-nav-buttons side="secondary">
-        <button class="button button-icon icon"
-            ng-class="{'ion-ios7-checkmark-outline yellow': isBookmarked(journal),
-                'ion-ios7-circle-outline grey': !isBookmarked(journal)}"
+        <button class="button button-icon"
             ng-click="toggleBookmarked(journal)">
+            <span class="icon-stack">
+                <i class="first_ico"
+                    ng-class="{'first_ico_enabled': isBookmarked(journal),
+                        'ion-ios7-circle-filled': isBookmarked(journal),
+                        'ion-ios7-circle-outline': !isBookmarked(journal)}">
+                </i>
+                <i class="ion-heart second_ico"
+                    ng-class="{'second_ico_enabled': isBookmarked(journal),
+                        'ion-ios7-heart': isBookmarked(journal),
+                        'ion-ios7-heart-outline': !isBookmarked(journal)}">
+                </i>
+            </span>
         </button>
     </ion-nav-buttons>
     <ion-content>
