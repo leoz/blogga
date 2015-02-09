@@ -1,6 +1,6 @@
 {
   "name": "blogga",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Blogga LiveJournal client",
   "dependencies": {
     "express": "^4.11.1",
