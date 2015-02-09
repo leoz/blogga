@@ -2,6 +2,11 @@
 * Blogga Post Style
 */
 
+.blg-post-buttons {
+    left: -webkit-calc(100% - 90px) !important;
+    top: -webkit-calc(100% - 54px) !important;
+}
+
 .blg-comment-buttons {
     left: -webkit-calc(100% - 128px) !important;
     top: -webkit-calc(100% - 54px) !important;
@@ -56,7 +61,7 @@
 }
 
 .spinner-comments {
-    bottom: 0;
+    bottom: -20px;
 }
 
 .spinner {
