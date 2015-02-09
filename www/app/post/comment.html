@@ -1,7 +1,8 @@
 <div ng-init="preProcessComments(child)" class="blg-comment-padding padding">
 <div ng-repeat="child in child.children">
 <div ng-if="child.$$load">
-    <div class="item item-stable blg-item-comment item-button-left item-button-right">
+    <div class="item item-stable blg-item-comment item-button-left item-button-right"
+        ng-click="toggleComment(child)">
         <button class="button button-light blg-avatar-button" ng-click="loadJournal(child.postername)">
             <div class="blg-avatar-cropper">
                 <div class="blg-avatar-rounded"
@@ -11,10 +12,10 @@
         </button>
 
         <p class="blg-right">{{child.datepostunix | unixFormat}}</p>
-        <h2>{{child.$$subject}}</h2>
         <p>{{child.postername}}</p>
+        <h2><i ng-show="child.children" class="icon {{child.$$show ? 'ion-arrow-down-b' : 'ion-arrow-right-b'}}"></i>  {{child.$$subject}}</h2>
 
-        <div class="buttons blg-comment-buttons">
+        <div class="buttons blg-post-buttons">
             <button class="button button-icon icon ion-ios7-compose-outline"
                 ng-class="{disabled: !canPostComment()}"
                 ng-click="openCommentEdit(journal,post.ditemid,child)">
@@ -22,10 +23,6 @@
             <button class="button button-icon icon ion-ios7-trash-outline"
                 ng-class="{disabled: !canDeleteComment(child)}"
                 ng-click="deleteComment(journal,post.ditemid,child.dtalkid)">
-            </button>
-            <button class="button button-icon icon {{child.$$show ? 'ion-minus' : 'ion-plus'}}"
-                ng-click="toggleComment(child)"
-                ng-show="child.children">
             </button>
         </div>
     </div>
