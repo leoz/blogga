@@ -34,6 +34,8 @@ angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
         }
     });
 }])
-.config(['$compileProvider', function ($compileProvider) {
+.config(['$compileProvider', '$ionicConfigProvider',
+    function ($compileProvider, $ionicConfigProvider) {
     $compileProvider.debugInfoEnabled(false);
+    $ionicConfigProvider.backButton.previousTitleText(false).text('');
 }]);

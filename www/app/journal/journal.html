@@ -1,4 +1,4 @@
-<ion-view view-title="posts @ {{journal}}" hide-back-button="true">
+<ion-view view-title="posts @ {{journal}}">
     <ion-nav-buttons side="primary">
         <button class="button button-icon button-clear ion-navicon"
             menu-toggle="left" ng-hide="$exposeAside.active">
@@ -7,8 +7,8 @@
     <ion-nav-buttons side="secondary">
         <button class="button button-icon" ng-click="toggleBookmarked(journal)">
             <i class="icon"
-                ng-class="{'ion-checkmark-circled energized': isBookmarked(journal),
-                'ion-plus-circled stable': !isBookmarked(journal)}"></i>
+                ng-class="{'ion-ios7-checkmark energized': isBookmarked(journal),
+                'ion-ios7-plus stable': !isBookmarked(journal)}"></i>
         </button>
     </ion-nav-buttons>
     <ion-content>
