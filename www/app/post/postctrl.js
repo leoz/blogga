@@ -128,6 +128,9 @@ angular.module('PostCtrl', [])
             if(post.props.current_location) {
                 TextService.convert(post.props, 'current_location');
             }
+            if(post.props.current_mood) {
+                TextService.convert(post.props, 'current_mood');
+            }
         }
     };
 
