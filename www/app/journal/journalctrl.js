@@ -131,7 +131,7 @@ angular.module('JournalCtrl', [])
             if(!posts[i]['poster']) {
                 posts[i]['poster'] = $scope.journal;
             }
-            TextService.convert(posts[i], 'subject');
+            TextService.convert(posts[i], 'event');
             AvatarService.getAvatar(posts[i], posts[i].poster);
         }
     };
