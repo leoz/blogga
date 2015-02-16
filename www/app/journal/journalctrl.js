@@ -1,10 +1,12 @@
 
-angular.module('JournalCtrl', [])
-.controller('JournalController', [ '$scope', '$state', '$stateParams',
+angular.module('JournalCtrl', ['ngLogExt'])
+.controller('JournalController', [ '$log', '$scope', '$state', '$stateParams',
     '$rootScope', '$timeout', 'ngLJService', 'AuthService', 'TextService',
-    'AvatarService', 'BookmarksService', function($scope, $state, $stateParams,
-    $rootScope, $timeout, ngLJService, AuthService, TextService,
+    'AvatarService', 'BookmarksService', function($log, $scope, $state,
+    $stateParams, $rootScope, $timeout, ngLJService, AuthService, TextService,
     AvatarService, BookmarksService) {
+
+    var log = $log.context('Journal');
 
     $scope.journal = $stateParams.journalName;
 
@@ -30,7 +32,7 @@ angular.module('JournalCtrl', [])
 
         read_lock = true;
 
-        console.log('JournalCtrl - readPosts');
+        log.debug('readPosts');
         if($scope.posts && $scope.posts.length) {
             var new_date = $scope.posts[$scope.posts.length - 1].logtime;
             if (last_date == new_date) {
@@ -83,7 +85,7 @@ angular.module('JournalCtrl', [])
     };
 
     $scope.update = function() {
-        console.log('JournalCtrl - update');
+        log.debug('update');
 
         $scope.posts = null;
         last_date = null;
@@ -95,8 +97,8 @@ angular.module('JournalCtrl', [])
     };
 
     $scope.$on('$ionicView.loaded', function(){
+        log.debug('$ionicView.loaded');
         BookmarksService.read_data();
-        $scope.update();
     });
 
     $scope.$on('$ionicView.beforeEnter', function(){
@@ -115,7 +117,7 @@ angular.module('JournalCtrl', [])
     });
 
     $scope.loadMore = function() {
-        console.log('JournalCtrl - loadMore');
+        log.debug('loadMore');
 
         $scope.readPosts(function() {
             $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -131,13 +133,12 @@ angular.module('JournalCtrl', [])
             if(!posts[i]['poster']) {
                 posts[i]['poster'] = $scope.journal;
             }
-            TextService.convert(posts[i], 'event');
+            TextService.convert(posts[i], 'subject');
             AvatarService.getAvatar(posts[i], posts[i].poster);
         }
     };
 
     $scope.loadPost = function(journalName,post) {
-        //console.log(post);
         var postId = post.itemid;
         if (post.journalname) {
             journalName = post.journalname;

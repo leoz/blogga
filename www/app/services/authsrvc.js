@@ -9,6 +9,7 @@ angular.module('AuthSrvc', ['ngLogExt'])
     var authdata = null;
 
     function getLoggedIn() {
+        log.debug('getLoggedIn');
         return loggedin;
     };
 

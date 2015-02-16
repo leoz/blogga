@@ -34,17 +34,17 @@
                 </button>
             </ion-item>
 
-            <ion-item ng-if="!isLoggedIn()" class="blg-menu-element item-icon-left" ng-click="login()">
+            <ion-item ng-if="!user.loggedIn" class="blg-menu-element item-icon-left" ng-click="login()">
                 <i class="icon ion-log-in"></i>
                 Login
             </ion-item>
 
-            <ion-item ng-if="isLoggedIn()" class="blg-menu-element item-icon-left" ng-click="logout()">
+            <ion-item ng-if="user.loggedIn" class="blg-menu-element item-icon-left" ng-click="logout()">
                 <i class="icon ion-log-out"></i>
                 Logout
             </ion-item>
 
-            <ion-item ng-if="isLoggedIn()" class="blg-menu-element item-icon-left" href="#/app/journal/{{loginData.username}}">
+            <ion-item ng-if="user.loggedIn" class="blg-menu-element item-icon-left" href="#/app/journal/{{loginData.username}}">
                 <div class="icon blg-icon-cropper">
                     <div class="blg-icon-rounded"
                         style = 'background-image: url({{loginData.$$userpic}})'>
@@ -53,17 +53,17 @@
                 {{loginData.username}}
             </ion-item>
 
-            <ion-item ng-if="isLoggedIn()" class="blg-menu-element item-icon-left" ng-controller="EditPostController" ng-click="openPostEdit()">
+            <ion-item ng-if="user.loggedIn" class="blg-menu-element item-icon-left" ng-controller="EditPostController" ng-click="openPostEdit()">
                 <i class="icon ion-ios7-compose-outline"></i>
                 Post to journal
             </ion-item>
 
-            <ion-item ng-if="isLoggedIn()" class="blg-menu-element item-icon-left" ng-click="bloh()">
+            <ion-item ng-if="user.loggedIn" class="blg-menu-element item-icon-left" ng-click="bloh()">
                 <i class="icon ion-ios7-email-outline"></i>
                 Messages
             </ion-item>
 
-            <div ng-if="isLoggedIn()" class="blg-menu-element item tabs blg-menu-tabs tabs-secondary tabs-icon-top">
+            <div ng-if="user.loggedIn" class="blg-menu-element item tabs blg-menu-tabs tabs-secondary tabs-icon-top">
                 <a class="tab-item"
                     ng-class="{'active': getList() === 'bookmarks'}"
                     ng-click="setList('bookmarks')">

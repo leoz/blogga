@@ -6,7 +6,8 @@ angular.module('AppCtrl', [])
     $scope.loginData = {};
 
     $scope.user = {
-        username: '',
+        loggedIn : false,
+        username : '',
         password : ''
     };
 
@@ -35,6 +36,7 @@ angular.module('AppCtrl', [])
 
     $scope.cbLoginOk = function() {
         console.log('Login OK');
+        $scope.user.loggedIn = true;
         $scope.loginData.$$error = null;
         AvatarService.getAvatar($scope.loginData, $scope.loginData.username);
         FriendsService.read_friends();
@@ -52,6 +54,7 @@ angular.module('AppCtrl', [])
 
     $scope.logout = function() {
         AuthService.clear_credentials();
+        $scope.user.loggedIn = false;
         $scope.activeList = 'bookmarks';
     };
 
@@ -63,13 +66,9 @@ angular.module('AppCtrl', [])
         return $scope.activeList = list;
     };
 
-    $scope.isLoggedIn = function() {
-        return AuthService.get_logged_in();
-    };
-
     $scope.getOffset = function() {
         var offset = ionic.Platform.isIOS() ? 20 : 0;
-        return (($scope.isLoggedIn() ? 365 : 158) + offset);
+        return (($scope.user.loggedIn ? 365 : 158) + offset);
     };
 
     $scope.getTop = function() {

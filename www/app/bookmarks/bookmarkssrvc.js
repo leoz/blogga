@@ -1,7 +1,9 @@
 
-angular.module('BookmarksSrvc', [])
-.factory('BookmarksService', ['AvatarService', 'StorageService',
-    function(AvatarService, StorageService) {
+angular.module('BookmarksSrvc', ['ngLogExt'])
+.factory('BookmarksService', ['$log', 'AvatarService', 'StorageService',
+    function($log, AvatarService, StorageService) {
+
+    var log = $log.context('BmkServ');
 
     var data = null;
     var key = 'bookmarks';
@@ -9,7 +11,7 @@ angular.module('BookmarksSrvc', [])
     var akey = 'active';
 
     function readData() {
-        console.log('BookmarksService - readData');
+        log.debug('readData');
         if (!adata) {
             readActiveJournal();
         }
@@ -19,9 +21,8 @@ angular.module('BookmarksSrvc', [])
     };
 
     function readBookmarks() {
-        console.log('BookmarksService - readBookmarks');
         data = StorageService.getCache(key);
-        console.log(data);
+        log.debug('readBookmarks', data);
         if (!data || !data.bookmarks || !data.bookmarks.length) {
             setDefaultBookmarks();
         }
@@ -109,9 +110,8 @@ angular.module('BookmarksSrvc', [])
     /**/
 
     function readActiveJournal() {
-        console.log('BookmarksService - readActiveJournal');
         adata = StorageService.getCache(akey);
-        console.log(adata);
+        log.debug('readActiveJournal', adata);
         if (!adata || !adata.active) {
             setDefaultActiveJournal();
         }
