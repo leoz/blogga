@@ -1,6 +1,8 @@
 
-angular.module('AuthSrvc', [])
-.factory('AuthService', [function() {
+angular.module('AuthSrvc', ['ngLogExt'])
+.factory('AuthService', ['$log', function($log) {
+
+    var log = $log.context('Auth');
 
     var loggedin = false;
     var username = null;
@@ -23,21 +25,21 @@ angular.module('AuthSrvc', [])
     };
 
     function setCredentials(u,p) {
-        console.log('AuthService - setCredentials');
+        log.debug('setCredentials');
         loggedin = false;
         username = u;
         authdata = p;
     };
 
     function clearCredentials() {
-        console.log('AuthService - clearCredentials');
+        log.debug('clearCredentials');
         loggedin = false;
         username = null;
         authdata = null;
     };
 
     function readCredentials() {
-        console.log('AuthService - readCredentials');
+        log.debug('readCredentials');
         setCredentials(null,null);
     };
     readCredentials();

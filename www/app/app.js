@@ -2,7 +2,7 @@
 // Blogga LiveJournal client
 //
 
-angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
+angular.module('blogga', ['ionic', 'ngMessages', 'ngLogExt', 'ngLiveJournal',
     'MainRoute', 'AppFilters',
     'AppCtrl', 'PostCtrl', 'JournalCtrl', 'GroupsCtrl', 'FriendsCtrl',
     'BookmarksCtrl', 'EditPostCtrl', 'EditCommentCtrl',
@@ -34,8 +34,9 @@ angular.module('blogga', ['ionic', 'ngMessages', 'ngLiveJournal',
         }
     });
 }])
-.config(['$compileProvider', '$ionicConfigProvider',
-    function ($compileProvider, $ionicConfigProvider) {
+.config(['$compileProvider', '$ionicConfigProvider', '$logProvider',
+    function ($compileProvider, $ionicConfigProvider, $logProvider) {
     $compileProvider.debugInfoEnabled(false);
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
+    $logProvider.debugEnabled(true);
 }]);
