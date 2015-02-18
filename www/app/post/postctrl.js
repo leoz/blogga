@@ -24,18 +24,23 @@ angular.module('PostCtrl', [])
     $scope.post = null;
     $scope.child = {};
 
-    $scope.canDeleteComment = function(child) {
-        console.log('PostController - canDeleteComment');
+    $scope.editData = {
+        loggedIn: false,
+        userName: null,
+        canDelete: false
+    };
 
-        if (!AuthService.get_logged_in() || !child || !child.postername) {
-            return false;
+    $scope.setEditData = function() {
+        $scope.editData.loggedIn = AuthService.get_logged_in();
+        $scope.editData.userName = AuthService.get_username();
+        if ($scope.editData.userName) {
+            $scope.editData.userName = $scope.editData.userName.replace(/-/g, '_');
         }
-
-        var decoratedName = child.postername.replace(/_/g, '-');
-        console.log('### ' + decoratedName + ' ' + AuthService.get_username());
-
-        return (decoratedName == AuthService.get_username());
-    }
+        if ($scope.post && $scope.post.poster) {
+            $scope.editData.canDelete = ($scope.post.poster == AuthService.get_username());
+        }
+    };
+    $scope.setEditData();
 
     $scope.deleteComment = function(journal,ditemid,dtalkid) {
         console.log('PostController - deleteComment');
@@ -51,15 +56,6 @@ angular.module('PostCtrl', [])
         }, function(){$scope.error = true;});
 
         $scope.clearComments();
-    };
-
-    $scope.canDeleteEntry = function() {
-        console.log('PostController - canDeleteEntry');
-        return (
-            AuthService.get_logged_in() &&
-            $scope.post &&
-            $scope.post.poster &&
-            $scope.post.poster == AuthService.get_username());
     };
 
     $scope.deleteEntry = function() {
@@ -110,6 +106,7 @@ angular.module('PostCtrl', [])
             $scope.post = response[0].events[0];
             $scope.loading.loaded = true;
             $scope.loading.post = false;
+            $scope.setEditData();
         }, function(){$scope.error = true;});
     };
 
@@ -193,8 +190,16 @@ angular.module('PostCtrl', [])
         $scope.update();
     });
 
-    $rootScope.$on('blgNewComment', function(event, args) {
+    $rootScope.$on('blgNewComment', function() {
         $scope.clearComments();
+    });
+
+    $rootScope.$on('blgLoginOk', function() {
+        $scope.setEditData();
+    });
+
+    $rootScope.$on('blgLogoutOk', function() {
+        $scope.setEditData();
     });
 
     $scope.clearComments = function() {

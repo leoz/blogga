@@ -17,11 +17,11 @@
 
         <div class="buttons blg-post-buttons">
             <button class="button button-icon icon ion-ios7-compose-outline"
-                ng-class="{disabled: !canPostComment()}"
+                ng-class="{disabled: !postData.canComment}"
                 ng-click="openCommentEdit(journal,post.ditemid,child)">
             </button>
             <button class="button button-icon icon ion-ios7-trash-outline"
-                ng-class="{disabled: !canDeleteComment(child)}"
+                ng-class="{disabled: !(child.postername == editData.userName)}"
                 ng-click="deleteComment(journal,post.ditemid,child.dtalkid)">
             </button>
         </div>

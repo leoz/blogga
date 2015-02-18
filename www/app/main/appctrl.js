@@ -1,6 +1,11 @@
 
-angular.module('AppCtrl', [])
-.controller('AppController', ['$scope', '$ionicModal', 'TextService', 'AuthService', 'AvatarService', 'FriendsService', 'GroupsService', function($scope, $ionicModal, TextService, AuthService, AvatarService, FriendsService, GroupsService) {
+angular.module('AppCtrl', ['ngLogExt'])
+.controller('AppController', ['$log', '$scope', '$ionicModal', 'TextService',
+    'AuthService', 'AvatarService', 'FriendsService', 'GroupsService',
+    function($log, $scope, $ionicModal, TextService, AuthService, AvatarService,
+    FriendsService, GroupsService) {
+
+    var log = $log.context('App');
 
     $scope.activeList = 'bookmarks';
     $scope.loginData = {};
@@ -28,26 +33,27 @@ angular.module('AppCtrl', [])
     };
 
     $scope.doLogin = function() {
-        console.log('Doing login ', $scope.loginData);
+        log.debug('Doing login ', $scope.loginData);
         $scope.loginData.$$error = null;
         AuthService.set_credentials($scope.loginData.username,$scope.loginData.password);
         GroupsService.read_groups($scope.cbLoginOk,$scope.cbLoginFailed);
     };
 
     $scope.cbLoginOk = function() {
-        console.log('Login OK');
+        log.debug('Login OK');
         $scope.user.loggedIn = true;
         $scope.loginData.$$error = null;
         AvatarService.getAvatar($scope.loginData, $scope.loginData.username);
         FriendsService.read_friends();
         AuthService.set_logged_in(true);
+        $scope.$emit('blgLoginOk');
         $scope.closeLogin();
     };
 
     $scope.cbLoginFailed = function(reason) {
-        console.log('Login Failed');
+        log.debug('Login Failed');
         TextService.convert(reason, 'message');
-        console.log(reason);
+        log.debug(reason);
         $scope.loginData.$$error = reason;
         AuthService.clear_credentials();
     };
@@ -55,6 +61,7 @@ angular.module('AppCtrl', [])
     $scope.logout = function() {
         AuthService.clear_credentials();
         $scope.user.loggedIn = false;
+        $scope.$emit('blgLogoutOk');
         $scope.activeList = 'bookmarks';
     };
 

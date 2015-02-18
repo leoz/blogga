@@ -1,24 +1,22 @@
 angular.module('EditCommentCtrl', [])
-.controller('EditCommentController', [ '$scope', '$state', '$ionicModal',
-    'ngLJService', 'AuthService', 'AvatarService',
-    function($scope, $state, $ionicModal,
+.controller('EditCommentController', [ '$scope', '$rootScope', '$state',
+    '$ionicModal', 'ngLJService', 'AuthService', 'AvatarService',
+    function($scope, $rootScope, $state, $ionicModal,
     ngLJService, AuthService, AvatarService) {
 
     $scope.postData = {
+        canComment: false,
         journal: null,
         ditemid: 0
     };
+
+    $scope.postData.canComment = AuthService.get_logged_in();
 
     $scope.newComment = {
         poster: null,
         parent: 0,
         subject: null,
         body: null
-    };
-
-    $scope.canPostComment = function() {
-        console.log('EditCommentCtrl - canPostComment');
-        return AuthService.get_logged_in();
     };
 
     $scope.clearComment = function() {
@@ -90,5 +88,13 @@ angular.module('EditCommentCtrl', [])
 
     $scope.$on('modal.removed', function(event, modal) {
 //        console.log('EditCommentCtrl - Modal ' + modal.id + ' is removed!');
+    });
+
+    $rootScope.$on('blgLoginOk', function() {
+        $scope.postData.canComment = AuthService.get_logged_in();
+    });
+
+    $rootScope.$on('blgLogoutOk', function() {
+        $scope.postData.canComment = AuthService.get_logged_in();
     });
 }]);
