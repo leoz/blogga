@@ -1,14 +1,16 @@
 
-angular.module('FriendsSrvc', [])
-.factory('FriendsService', ['ngLJService', 'AuthService', 'TextService',
-    'AvatarService', function(ngLJService, AuthService, TextService,
-    AvatarService) {
+angular.module('FriendsSrvc', ['ngLogExt'])
+.factory('FriendsService', [ '$log', 'ngLJService', 'AuthService',
+    'TextService', 'AvatarService',
+    function($log, ngLJService, AuthService, TextService, AvatarService) {
+
+    var log = $log.context('FrdServ');
 
     var data = null;
     var error = false;
 
     function readFriends() {
-        console.log('FriendsService - readFriends');
+        log.debug('readFriends');
         if (data) {
             data = null;
         }

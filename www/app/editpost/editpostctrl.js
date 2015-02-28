@@ -1,7 +1,9 @@
-angular.module('EditPostCtrl', [])
-.controller('EditPostController', [ '$scope', '$state', '$ionicModal',
-    'ngLJService', 'AuthService', 'AvatarService', function($scope, $state, $ionicModal,
-    ngLJService, AuthService, AvatarService) {
+angular.module('EditPostCtrl', ['ngLogExt'])
+.controller('EditPostController', [ '$log', '$scope', '$state', '$ionicModal',
+    'ngLJService', 'AuthService', 'AvatarService', function($log, $scope,
+    $state, $ionicModal, ngLJService, AuthService, AvatarService) {
+
+    var log = $log.context('EdtPost');
 
     $scope.newEntry = {
         journal: null,
@@ -10,7 +12,7 @@ angular.module('EditPostCtrl', [])
     };
 
     $scope.clearEntry = function() {
-        console.log('clearEntry');
+        log.debug('clearEntry');
         $scope.newEntry.journal = null;
         $scope.newEntry.subject = null;
         $scope.newEntry.body = null;
@@ -25,19 +27,19 @@ angular.module('EditPostCtrl', [])
     });
 
     $scope.openPostEdit = function() {
-        console.log('openPostEdit');
+        log.debug('openPostEdit');
         $scope.newEntry.journal = AuthService.get_username();
         AvatarService.getAvatar($scope.newEntry, $scope.newEntry.journal);
         $scope.postEdit.show();
     };
 
     $scope.closePostEdit = function() {
-        console.log('closePostEdit');
+        log.debug('closePostEdit');
         $scope.postEdit.hide();
     };
 
     $scope.postEntry = function() {
-        console.log('postEntry');
+        log.debug('postEntry');
 
         ngLJService.post_event(
             AuthService.get_username(),
@@ -55,16 +57,13 @@ angular.module('EditPostCtrl', [])
     };
 
     $scope.$on('$destroy', function(event, modal) {
-//        console.log('Modal ' + modal.id + ' is destroyed!');
         $scope.postEdit.remove();
     });
 
     $scope.$on('modal.hidden', function(event, modal) {
-//        console.log('Modal ' + modal.id + ' is hidden!');
         $scope.clearEntry();
     });
 
     $scope.$on('modal.removed', function(event, modal) {
-//        console.log('Modal ' + modal.id + ' is removed!');
     });
 }]);

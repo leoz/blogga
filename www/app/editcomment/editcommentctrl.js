@@ -1,8 +1,10 @@
-angular.module('EditCommentCtrl', [])
-.controller('EditCommentController', [ '$scope', '$rootScope', '$state',
+angular.module('EditCommentCtrl', ['ngLogExt'])
+.controller('EditCommentController', [ '$log', '$scope', '$rootScope', '$state',
     '$ionicModal', 'ngLJService', 'AuthService', 'AvatarService',
-    function($scope, $rootScope, $state, $ionicModal,
+    function($log, $scope, $rootScope, $state, $ionicModal,
     ngLJService, AuthService, AvatarService) {
+
+    var log = $log.context('EdtCom');
 
     $scope.postData = {
         canComment: false,
@@ -20,7 +22,7 @@ angular.module('EditCommentCtrl', [])
     };
 
     $scope.clearComment = function() {
-        console.log('EditCommentCtrl - clearComment');
+        log.debug('clearComment');
         $scope.newComment.poster = null;
         $scope.newComment.parent = 0;
         $scope.newComment.subject = null;
@@ -28,7 +30,7 @@ angular.module('EditCommentCtrl', [])
     };
 
     $scope.setPostData = function(journal,ditemid) {
-        console.log('EditCommentCtrl - setPostData: ' + journal + ' ' + ditemid);
+        log.debug('setPostData: ' + journal + ' ' + ditemid);
         $scope.postData.journal = journal;
         $scope.postData.ditemid = ditemid;
     };
@@ -42,7 +44,7 @@ angular.module('EditCommentCtrl', [])
     });
 
     $scope.openCommentEdit = function(journal,ditemid,child) {
-        console.log('EditCommentCtrl - openCommentEdit');
+        log.debug('openCommentEdit');
         $scope.setPostData(journal,ditemid);
         $scope.newComment.poster = AuthService.get_username();
         if (child) {
@@ -53,12 +55,12 @@ angular.module('EditCommentCtrl', [])
     };
 
     $scope.closeCommentEdit = function() {
-        console.log('EditCommentCtrl - closeCommentEdit');
+        log.debug('closeCommentEdit');
         $scope.commentEdit.hide();
     };
 
     $scope.addComment = function() {
-        console.log('EditCommentCtrl - addComment');
+        log.debug('addComment');
 
         ngLJService.add_comment(
             AuthService.get_username(),
@@ -77,17 +79,14 @@ angular.module('EditCommentCtrl', [])
     };
 
     $scope.$on('$destroy', function(event, modal) {
-//        console.log('EditCommentCtrl - Modal ' + modal.id + ' is destroyed!');
         $scope.commentEdit.remove();
     });
 
     $scope.$on('modal.hidden', function(event, modal) {
-//        console.log('EditCommentCtrl - Modal ' + modal.id + ' is hidden!');
         $scope.clearComment();
     });
 
     $scope.$on('modal.removed', function(event, modal) {
-//        console.log('EditCommentCtrl - Modal ' + modal.id + ' is removed!');
     });
 
     $rootScope.$on('blgLoginOk', function() {

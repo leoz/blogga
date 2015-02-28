@@ -1,11 +1,13 @@
 
-angular.module('PostCtrl', [])
-.controller('PostController', [ '$scope', '$state', '$rootScope',
+angular.module('PostCtrl', ['ngLogExt'])
+.controller('PostController', [ '$log', '$scope', '$state', '$rootScope',
     '$stateParams', '$ionicScrollDelegate', 'ngLJService',
     'BookmarksService', 'AuthService', 'TextService', 'AvatarService',
-    function($scope, $state, $rootScope,
+    function($log, $scope, $state, $rootScope,
     $stateParams, $ionicScrollDelegate, ngLJService,
     BookmarksService, AuthService, TextService, AvatarService) {
+
+    var log = $log.context('PstCtrl');
 
     $scope.journal = $stateParams.journalName;
     $scope.postId = $stateParams.postId;
@@ -43,7 +45,7 @@ angular.module('PostCtrl', [])
     $scope.setEditData();
 
     $scope.deleteComment = function(journal,ditemid,dtalkid) {
-        console.log('PostController - deleteComment');
+        log.debug('deleteComment');
 
         ngLJService.delete_comments(
             AuthService.get_username(),
@@ -59,7 +61,7 @@ angular.module('PostCtrl', [])
     };
 
     $scope.deleteEntry = function() {
-        console.log('PostController - deleteEntry');
+        log.debug('deleteEntry');
 
         ngLJService.delete_event(
             AuthService.get_username(),
@@ -92,7 +94,7 @@ angular.module('PostCtrl', [])
     };
 
     $scope.getPost = function() {
-        console.log('PostController - getPost');
+        log.debug('getPost');
         $scope.loading.loaded = false;
         $scope.loading.post = true;
         ngLJService.get_event(
@@ -132,7 +134,7 @@ angular.module('PostCtrl', [])
     };
 
     $scope.getComments = function() {
-        console.log('PostController - getComments');
+        log.debug('getComments');
         $scope.loading.comments = true;
         ngLJService.get_comments(
             AuthService.get_username(),
@@ -181,7 +183,7 @@ angular.module('PostCtrl', [])
     };
 
     $scope.update = function() {
-        console.log('PostController - update');
+        log.debug('update');
         $scope.getPost();
     };
 
@@ -238,11 +240,11 @@ angular.module('PostCtrl', [])
     };
 
     $scope.processLink = function(e) {
-        console.log('PostCtrl - processLink: ' + e.toElement.tagName);
+        log.debug('processLink: ' + e.toElement.tagName);
         if(e.toElement.tagName == "A"){
-            console.log('processLink: ' + e.toElement.href);
-            console.log('hostname: ' + e.toElement.hostname);
-            console.log('pathname: ' + e.toElement.pathname);
+            log.debug('processLink: ' + e.toElement.href);
+            log.debug('hostname: ' + e.toElement.hostname);
+            log.debug('pathname: ' + e.toElement.pathname);
 
             e.preventDefault();
             e.stopPropagation();
@@ -258,7 +260,7 @@ angular.module('PostCtrl', [])
                     post = post[1].split('.');
                     if (post[0]) {
                         post[0] = post[0]/256 | 0;
-                        console.log('Open journal: ' + host[0] + ' / post: ' + post[0]);
+                        log.debug('Open journal: ' + host[0] + ' / post: ' + post[0]);
                         $scope.loadPost(host[0],post[0]);
                     }
                 }
@@ -271,7 +273,6 @@ angular.module('PostCtrl', [])
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
-            //console.log(e);
             $scope.loadURL(e.toElement.src);
         }
     }

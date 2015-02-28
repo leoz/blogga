@@ -1,12 +1,16 @@
 
-angular.module('GroupsSrvc', [])
-.factory('GroupsService', ['ngLJService', 'AuthService', 'AvatarService', function(ngLJService, AuthService, AvatarService) {
+angular.module('GroupsSrvc', ['ngLogExt'])
+.factory('GroupsService', [ '$log', 'ngLJService', 'AuthService',
+    'AvatarService',
+    function($log, ngLJService, AuthService, AvatarService) {
+
+    var log = $log.context('GrpServ');
 
     var data = null;
     var error = false;
 
     function readGroups(cb_ok,cb_failed) {
-        console.log('GroupsService - readGroups');
+        log.debug('readGroups');
         if (data) {
             data = null;
         }

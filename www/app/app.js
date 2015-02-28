@@ -38,5 +38,5 @@ angular.module('blogga', ['ionic', 'ngMessages', 'ngLogExt', 'ngLiveJournal',
     function ($compileProvider, $ionicConfigProvider, $logProvider) {
     $compileProvider.debugInfoEnabled(false);
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
-    $logProvider.debugEnabled(true);
+    $logProvider.debugEnabled(false);
 }]);
