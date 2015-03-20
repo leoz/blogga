@@ -44,9 +44,19 @@
     color: #000 !important;
 }
 
+/**/
+
 .blg-html img {
     max-width: 100%;
     height: auto;
+}
+
+.blg-html .blg-img-wrap {
+    background: yellow;
+}
+
+.blg-html .blg-img-wrap img {
+    visibility: hidden;
 }
 
 /**/

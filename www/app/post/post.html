@@ -36,8 +36,9 @@
             </div>
             <div class="item item-text-wrap">
                 <pre class="blg-html"
-                    ng-bind-html="post.$$event"
-                    ng-click="processLink($event)">
+                    compile="post.$$event"
+                    ng-click="processLink($event)"
+                    images-loaded="imgLoadedEvents">
                 </pre>
             </div>
 

@@ -275,5 +275,66 @@ angular.module('PostCtrl', ['ngLogExt'])
             e.stopImmediatePropagation();
             $scope.loadURL(e.toElement.src);
         }
-    }
+    };
+
+    $scope.imgLoadedEvents = {
+
+        always: function(instance) {
+            log.debug('all images are loaded 1');
+
+            for (var i = 0; i < instance.images.length; i++) {
+                instance.images[i].img.parentNode.className = '';
+            }
+
+            console.log(instance.images);
+            //angular.element(instance.elements[0]).removeClass('blg-img-wrap');
+        },
+
+        done: function(instance) {
+            log.debug('all images are loaded 2');
+            //angular.element(instance.elements[0]).removeClass('blg-img-wrap');
+        },
+
+        fail: function(instance) {
+            log.debug('all images are loaded 3');
+        },
+
+        progress: function(instance, image) {
+            var result = image.isLoaded ? 'loaded' : 'broken';
+            log.debug('image is ' + result + ' for ' + image.img.src);
+            $ionicScrollDelegate.resize();
+
+//            image.img.parentNode.className = '';
+//            image.img.style.visibility = 'visible';
+        }
+    };
+}])
+.directive('img', function () {
+    return {
+        restrict: 'E',
+        link: function (scope, element, attr) {
+            element.wrap('<div class="blg-img-wrap"></div>');
+        }
+    };
+})
+.directive('compile', ['$compile', function ($compile) {
+    return function(scope, element, attrs) {
+        scope.$watch(
+            function(scope) {
+                // watch the 'compile' expression for changes
+                return scope.$eval(attrs.compile);
+            },
+            function(value) {
+                // when the 'compile' expression changes
+                // assign it into the current DOM
+                element.html(value);
+
+                // compile the new DOM and link it to the current
+                // scope.
+                // NOTE: we only compile .childNodes so that
+                // we don't get into infinite loop compiling ourselves
+                $compile(element.contents())(scope);
+            }
+        );
+    };
 }]);
