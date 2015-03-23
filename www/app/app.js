@@ -2,11 +2,11 @@
 // Blogga LiveJournal client
 //
 
-angular.module('blogga', ['ionic', 'ngMessages', 'angular-images-loaded', 'ngLogExt', 'ngLiveJournal',
-    'MainRoute', 'AppFilters',
+angular.module('blogga', ['ionic', 'ngMessages', 'angular-images-loaded',
+    'ngLogExt', 'ngLiveJournal', 'MainRoute', 'AppFilters',
     'AppCtrl', 'PostCtrl', 'JournalCtrl', 'GroupsCtrl', 'FriendsCtrl',
     'BookmarksCtrl', 'EditPostCtrl', 'EditCommentCtrl',
-    'AvatarSrvc', 'AuthSrvc', 'StorageSrvc',
+    'AvatarSrvc', 'AuthSrvc', 'StorageSrvc', 'ImageSrvc',
     'BookmarksSrvc', 'FriendsSrvc', 'GroupsSrvc', 'TextSrvc'])
 
 .run(['$ionicPlatform', '$rootScope', 'ngLJService', function($ionicPlatform, $rootScope, ngLJService) {
@@ -38,5 +38,5 @@ angular.module('blogga', ['ionic', 'ngMessages', 'angular-images-loaded', 'ngLog
     function ($compileProvider, $ionicConfigProvider, $logProvider) {
     $compileProvider.debugInfoEnabled(false);
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
-    $logProvider.debugEnabled(false);
+    $logProvider.debugEnabled(true);
 }]);

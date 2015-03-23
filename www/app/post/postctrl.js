@@ -1,10 +1,10 @@
 
 angular.module('PostCtrl', ['ngLogExt'])
 .controller('PostController', [ '$log', '$scope', '$state', '$rootScope',
-    '$stateParams', '$ionicScrollDelegate', 'ngLJService',
+    '$stateParams', '$ionicScrollDelegate', 'ngLJService', 'ImageService',
     'BookmarksService', 'AuthService', 'TextService', 'AvatarService',
     function($log, $scope, $state, $rootScope,
-    $stateParams, $ionicScrollDelegate, ngLJService,
+    $stateParams, $ionicScrollDelegate, ngLJService, ImageService,
     BookmarksService, AuthService, TextService, AvatarService) {
 
     var log = $log.context('PstCtrl');
@@ -277,31 +277,39 @@ angular.module('PostCtrl', ['ngLogExt'])
         }
     };
 
+    $scope.showImages = function(instance) {
+        log.debug('showImages');
+        for (var i = 0; i < instance.images.length; i++) {
+            instance.images[i].img.parentNode.className = '';
+        }
+    };
+
+    $scope.resizeImage = function(image) {
+        ImageService.resize(image.img, 256, 256)
+          .then(function (resizedImage) {
+            // do something with resized image
+        });
+    };
+
     $scope.imgLoadedEvents = {
 
         always: function(instance) {
-            log.debug('all images are loaded 1');
-
-            for (var i = 0; i < instance.images.length; i++) {
-                instance.images[i].img.parentNode.className = '';
-            }
-
-            console.log(instance.images);
-            //angular.element(instance.elements[0]).removeClass('blg-img-wrap');
+            log.debug('imgLoadedEvents - all images are loaded');
+            $scope.showImages(instance);
         },
 
         done: function(instance) {
-            log.debug('all images are loaded 2');
-            //angular.element(instance.elements[0]).removeClass('blg-img-wrap');
+            log.debug('imgLoadedEvents - done');
         },
 
         fail: function(instance) {
-            log.debug('all images are loaded 3');
+            log.debug('imgLoadedEvents - fail');
         },
 
         progress: function(instance, image) {
             var result = image.isLoaded ? 'loaded' : 'broken';
             log.debug('image is ' + result + ' for ' + image.img.src);
+//            $scope.resizeImage(image);
             $ionicScrollDelegate.resize();
 
 //            image.img.parentNode.className = '';
