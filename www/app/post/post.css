@@ -52,7 +52,10 @@
 }
 
 .blg-html .blg-img-wrap {
-    background: yellow;
+    background: #F1F1F1;
+    border-color: #DDDDDD;
+    border-width: thin;
+    border-style: dashed;
 }
 
 .blg-html .blg-img-wrap img {
