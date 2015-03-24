@@ -7,8 +7,8 @@
     <ion-nav-buttons side="secondary">
         <button class="button button-icon" ng-click="toggleBookmarked(journal)">
             <i class="icon"
-                ng-class="{'ion-ios7-checkmark energized': isBookmarked(journal),
-                'ion-ios7-plus stable': !isBookmarked(journal)}"></i>
+                ng-class="{'ion-ios-checkmark energized': isBookmarked(journal),
+                'ion-ios-plus stable': !isBookmarked(journal)}"></i>
         </button>
     </ion-nav-buttons>
     <ion-content>
@@ -30,7 +30,7 @@
                 </button>
                 <i class="icon ion-chatbubble light">{{post.reply_count}}</i>
                 <h2>{{post.$$subject}}</h2>
-                <p class="blg-right ion-ios7-clock-outline"> {{post.eventtime | dateFormat}}</p>
+                <p class="blg-right ion-ios-clock-outline"> {{post.eventtime | dateFormat}}</p>
                 <p>{{post.poster}}</p>
             </ion-item>
             <ion-item class="padding text-center" ng-if="error">

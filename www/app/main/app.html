@@ -1,7 +1,7 @@
 <ion-side-menus>
     <ion-side-menu-content>
         <ion-nav-bar class="bar-positive">
-            <ion-nav-back-button class="button-icon ion-ios7-arrow-left">
+            <ion-nav-back-button class="button-icon ion-ios-arrow-left">
             </ion-nav-back-button>
         </ion-nav-bar>
         <ion-nav-view name="app-content"></ion-nav-view>
@@ -54,12 +54,12 @@
             </ion-item>
 
             <ion-item ng-if="user.loggedIn" class="blg-menu-element item-icon-left" ng-controller="EditPostController" ng-click="openPostEdit()">
-                <i class="icon ion-ios7-compose-outline"></i>
+                <i class="icon ion-ios-compose-outline"></i>
                 Post to journal
             </ion-item>
 
             <ion-item ng-if="user.loggedIn" class="blg-menu-element item-icon-left" ng-click="bloh()">
-                <i class="icon ion-ios7-email-outline"></i>
+                <i class="icon ion-ios-email-outline"></i>
                 Messages
             </ion-item>
 
@@ -67,19 +67,19 @@
                 <a class="tab-item"
                     ng-class="{'active': getList() === 'bookmarks'}"
                     ng-click="setList('bookmarks')">
-                    <i class="icon ion-ios7-bookmarks-outline"></i>
+                    <i class="icon ion-ios-bookmarks-outline"></i>
                     Bookmarks
                 </a>
                 <a class="tab-item"
                     ng-class="{'active': getList() === 'friends'}"
                     ng-click="setList('friends')">
-                    <i class="icon ion-ios7-heart-outline"></i>
+                    <i class="icon ion-ios-heart-outline"></i>
                     Friends
                 </a>
                 <a class="tab-item"
                     ng-class="{'active': getList() === 'groups'}"
                     ng-click="setList('groups')">
-                    <i class="icon ion-ios7-people-outline"></i>
+                    <i class="icon ion-ios-people-outline"></i>
                     Groups
                 </a>
             </div>

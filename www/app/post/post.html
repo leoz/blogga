@@ -1,6 +1,6 @@
 <ion-view view-title="{{journal}}">
     <ion-nav-buttons side="secondary">
-        <a class="button button-icon icon ion-ios7-paper-outline"
+        <a class="button button-icon icon ion-ios-paper-outline"
             href="#/app/journal/{{journal}}">
         </a>
     </ion-nav-buttons>
@@ -22,12 +22,12 @@
 
                 <div class="buttons blg-post-buttons">
                     <button
-                        class="button button-icon icon ion-ios7-compose-outline"
+                        class="button button-icon icon ion-ios-compose-outline"
                         ng-class="{disabled: !postData.canComment}"
                         ng-click="openCommentEdit(journal,post.ditemid,null)">
                     </button>
                     <button
-                        class="button button-icon icon ion-ios7-trash-outline"
+                        class="button button-icon icon ion-ios-trash-outline"
                         ng-class="{disabled: !editData.loggedIn || !editData.canDelete}"
                         ng-click="deleteEntry()">
                     </button>
@@ -43,12 +43,12 @@
             </div>
 
             <ion-item ng-if="post.props && post.props.taglist" class="item-icon-left">
-                <i class="icon ion-ios7-pricetags-outline placeholder-icon"></i>
+                <i class="icon ion-ios-pricetags-outline placeholder-icon"></i>
                 <span>{{post.props.$$taglist}}</span>
             </ion-item>
 
             <ion-item ng-if="post.props && post.props.current_location" class="item-icon-left">
-                <i class="icon ion-ios7-location-outline placeholder-icon"></i>
+                <i class="icon ion-ios-location-outline placeholder-icon"></i>
                 <span>{{post.props.$$current_location}}</span>
             </ion-item>
 
@@ -63,7 +63,7 @@
             class="button button-full button-clear button-positive"
             ng-class="{disabled: !(post.reply_count && !show.comments)}"
             ng-click="show.comments = true; getComments();">
-            <i class="icon ion-ios7-chatboxes-outline" style="margin-right: 8px"></i>
+            <i class="icon ion-ios-chatboxes-outline" style="margin-right: 8px"></i>
             load comments
         </button>
 

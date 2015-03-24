@@ -16,11 +16,11 @@
         <h2><i ng-show="child.children" class="icon {{child.$$show ? 'ion-arrow-down-b' : 'ion-arrow-right-b'}}"></i>  {{child.$$subject}}</h2>
 
         <div class="buttons blg-post-buttons">
-            <button class="button button-icon icon ion-ios7-compose-outline"
+            <button class="button button-icon icon ion-ios-compose-outline"
                 ng-class="{disabled: !postData.canComment}"
                 ng-click="openCommentEdit(journal,post.ditemid,child)">
             </button>
-            <button class="button button-icon icon ion-ios7-trash-outline"
+            <button class="button button-icon icon ion-ios-trash-outline"
                 ng-class="{disabled: !(child.postername == editData.userName)}"
                 ng-click="deleteComment(journal,post.ditemid,child.dtalkid)">
             </button>
@@ -40,7 +40,7 @@
 </div>
 <ion-item
     ng-if="child.$$load_more"
-    class="button icon-left ion-ios7-chatboxes-outline button-positive"
+    class="button icon-left ion-ios-chatboxes-outline button-positive"
     ng-click="loadComments(child)">
     More comments
 </ion-item>
