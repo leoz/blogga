@@ -6,7 +6,7 @@ angular.module('blogga', ['ionic', 'ngMessages', 'angular-images-loaded',
     'ngLogExt', 'ngLiveJournal', 'MainRoute', 'AppFilters',
     'AppCtrl', 'PostCtrl', 'JournalCtrl', 'GroupsCtrl', 'FriendsCtrl',
     'BookmarksCtrl', 'EditPostCtrl', 'EditCommentCtrl',
-    'AvatarSrvc', 'AuthSrvc', 'StorageSrvc', 'ImageSrvc',
+    'AvatarSrvc', 'AuthSrvc', 'StorageSrvc',
     'BookmarksSrvc', 'FriendsSrvc', 'GroupsSrvc', 'TextSrvc'])
 
 .run(['$ionicPlatform', '$rootScope', 'ngLJService', function($ionicPlatform, $rootScope, ngLJService) {

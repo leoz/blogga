@@ -1,10 +1,10 @@
 
 angular.module('PostCtrl', ['ngLogExt'])
 .controller('PostController', [ '$log', '$scope', '$state', '$rootScope',
-    '$stateParams', '$ionicScrollDelegate', 'ngLJService', 'ImageService',
+    '$stateParams', '$ionicScrollDelegate', 'ngLJService',
     'BookmarksService', 'AuthService', 'TextService', 'AvatarService',
     function($log, $scope, $state, $rootScope,
-    $stateParams, $ionicScrollDelegate, ngLJService, ImageService,
+    $stateParams, $ionicScrollDelegate, ngLJService,
     BookmarksService, AuthService, TextService, AvatarService) {
 
     var log = $log.context('PstCtrl');
@@ -284,13 +284,6 @@ angular.module('PostCtrl', ['ngLogExt'])
         }
     };
 
-    $scope.resizeImage = function(image) {
-        ImageService.resize(image.img, 256, 256)
-          .then(function (resizedImage) {
-            // do something with resized image
-        });
-    };
-
     $scope.imgLoadedEvents = {
 
         always: function(instance) {
@@ -309,11 +302,7 @@ angular.module('PostCtrl', ['ngLogExt'])
         progress: function(instance, image) {
             var result = image.isLoaded ? 'loaded' : 'broken';
             log.debug('image is ' + result + ' for ' + image.img.src);
-//            $scope.resizeImage(image);
             $ionicScrollDelegate.resize();
-
-//            image.img.parentNode.className = '';
-//            image.img.style.visibility = 'visible';
         }
     };
 }])
