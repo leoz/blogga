@@ -334,4 +334,10 @@ angular.module('PostCtrl', ['ngLogExt'])
             }
         );
     };
-}]);
+}])
+.directive('ljEmbed', function() {
+    return {
+        restrict: 'E',
+        template: '<div class="blg-embed-wrap"><ion-spinner></ion-spinner></div>'
+    };
+});
