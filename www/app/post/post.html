@@ -67,10 +67,10 @@
             load comments
         </button>
 
-        <div class="spinner spinner-comments ng-hide"
+        <ion-spinner
+            class="blg-spinner blg-spinner-comments spinner-positive ng-hide"
             ng-show="loading.comments">
-            <i class="icon ion-loading-d positive"></i>
-        </div>
+        </ion-spinner>
 
         <div ng-if="show.comments" class="list list-inset">
             <ion-list>
@@ -80,11 +80,11 @@
             </ion-list>
         </div>
 
-        <div class="spinner spinner-post ng-hide"
+        <ion-spinner
+            class="blg-spinner blg-spinner-post spinner-positive ng-hide"
             ng-show="loading.post"
             ng-style="{'top':getPostSpinnerHeight()+'px'}">
-            <i class="icon ion-loading-d positive"></i>
-        </div>
+        </ion-spinner>
 
     </ion-content>
 </ion-view>

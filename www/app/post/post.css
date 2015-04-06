@@ -64,15 +64,15 @@
 
 /**/
 
-.spinner-post {
+.blg-spinner-post {
     top: 50px;
 }
 
-.spinner-comments {
+.blg-spinner-comments {
     bottom: -20px;
 }
 
-.spinner {
+.blg-spinner {
     margin: 100px auto 0;
     text-align: center;
     font-size: 50px;
@@ -83,12 +83,12 @@
     transition: all 0.4s cubic-bezier(0.6, -1.6, 0.92, 0.48);
 }
 
-.spinner.ng-hide-add {
+.blg-spinner.ng-hide-add {
     -webkit-transform: scale(1, 1);
     transform: scale(1, 1);
 }
 
-.spinner.ng-hide-add-active {
+.blg-spinner.ng-hide-add-active {
     -webkit-transform: scale(0, 0);
     transform: scale(0, 0);
 }
