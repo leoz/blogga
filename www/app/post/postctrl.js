@@ -150,11 +150,11 @@ angular.module('PostCtrl', ['ngLogExt'])
 
     $scope.preProcessComments = function(child) {
         $scope.loadComments(child);
-        for (var i = 0; i < child.children.length; i++) {
-            TextService.convert(child.children[i], 'subject');
-            TextService.convert(child.children[i], 'body');
-            AvatarService.getAvatar(child.children[i], child.children[i].postername);
-        }
+//        for (var i = 0; i < child.children.length; i++) {
+//            TextService.convert(child.children[i], 'subject');
+//            TextService.convert(child.children[i], 'body');
+//            AvatarService.getAvatar(child.children[i], child.children[i].postername);
+//        }
     };
 
     $scope.loadComments = function(child) {
@@ -162,13 +162,17 @@ angular.module('PostCtrl', ['ngLogExt'])
             child.$$last_index = 0;
         }
 
-        var count = 10; // Max number of comments to load
+        var count = 5; // Max number of comments to load
 
         for (var i = count; child.$$last_index < child.children.length; i--) {
             if (!i) {
                 break;
             }
+//            console.log(child.children[child.$$last_index]);
             child.children[child.$$last_index].$$load = true;
+            TextService.convert(child.children[child.$$last_index], 'subject');
+            TextService.convert(child.children[child.$$last_index], 'body');
+            AvatarService.getAvatar(child.children[child.$$last_index], child.children[child.$$last_index].postername);
             child.$$last_index++;
         }
 

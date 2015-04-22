@@ -104,6 +104,7 @@ angular.module('BookmarksSrvc', ['ngLogExt'])
     };
 
     function getBookmarks(){
+        log.debug('getBookmarks');
         return data.bookmarks;
     };
 
