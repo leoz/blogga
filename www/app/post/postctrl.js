@@ -339,9 +339,34 @@ angular.module('PostCtrl', ['ngLogExt'])
         );
     };
 }])
-.directive('ljEmbed', function() {
+.directive('ljEmbed', ['$log', '$compile', 'ngLJService', function($log, $compile, ngLJService) {
+    var log = $log.context('ljEmbed');
+
+    function link(scope, element, attrs) {
+
+        //console.log(scope.post);
+
+        log.debug('link: journal - ' + scope.journal +
+                  ', postId - ' + scope.post.ditemid +
+                  ', embed - ' + attrs.id);
+
+        ngLJService.get_embed(
+            scope.journal,
+            scope.post.ditemid,
+            attrs.id
+        ).then(function(response) {
+            log.debug('link: data ' + response);
+
+            element[0].outerHTML = response;
+            $compile(element.contents())(scope);
+
+        }, function(){});
+
+    };
+
     return {
         restrict: 'E',
-        template: '<div class="blg-embed-wrap"><ion-spinner></ion-spinner></div>'
+        template: '<div class="blg-embed-wrap"><ion-spinner></ion-spinner></div>',
+        link: link
     };
-});
+}]);
