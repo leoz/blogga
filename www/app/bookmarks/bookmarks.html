@@ -15,11 +15,11 @@
 
         <ion-list show-delete="showDelete()">
             <ion-item class="blg-menu-item item-icon-left"
-                collection-repeat="bookmark in ::service.get_bookmarks()"
+                collection-repeat="bookmark in service.get_bookmarks()"
                 collection-item-width="'100%'"
                 collection-item-height="52"
                 type="item-text-wrap"
-                href="#/app/journal/{{::bookmark.username}}"
+                href="#/app/journal/{{bookmark.username}}"
                 ng-class="{active: (service.get_active_journal() == bookmark.username)}">
 
                 <ion-delete-button class="ion-minus-circled"
@@ -32,7 +32,7 @@
                     </div>
                 </div>
 
-                <h2>{{::bookmark.username}}</h2>
+                <h2>{{bookmark.username}}</h2>
 
             </ion-item>
         </ion-list>
